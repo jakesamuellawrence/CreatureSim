@@ -1,0 +1,72 @@
+Record of Progress
+
+2018-06-11
+	-Project proposal															Started
+		Reflection: none
+	
+2018-06-12
+	-Project proposal															Completed
+		Reflection: none
+	
+2018-06-18
+	-Researching frames and panels in Java										Started
+		Reflection: none
+	
+2018-06-19
+	-Feasibility Study															Completed
+		Reflection: none
+		
+2018-06-21
+	-End User Survey															Completed
+		Reflection: Once the survey had already been sent out I realised
+					one of the proposed names for the project may infringe
+					on the Copyrights, Designs, and Patents act. For this
+					reason, I chose to discount that name from the question,
+					no matter how many people chose it as the best.
+		
+2018-06-25
+	-End User Survey Analysis													Completed
+		Reflection: User responses about the priority of features 
+	   			    differed greatly from my own judgements about 
+					what order to develop features in. To solve this,
+					I have decided to make a compromise between the 
+					survey responses and my own intuitions
+	
+					
+2018-08-23
+	-Initial Gantt Chart														Started
+		Reflection: Gantt chart was made after most of the analysis phase
+					and so the times for those were filled in instead of 
+					planned
+					
+2018-08-30
+	-Initial Gantt Chart														Completed
+		Reflection: none
+	-Outline Project Plan														Completed
+		Reflection: I realised the predicted final date for project finish
+					is after the due date for the projects to be completed.
+					However, this should not be a problem as this date is
+					likely an overestimation, as it assumes that an hour is
+					done each week, where in reality more will likely be done
+					each week, both in class and at home
+		
+2018-09-06
+	-Revised Gantt Chart														Edited
+		Reflections: I realised I did not include a subsegment for designing
+					 the neural net (i.e input data, nodes, outputs etc.).
+					 This will be added to the Revised Gantt chart as and when
+					 I come to complete it
+	-Requirements Specification													Started
+		Reflections: None
+		
+2018-09-13
+	-Requirements Specification													Completed
+		Reflections: None
+	-Setup Git and link to github repo											Started
+		Reflections: This is done to provide version control incase changes
+					 need to be rolled back, to create a backup in case data
+					 is lost, and so that the project can easily be worked on
+					 at home
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~10 hours spent
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
