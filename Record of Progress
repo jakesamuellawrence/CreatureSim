@@ -62,11 +62,23 @@ Record of Progress
 2018-09-13
 	-Requirements Specification													Completed
 		Reflections: None
-	-Setup Git and link to github repo											Started
-		Reflections: This is done to provide version control incase changes
+	-Setup Git and link to github repo											Completed
+		Reflections: This was done to provide version control incase changes
 					 need to be rolled back, to create a backup in case data
 					 is lost, and so that the project can easily be worked on
-					 at home
+					 at home.
+					 Problems were encountered with git opening the wrong text
+					 editor for commit messages. This was overcome by doing some
+					 research on StackOverflow on how to change the default text
+					 editor for git
+	-Commit and push all current documents and files to origin					Completed
+		Reflections: none
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~10 hours spent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+2018-09-18
+	-Test Plan																	Started
+		-Reflections: None
+	-Revised Gantt Chart														Edited
+		-Reflections: Edited to reflect the test plan
