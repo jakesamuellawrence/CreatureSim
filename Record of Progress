@@ -83,7 +83,12 @@ Record of Progress
 	-Revised Gantt Chart														Edited
 		-Reflections: Edited to reflect the test plan
 		
-2018-0-20
+2018-09-20
 	-Neural Net and Evolution Design											Committed
 		-Reflections: A small amount of research had to be done on nodes and
 					  layers in a neural net.
+					  
+2018-09-27
+	-Neural Net and Evolution Design											Committed
+		-Reflections: Edited to add a bias node to the net design (A node which
+					  Always has a value of 1)
