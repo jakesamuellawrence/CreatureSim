@@ -92,3 +92,12 @@ Record of Progress
 	-Neural Net and Evolution Design											Committed
 		-Reflections: Edited to add a bias node to the net design (A node which
 					  Always has a value of 1)
+	-UI Design																	Started
+		-Reflections: None
+	-Detailed Project Plan,														Edited
+	 End User Survey Analysis,													Edited
+	 Revised Gantt Chart,														Edited
+	 
+	 Test Plan																	Edited
+		-Reflections: Edited to change all occurrences of 'average food graph'
+					  to 'average survival time graph'
