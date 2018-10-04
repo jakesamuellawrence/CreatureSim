@@ -92,12 +92,20 @@ Record of Progress
 	-Neural Net and Evolution Design											Committed
 		-Reflections: Edited to add a bias node to the net design (A node which
 					  Always has a value of 1)
+	-UI Wireframe																Completed
 	-UI Design																	Started
 		-Reflections: None
 	-Detailed Project Plan,														Edited
 	 End User Survey Analysis,													Edited
 	 Revised Gantt Chart,														Edited
-	 
+	 Requirements Specification,												Edited
 	 Test Plan																	Edited
 		-Reflections: Edited to change all occurrences of 'average food graph'
 					  to 'average survival time graph'
+					  
+2018-10-4
+	-UI Design																	Committed
+		-Reflections: A functional requirement was actually removed because I 
+	  				  realised that it was not feasible to include in the UI
+	-Requirements Specification													Edited
+		-Reflections: see above
