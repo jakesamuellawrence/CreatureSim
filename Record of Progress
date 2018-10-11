@@ -105,7 +105,11 @@ Record of Progress
 					  
 2018-10-4
 	-UI Design																	Committed
-		-Reflections: A functional requirement was actually removed because I 
+		-Reflections: A functional requirement was removed because I 
 	  				  realised that it was not feasible to include in the UI
 	-Requirements Specification													Edited
 		-Reflections: see above
+		
+2018-10-11
+	-Class Model Diagram														Comitted
+		-Reflections: None
