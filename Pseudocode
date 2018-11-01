@@ -1,0 +1,246 @@
+##### KEY:
+# # means commentary
+# CAPITALS means keywords and commands
+# lower_case means variables
+# free form sentences mean steps to be refined
+
+Overal Steps{
+	1) start program
+	2) initialise variables and objects
+	3) STATE = MainMenu
+	4) start new thread which constantly redraws everything on-screen
+	5) start new thread which does logic for all parts of the program
+}
+
+1) Start Program Refinement{
+	1.1) 	CREATE NEW WINDOW frame
+	1.2) 	CREATE NEW DRAWING CANVAS panel
+	1.3) 	ADD panel TO frame
+}
+
+2) Initialise Variables and Objects Refinement{
+	2.1) 	DECLARE creatures AS ARRAY OF Creature WITH LENGTH generation_size
+	2.2) 	LOOP FROM 0 TO generation_size-1{
+	2.3) 		creatures[loop] = NEW Creature()
+	2.4) 		Randomise weights of creatures
+	2.5) 	}
+}
+
+2.4) Randomise weights of creatures refinement{
+	2.4.1) 	FOR weight IN weights{
+	2.4.2)		weight = randomNumBetween(-1, 1)
+	2.4.3) 	}
+}
+
+4) Start new thread which constantly redraws everything on-screen refinement{
+	4.1) 	DECLARE paint_thread AS NEW Thread{
+				# This creates a concurrent process which constantly loops
+	4.2)		WHILE TRUE{
+	4.3)			IF STATE == MainMenu{
+	4.4)				DRAW menu_background, menu_text
+	4.5)				calculate and draw graphs
+	4.6)				display generation statistics
+	4.7)				draw all buttons
+	4.8)				SLEEP THREAD FOR tick_time
+	4.9)			}
+	4.10)			ELSE IF STATE == SlowGeneration{
+	4.11)				draw all creatures
+	4.12)				tick_count = tick_count+1
+	4.13)				SLEEP THREAD FOR tick_time
+	4.14)			}
+	4.15)			ELSE IF STATE == QuickGeneration{
+	4.16)				draw all creatures
+	4.17)				tick_count = tick_count+1
+	4.18)			}
+	4.19)		}
+	4.20)	}
+	4.21)	START paint_thread
+}
+
+4.4) calculate and draw graphs refinement{
+	######	gen_stats.csv written in format:
+	#####	generation no, highest time, average time, lowest time, best creature
+	4.4.1)	DECLARE gen_stats AS NEW FILE(gen_stats.csv)
+	4.4.2)	DECLARE generations AS ARRAY OF INTEGERS
+	4.4.3)	DECLARE highests AS ARRAY OF INTEGERS
+	4.4.4)	DECLARE averages AS ARRAY OF INTEGERS
+	4.4.5)	DECLARE lowests AS ARRAY OF INTEGERS
+	4.4.6)	DECLARE best_creatures AS ARRAY OF STRING
+	4.4.7)	OPEN(gen_stats)
+	4.4.8)	ARRAY OF STRING lines = READ(gen_stats)
+	4.4.9)	FOR line IN lines{
+	4.4.10)		ARRAY OF STRING values = SPLIT(",", line)
+	4.4.11)		generations.append(values[0])
+	4.4.12)		highests.append(values[1])
+	4.4.13)		averages.append(values[2])
+	4.4.14)		lowests.append(values[3])
+	4.4.15)		best_creatures.append(values[4])
+	4.4.16)	}
+	4.4.17)	DRAW GRAPH(generations, highests, dark_red)
+	4.4.18)	DRAW GRAPH(generations, averages, red)
+	4.4.19)	DRAW GRAPH(generations, lowests, light_red)
+	4.4.20)	CLOSE(gen_stats)
+}
+
+4.5) display generation statistics refinement{
+	######	gen_stats.csv written in format:
+	#####	generation no, highest time, average time, lowest time, best creature
+	4.5.1)	DECLARE gen_stats AS NEW FILE(gen_stats.csv)
+	4.5.2)	OPEN(gen_stats)
+	4.5.3)	ARRAY OF STRING lines = READ(gen_stats)
+	4.5.4)	ARRAY OF STRING most_recent = SPLIT(",", lines[lines.length-1])
+	4.5.5)	INTEGER current_generation = most_recent[0]
+	4.5.6)	INTEGER generation_size = creatures.length
+	4.5.7)	STRING best_creature = most_recent[4]
+	4.5.8)	INTEGER average_time = most_recent[2]
+	4.5.9)	INTEGER highest_time = most_recent[1]
+	4.5.10)	INTEGER lowest_time = most_recent[3]
+	4.5.11)	CLOSE(gen_stats)
+}
+
+4.4) draw all buttons refinement{
+	4.4.1)	FOR button IN buttons{
+	4.4.2)		SET COLOR TO ORANGE
+	4.4.3)		DRAW RECTANGLE(button.x, button.y, button.width, button.height)
+	4.4.4)		DRAW TEXT(button.button_text, button.x, button.y)
+	4.4.5)	}
+}
+
+4.7) draw all creatures refinement{
+	4.7.1)	FOR creature IN creatures{
+	4.7.2)		SET COLOR TO creature.color
+	4.7.3)		DRAW CIRCLE(creature.x, creature.y, creature.radius)
+	4.7.4)		SET COLOR TO white
+	4.7.5)		DRAW LINE(creature.x, creature.y, creature.front_x, creature.front_y)
+				# Line is drawn so it can be seen which direction the creature is facing
+	4.7.6)	}
+}
+
+5) Start new thread which does logic for all parts of the program refine{
+	5.1)	DECLARE logic_thread AS NEW Thread{
+	5.2)		# This creates a concurrent process which constantly loops
+	5.3)		WHILE TRUE{
+	5.4)			IF STATE == MainMenu{
+	5.5)				check if buttons have been clicked on
+	5.6)				SLEEP THREAD FOR tick_time
+	5.6)			}
+	5.7)			IF STATE == SlowGeneration{
+	5.8)				run through creature neural nets and move them
+	5.9)				SLEEP THREAD FOR tick_time
+	5.10)			}
+	5.11)			IF STATE == QuickGeneration{
+	5.12)				run through creature neural nets and move them
+	5.13)			}
+	5.14)		}
+	5.15)	START logic_thread	
+}
+
+5.5) check if buttons have been clicked on refinement{
+	5.5.1)	IF MOUSE CLICKED ON SlowGenerationButton{
+	5.5.2)		start slow generation
+	5.5.3)	}
+	5.5.4)	IF MOUSE CLICKED ON QuickGenerationButton{
+	5.5.5)		start quick generation
+	5.5.6)	}
+	5.5.7)	IF MOUSE CLICKED ON ViewPreviousButton{
+	5.5.8)		view previous generation
+	5.5.9)	}
+	5.5.10) IF MOUSE CLICKED ON StartFreshButton{
+	5.5.11)		start new set of creatures
+	5.5.12)	}
+	5.5.13)	IF MOUSE CLICKED ON ExitToDesktopButton{
+	5.5.14)		exit to desktop
+	5.5.15)	}
+}
+
+5.5.2) start slow generation refinement{
+	######	gen_stats.csv written in format:
+	#####	generation no, highest time, average time, lowest time, best creature
+	5.5.2.1)	make new generation from old
+	5.5.2.2)	STATE = SlowGeneration
+	5.5.2.3)	REPEAT UNTIL ticks_passed = 2000{
+	5.5.2.4)		FOR creature IN creatures{
+	5.5.2.5)			creature.runThroughNeuralNet()
+	5.5.2.6)		}
+	5.5.2.7)	}
+	5.5.2.8)	INTEGER total_time = 0
+	5.5.2.9)	INTEGER highest_time = creatures[0].survival_time
+	5.5.2.10)	INTEGER lowest_time = creatures[0].survival_time
+	5.5.2.11)	INTEGER current_generation = 0
+	5.5.2.12)	STRING best_creature = creatures[0].name
+	5.5.2.13)	FOR creature IN creatures{
+	5.5.2.14)		total_time = total_time + creature.survival_time
+	5.5.2.15)		IF creature.survival_time > highest_time){
+	5.5.2.16)			highest_time = creature.survival_time
+	5.5.2.17)			best_creature = creature.name
+	5.5.2.18)		}
+	5.5.2.19)		ELSE IF creature.survival_time < lowest_time{
+	5.5.2.20)			lowest_time = creature.survival_time
+	5.5.2.21)		}
+	5.5.2.22)	}
+	5.5.2.23)	DECLARE gen_stats AS NEW FILE(gen_stats.csv)
+	5.5.2.24)	OPEN(gen_stats)
+	5.5.2.25)	ARRAY OF STRING lines = READ(gen_stats)
+	5.5.2.26)	ARRAY OF STRING most_recent = SPLIT(",", lines[lines.length-1])
+	5.5.2.27)	current_generation = most_recent[0] + 1;
+	5.5.2.28)	WRITE(current_generation, highest_time, average_time, lowest_time, best_creatures)
+	5.5.2.29)	CLOSE(gen_stats)
+}
+
+5.5.5) start quick generation refinement{
+	######	gen_stats.csv written in format:
+	#####	generation no, highest time, average time, lowest time, best creature
+	5.5.2.1)	make new generation from old
+	5.5.2.2)	STATE = QuickGeneration
+	5.5.2.3)	REPEAT UNTIL ticks_passed = 2000{
+	5.5.2.4)		FOR creature IN creatures{
+	5.5.2.5)			creature.runThroughNeuralNet()
+	5.5.2.6)		}
+	5.5.2.7)	}
+	5.5.2.8)	INTEGER total_time = 0
+	5.5.2.9)	INTEGER highest_time = creatures[0].survival_time
+	5.5.2.10)	INTEGER lowest_time = creatures[0].survival_time
+	5.5.2.11)	INTEGER current_generation = 0
+	5.5.2.12)	STRING best_creature = creatures[0].name
+	5.5.2.13)	FOR creature IN creatures{
+	5.5.2.14)		total_time = total_time + creature.survival_time
+	5.5.2.15)		IF creature.survival_time > highest_time){
+	5.5.2.16)			highest_time = creature.survival_time
+	5.5.2.17)			best_creature = creature.name
+	5.5.2.18)		}
+	5.5.2.19)		ELSE IF creature.survival_time < lowest_time{
+	5.5.2.20)			lowest_time = creature.survival_time
+	5.5.2.21)		}
+	5.5.2.22)	}
+	5.5.2.23)	DECLARE gen_stats AS NEW FILE(gen_stats.csv)
+	5.5.2.24)	OPEN(gen_stats)
+	5.5.2.25)	ARRAY OF STRING lines = READ(gen_stats)
+	5.5.2.26)	ARRAY OF STRING most_recent = SPLIT(",", lines[lines.length-1])
+	5.5.2.27)	current_generation = most_recent[0] + 1;
+	5.5.2.28)	WRITE(current_generation, highest_time, average_time, lowest_time, best_creatures)
+	5.5.2.29)	CLOSE(gen_stats)
+}
+
+5.5.8) view previous generation refinement{
+	######	gen_stats.csv written in format:
+	#####	generation no, highest time, average time, lowest time, best creature
+	5.5.2.1)	make new generation from old
+	5.5.2.2)	STATE = SlowGeneration
+	5.5.2.3)	REPEAT UNTIL ticks_passed = 2000{
+	5.5.2.4)		FOR creature IN creatures{
+	5.5.2.5)			creature.runThroughNeuralNet()
+	5.5.2.6)		}
+	5.5.2.7)	}
+}
+
+5.5.11) start new set of creatures refinement{
+	5.5.11.1)	DECLARE FILE gen_stats AS NEW FILE(gen_stats.csv)
+	5.5.11.2)	OPEN(gen_stats)
+	5.5.11.3)	CLEAR(gen_stats)
+	5.5.11.4)	CLOSE(gen_stats)
+	5.5.11.5)	initialise variables and objects
+}
+
+5.5.14) exit to desktop refinement{
+	5.5.14.1)	DISPOSE OF FRAME
+}

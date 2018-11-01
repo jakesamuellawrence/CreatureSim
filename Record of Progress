@@ -111,5 +111,23 @@ Record of Progress
 		-Reflections: see above
 		
 2018-10-11
-	-Class Model Diagram														Comitted
-		-Reflections: None
+	-Class Model Diagram														Committed
+		-Reflections: See below
+		
+2018-10-25
+	-Pseudocode																	Started
+		-Reflections: How to approach pseudocode was at first a challenge, given
+					  my project was being done in an object oriented way, which
+					  is not as well suited to pseudocode. I decided that instead
+					  of trying to detail out how the actual object oriented code
+					  will look, I would instead describe the algorithms and flow
+					  of the program. This means my pseudocode does not show any
+					  class or objects or relationships, but these are all shown
+					  by my Class Model diagram instead.
+					  
+2018-11-01
+	-Pseudocode																	Committed
+		-Reflections: Continuing my pseudocode this week puts me two hours
+					  behind schedule. However, I do not believe this to be a
+					  problem, as work can be done out-with school if and when
+					  it is needed
