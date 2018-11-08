@@ -1,5 +1,5 @@
-workspace/RemoteSystemsTempFiles/*
+workspace/RemoteSystemsTempFiles
 workspace/bin
-workspace/.metadata/*
+workspace/.metadata
 workspace/CreatureSim/.classpath
 workspace/CreatureSim/.project
