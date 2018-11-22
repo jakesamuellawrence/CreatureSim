@@ -6,11 +6,11 @@ public class Main{
 	public static CSFrame frame;
 	
 	/**
-	 * Is called when executing the program. Serves as an entry point to the program
+	 * Is called upon executing the program. Serves as an entry point to the program
 	 * 
 	 * @param args arguments passed into the program upon running it
 	 */
 	public static void main(String[] args){
-		frame = new CSFrame();
+		frame = new CSFrame(); 						// Creates a new instance of the CSFrame class
 	}
 }

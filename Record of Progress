@@ -139,3 +139,9 @@ Record of Progress
 	-Frame and Panel: Implementation											Continued
 		-Reflections: I needed to research javadoc syntax in order to write
 					  as clear as possible internal commentary
+					  
+2018-11-22
+	-Frame and Panel: Implementation											Committed
+		-Reflections: The coding of the Frame and Panel component was completed
+					  but component testing needed to be done before the code
+					  was committed.
