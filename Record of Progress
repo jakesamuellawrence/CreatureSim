@@ -73,8 +73,9 @@ Record of Progress
 					 editor for git
 	-Add, commit and push all current documents and files to origin				Completed
 		Reflections: none
+		
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~10 hours spent
+~10 sessions spent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 2018-09-18
@@ -145,3 +146,29 @@ Record of Progress
 		-Reflections: The coding of the Frame and Panel component was completed
 					  but component testing needed to be done before the code
 					  was committed.
+	-Frame and Panel: Testing													Committed
+		-Reflections: A block of code known as a driver had to be written in
+					  to test the component.
+	-Neural Net: Implementation													Started
+	
+2018-11-26
+	-Neural Net: Implementation and Testing										Continued
+		-Reflections: Originally, I had chosen the sigmoid function to act
+					  as the transfer function for most nodes in the network
+					  however as I was developing the network I was unsure as
+					  to whether this would be able to allow the networks to
+					  operate as I desired. However, after some research and
+					  sketching of various functions, I determined that sigmoid
+					  was in fact satisfactory
+	
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~20 sessions spent
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+2018-11-29
+	-Neural Net: Implementation and Testing										Continued
+		-Reflections: None
+	-Neural Net Design															Edited
+		-Reflections: Neural Net Design changed to reflect the research 
+					  mentioned above
+	

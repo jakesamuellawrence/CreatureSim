@@ -2,9 +2,13 @@ package creaturesim.display;
 
 import javax.swing.JFrame;
 
+/**
+ * Acts as a window into which other components can be added
+ * 
+ * @author jakesamuellawrence
+ * @see JFrame
+ */
 public class CSFrame extends JFrame{
-	
-	
 	CSPanel canvas;
 	
 	/**

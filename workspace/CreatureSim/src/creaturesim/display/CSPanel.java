@@ -7,6 +7,12 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+/**
+ * Acts as a canvas on which things can be drawn.
+ * 
+ * @author jakesamuellawrence
+ * @see JPanel
+ */
 public class CSPanel extends JPanel{
 	int default_x_resolution = 1280;
 	int default_y_resolution = 720;
