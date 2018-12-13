@@ -171,4 +171,27 @@ Record of Progress
 	-Neural Net Design															Edited
 		-Reflections: Neural Net Design changed to reflect the research 
 					  mentioned above
+					  
+2018-12-06																		
+	-Neural Net: Implementation and Testing										Continued
+		-Reflections: It was noticed during testing that no nodes were being
+					  given negative weights, and so this was fixed.
+					  
+2018-12-13
+	-Neural Net: Implementation and Testing										Committed
+		-Reflections: None
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	

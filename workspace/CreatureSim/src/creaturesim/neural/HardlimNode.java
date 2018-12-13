@@ -4,12 +4,12 @@ import java.util.Arrays;
 
 /**
  * Implementation of Node that gets inputs from an array of
- * other nodes. Uses the sigmoid transfer function
+ * other nodes. Uses the hardlim transfer function
  * 
  * @author jakesamuellawrence
  */
 
-public class SigmoidNode implements Node{
+public class HardlimNode implements Node{
 	Node[] inputs;
 	double[] weights;
 	double bias;
@@ -20,14 +20,14 @@ public class SigmoidNode implements Node{
 	 * 
 	 * @param inputs an array of nodes which the node should take inputs from.
 	 */
-	public SigmoidNode(Node[] inputs){
+	public HardlimNode(Node[] inputs){
 		this.inputs = inputs;
 		weights = new double[inputs.length];
 		randomiseWeights();
 	}
 	
 	/**
-	 * Uses the sigmoid transfer function to convert
+	 * Uses the hardlims transfer function to convert
 	 * a given value.
 	 * 
 	 * @param in the value to be transferred
@@ -35,14 +35,15 @@ public class SigmoidNode implements Node{
 	 */
 	@Override
 	public double transfer(double in){
-		return(TransferFunctions.sigmoid(in));
+		return(TransferFunctions.hardlim(in));
 	}
 	
 	/**
 	 * Calculates the output of this node.
 	 * <p>
-	 * Gets the inputs from all nodes and multiplies them by the corresponding weights,
-	 * then adds them all, then adds the bias value
+	 * Gets the inputs from all nodes and multiplies them by the weights,
+	 * then adds them all together,
+	 * then adds the bias value,
 	 * then passes the result through the chosen transfer function.
 	 */
 	public double getOutput(){
@@ -73,7 +74,7 @@ public class SigmoidNode implements Node{
 	 */
 	@Override
 	public String toString(){
-		return("Layer node. Uses sigmoid. \n" +
+		return("Layer node. Uses hardlim. \n" +
 			   "Weights are: " + Arrays.toString(weights) + "\n" + 
 			   "Bias is: " + Double.toString(bias) + "\n" + 
 			   "value to output is: " + Double.toString(getOutput()));
