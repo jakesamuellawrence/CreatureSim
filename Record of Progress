@@ -180,6 +180,19 @@ Record of Progress
 2018-12-13
 	-Neural Net: Implementation and Testing										Committed
 		-Reflections: None
+		
+		
+2018-12-20
+	-Buttons and Menus research													Finished
+		-Reflections: During my research I realised I would need to approach a
+					  certain part of implementation in a slightly different
+					  way than originally intended. These changes have been
+					  reflected in the Class Model Diagrams.
+	-Buttons and Menus implementation											Started
+	
+2019-01-31
+	-Buttons and Menus implementation											Continued
+	
 
 
 
