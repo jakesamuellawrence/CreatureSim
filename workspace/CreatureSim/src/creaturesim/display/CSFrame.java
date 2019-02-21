@@ -22,7 +22,7 @@ public class CSFrame extends JFrame{
 		this.add(canvas);											// Adds the canvas to the frame so that it can be painted on
 		this.pack();												// Forces window to be an appropriate size for all contained components
 		
-		this.setResizable(true); 									// Makes the window un-resizable, so that layout stays consistent;
+		this.setResizable(false); 									// Makes the window un-resizable, so that layout stays consistent;
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE); 				// Sets the window to be destroyed when the X is pressed
 		this.setVisible(true); 										// Makes the window visible
 	}

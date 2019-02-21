@@ -21,6 +21,6 @@ public class InGame extends JPanel{
 	 */
 	public void paintComponent(Graphics g){
 		g.setColor(Color.black);
-		g.fillRect(0, 0, 1280, 720);
+		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 	}
 }

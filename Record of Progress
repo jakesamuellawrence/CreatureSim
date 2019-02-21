@@ -183,15 +183,45 @@ Record of Progress
 		
 		
 2018-12-20
-	-Buttons and Menus research													Finished
+	-Buttons and Menus research													Started
 		-Reflections: During my research I realised I would need to approach a
 					  certain part of implementation in a slightly different
 					  way than originally intended. These changes have been
 					  reflected in the Class Model Diagrams.
 	-Buttons and Menus implementation											Started
+		-Reflections: None
 	
 2019-01-31
+	-Buttons and Menus research													Continued
+		-Reflections: I had never created a GUI in java before, and a great
+					  deal of research into various LayoutManagers needed
+					  to be done.
 	-Buttons and Menus implementation											Continued
+		-Reflections: The resources that were found on LayoutManagers were
+					  in places vague and unclear, or not suited to my 
+					  specific application. This meant that a large amount
+					  amount of trial and error and experimentation had to
+					  be done in order to find a viable solution. This 
+					  put the project significantly behind schedule, however
+					  this is okay as plans have been made to carry out a large
+					  portion of the work out-with school time
+	
+2019-02-07
+	-Buttons and Menus research													Continued
+		-Reflections: None
+	-Buttons and Menus implementation											Continued
+		-Reflections: None
+	
+2019-02-21
+	-Buttons and Menus research													Continued
+		-Reflections: None
+	-Buttons and Menus implementation											Continued
+		-Reflections: It was realised during the process of implementation that
+					  the main menu may look better if the buttons were to have
+					  borders. This will be tested, and if successful, will be
+					  reflected when the high fidelity prototype is created.
+	
+
 	
 
 
