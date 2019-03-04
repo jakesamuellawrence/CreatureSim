@@ -25,6 +25,8 @@ public class MainMenu extends JPanel{
 		addButton(4, 2, 1, 1, 5, "View Previous Generation");
 		addButton(4, 12, 5, 1, 5, "Start Fresh");
 		addButton(0, 12, 1, 1, 5, "Exit To Desktop");
+		
+		addTitle(0, 0, 3, 1, "CreatureSim", "By Jake Lawrence");
 	}
 	
 	/**
@@ -53,8 +55,8 @@ public class MainMenu extends JPanel{
 	 * @param action String, the action associated with the button, to be checked by an ActionListener 
 	 */
 	public void addButton(int x, int y, int width, int height, int insets, String action){
-		constraints.weightx = 0;
-		constraints.weighty = 0;
+		constraints.weightx = 0.1;
+		constraints.weighty = 0.1;
 		CSButton button = new CSButton(action);
 		constraints.gridx = x;
 		constraints.gridy = y;
@@ -62,5 +64,15 @@ public class MainMenu extends JPanel{
 		constraints.gridheight = height;
 		constraints.insets = new Insets(insets, insets, insets, insets);
 		this.add(button, constraints);
+	}
+	public void addTitle(int x, int y, int width, int height, String title, String subtitle){
+		constraints.weightx = 0.1;
+		constraints.weighty = 0.1;
+		CSTitle cstitle = new CSTitle(title, subtitle);
+		constraints.gridx = x;
+		constraints.gridy = y;
+		constraints.gridwidth = width;
+		constraints.gridheight = height;
+		this.add(cstitle, constraints);
 	}
 }
