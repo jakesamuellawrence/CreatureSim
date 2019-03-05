@@ -28,6 +28,8 @@ public class MainMenu extends JPanel{
 		
 		addTitle(0, 0, 2, 2, "CreatureSim", "By Jake Lawrence");
 		
+		addCSStatblock(0, 2, 3, 1);
+		
 		addGraph(0, 3, 3, 9);
 	}
 	
@@ -86,5 +88,15 @@ public class MainMenu extends JPanel{
 		constraints.gridwidth = width;
 		constraints.gridheight = height;
 		this.add(graph, constraints);
+	}
+	public void addCSStatblock(int x, int y, int width, int height){
+		constraints.weightx = 0.1;
+		constraints.weighty = 0.2;
+		CSStatblock statblock = new CSStatblock();
+		constraints.gridx = x;
+		constraints.gridy = y;
+		constraints.gridwidth = width;
+		constraints.gridheight = height;
+		this.add(statblock, constraints);
 	}
 }
