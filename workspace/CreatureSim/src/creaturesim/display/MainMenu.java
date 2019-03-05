@@ -26,7 +26,9 @@ public class MainMenu extends JPanel{
 		addButton(4, 12, 5, 1, 5, "Start Fresh");
 		addButton(0, 12, 1, 1, 5, "Exit To Desktop");
 		
-		addTitle(0, 0, 3, 1, "CreatureSim", "By Jake Lawrence");
+		addTitle(0, 0, 2, 2, "CreatureSim", "By Jake Lawrence");
+		
+		addGraph(0, 3, 3, 9);
 	}
 	
 	/**
@@ -74,5 +76,15 @@ public class MainMenu extends JPanel{
 		constraints.gridwidth = width;
 		constraints.gridheight = height;
 		this.add(cstitle, constraints);
+	}
+	public void addGraph(int x, int y, int width, int height){
+		constraints.weightx = 1;
+		constraints.weighty = 1;
+		CSGraph graph = new CSGraph();
+		constraints.gridx = x;
+		constraints.gridy = y;
+		constraints.gridwidth = width;
+		constraints.gridheight = height;
+		this.add(graph, constraints);
 	}
 }
