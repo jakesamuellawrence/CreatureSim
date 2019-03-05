@@ -5,6 +5,15 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+/**
+ * Panel to be displayed by CSPanel's CardLayout.
+ * 
+ * Represents what is displayed in-game. I.e, creatures, (creature scores?),
+ * fast forwards controls, and a button to exit
+ * 
+ * @author jakesamuellawrence
+ *
+ */
 public class InGame extends JPanel{
 	public InGame(){
 		super();

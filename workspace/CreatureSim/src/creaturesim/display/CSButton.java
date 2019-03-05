@@ -20,8 +20,8 @@ public class CSButton extends JButton{
 	
 	public String button_text; 
 	
-	public final int preferred_x = 250;
-	public final int preferred_y = 35;
+	public final int preferred_width = 275;
+	public final int preferred_height = 45;
 	
 	public final int border_thickness = 3;
 	
@@ -34,7 +34,7 @@ public class CSButton extends JButton{
 	public CSButton(String action){
 		this.button_text = action;
 		this.setActionCommand(action);
-		this.setPreferredSize(new Dimension(preferred_x, preferred_y));
+		this.setPreferredSize(new Dimension(preferred_width, preferred_height));
 	}
 	
 	/**
@@ -47,18 +47,25 @@ public class CSButton extends JButton{
 	public void paintComponent(Graphics g){
 		// Draw Border
 		g.setColor(Color.black);
-		g.fillRect(0, 0, this.getWidth(), this.getHeight());
+		g.fillRect(getWidth()/2-preferred_width/2, getHeight()/2-preferred_height/2, 
+				   preferred_width, preferred_height);
 		// Draw Button
 		g.setColor(Color.decode("#f2a805"));
-		g.fillRect(border_thickness, border_thickness, 
-				   this.getWidth() - 2*border_thickness, this.getHeight() - 2*border_thickness);
+		g.fillRect(getWidth()/2-preferred_width/2+border_thickness, 
+				   getHeight()/2-preferred_height/2+border_thickness, 
+				   preferred_width-2*border_thickness, preferred_height-2*border_thickness);
 		// Draw Text
 		g.setColor(Color.black);
-		Font button_font = new Font("Arial", Font.BOLD, 18);
+		Font button_font = new Font("Arial", Font.PLAIN, 20);
 		this.setFont(button_font);
 		FontMetrics fm = g.getFontMetrics();
 		int text_width = fm.stringWidth(button_text);
 		int text_height = fm.getAscent();
-		g.drawString(button_text, this.getWidth()/2 - text_width/2, this.getHeight()/2 + (text_height/2));
+		g.drawString(button_text, 
+				     getWidth()/2 - text_width/2, getHeight()/2 + (text_height/2));
+		
+		//Draw Cell
+		g.setColor(Color.white);
+//		g.drawRect(0, 0, getWidth()-1, getHeight()-1);
 	}
 }

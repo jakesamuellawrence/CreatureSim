@@ -24,7 +24,8 @@ public class CSPanel extends JPanel{
 	
 	/**
 	 * Constructor for CSPanel. Calls parent constructor from JPanel,
-	 * then sets the size.
+	 * then sets the size, adds a CardLayout, adds cards, and shows
+	 * the main menu card
 	 */
 	public CSPanel(){
 		super(new CardLayout());

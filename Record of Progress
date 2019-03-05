@@ -220,10 +220,31 @@ Record of Progress
 					  the main menu may look better if the buttons were to have
 					  borders. This will be tested, and if successful, will be
 					  reflected when the high fidelity prototype is created.
-	
+					
+2019-02-28
+	-Buttons and Menus research													Continued
+		-Reflections: None
+	-Buttons and Menus implementation											Continued
+		-Reflections: It was realised that the default java library for
+					  displaying graphics did not have a feature to automatically
+					  wrap text within a certain region, so an algorithm to
+					  do this head to be written and implemented by me.
 
-	
-
+2019-03-04
+	-Buttons and Menus research													Continued
+		-Reflections: None
+	-Buttons and Menus implementation											Continued
+		-Reflections: Issues were faced in the design of the word wrap
+		              algorithm due to logical errors in the design. 
+		              However, these have been overcome.	
+		              
+2019-03-05
+	-Buttons and Menus implementation											Continued
+		-Reflections: None
+		
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~30 sessions spent
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 
