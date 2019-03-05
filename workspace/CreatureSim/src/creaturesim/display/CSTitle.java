@@ -10,10 +10,10 @@ import javax.swing.JPanel;
 public class CSTitle extends JPanel{
 	int preferred_x;
 	int preferred_y;
-	int margin = 5;
+	int margin = 0;
 	int subtitle_offset = 10;
-	int title_size = 30;
-	int subtitle_size = 15;
+	int title_size = 18;
+	int subtitle_size = 8;
 	
 	Font title_font;
 	Font subtitle_font;
@@ -48,7 +48,7 @@ public class CSTitle extends JPanel{
 		System.out.println("BY JAKE LAWRENCE");
 		
 		// Draw outline
-		g.setColor(Color.white);
-		g.drawRect(0, 0, getWidth()-1, getHeight()-1);
+//		g.setColor(Color.white);
+//		g.drawRect(0, 0, getWidth()-1, getHeight()-1);
 	}
 }

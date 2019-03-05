@@ -18,7 +18,7 @@ public class CSStatblock extends JPanel{
 		
 		// Draw stats
 		g.setColor(Color.black);
-		g.setFont(new Font("Arial", Font.BOLD, 20));
+		g.setFont(new Font("Arial", Font.BOLD, 14));
 		FontMetrics fm = g.getFontMetrics();
 		int text_height = fm.getAscent();
 		g.drawString("Current Generation: XX", margin, getHeight()*2/7);

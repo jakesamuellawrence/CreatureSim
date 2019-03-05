@@ -85,7 +85,5 @@ public class CSTextBlock extends JPanel{
 			to_return = to_return + words[i] + " ";
 		}
 		return(to_return);
-	}
-	
-	
+	}	
 }

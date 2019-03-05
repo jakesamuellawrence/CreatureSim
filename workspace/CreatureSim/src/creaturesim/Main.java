@@ -1,11 +1,6 @@
 package creaturesim;
 
 import creaturesim.display.CSFrame;
-import creaturesim.neural.HardlimNode;
-import creaturesim.neural.Node;
-import creaturesim.neural.SigmoidInputNode;
-import creaturesim.neural.SigmoidNode;
-import creaturesim.neural.TanhNode;
 
 public class Main{
 	public static CSFrame frame;
