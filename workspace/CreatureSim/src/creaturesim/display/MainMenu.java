@@ -29,6 +29,7 @@ public class MainMenu extends JPanel{
 		
 		constraints.fill = GridBagConstraints.BOTH;
 		
+<<<<<<< HEAD
 		addButton(4, 0, 1, 1, "Slow Generation");
 		addButton(4, 1, 1, 1, "Quick Generation");
 		addButton(4, 2, 1, 1, "View Previous Generation");
@@ -65,6 +66,19 @@ public class MainMenu extends JPanel{
 		addTextBlock(3, 12, 1, 1, "Discard all creatures and start simulation again from scratch");
 		addTextBlock(1, 12, 1, 1, "WARNING: current set of generations will be lost when the " +
 				                  "application is closed.");
+=======
+		addButton(4, 0, 1, 1, 5, "Slow Generation");
+		addButton(4, 1, 1, 1, 5, "Quick Generation");
+		addButton(4, 2, 1, 1, 5, "View Previous Generation");
+		addButton(4, 12, 5, 1, 5, "Start Fresh");
+		addButton(0, 12, 1, 1, 5, "Exit To Desktop");
+		
+		addTitle(0, 0, 2, 2, "CreatureSim", "By Jake Lawrence");
+		
+		addCSStatblock(0, 2, 3, 1);
+		
+		addGraph(0, 3, 3, 9);
+>>>>>>> statblock
 	}
 	
 	/**
@@ -92,11 +106,17 @@ public class MainMenu extends JPanel{
 	 * @param height int, the gridheight for the button, in number of rows
 	 * @param action String, the action associated with the button, to be checked by an ActionListener 
 	 */
+<<<<<<< HEAD
 	public void addButton(int x, int y, int width, int height, String action){
 		// set constraints true for all buttons
 		constraints.weightx = 0.3;
 		constraints.weighty = 0.1;
 		// instantiate button and set specific constraints
+=======
+	public void addButton(int x, int y, int width, int height, int insets, String action){
+		constraints.weightx = 0.1;
+		constraints.weighty = 0.1;
+>>>>>>> statblock
 		CSButton button = new CSButton(action);
 		constraints.gridx = x;
 		constraints.gridy = y;
@@ -104,15 +124,46 @@ public class MainMenu extends JPanel{
 		constraints.gridheight = height;
 		this.add(button, constraints);
 	}
+<<<<<<< HEAD
 	public void addTextBlock(int x, int y, int width, int height, String text){
 		// set weights dynamically
 		constraints.weightx = 0.3;
 		constraints.weighty = text.length()/50;
 		CSTextBlock textblock = new CSTextBlock(text);
+=======
+	public void addTitle(int x, int y, int width, int height, String title, String subtitle){
+		constraints.weightx = 0.1;
+		constraints.weighty = 0.1;
+		CSTitle cstitle = new CSTitle(title, subtitle);
+>>>>>>> statblock
 		constraints.gridx = x;
 		constraints.gridy = y;
 		constraints.gridwidth = width;
 		constraints.gridheight = height;
+<<<<<<< HEAD
 		this.add(textblock, constraints);
+=======
+		this.add(cstitle, constraints);
+	}
+	public void addGraph(int x, int y, int width, int height){
+		constraints.weightx = 1;
+		constraints.weighty = 1;
+		CSGraph graph = new CSGraph();
+		constraints.gridx = x;
+		constraints.gridy = y;
+		constraints.gridwidth = width;
+		constraints.gridheight = height;
+		this.add(graph, constraints);
+	}
+	public void addCSStatblock(int x, int y, int width, int height){
+		constraints.weightx = 0.1;
+		constraints.weighty = 0.2;
+		CSStatblock statblock = new CSStatblock();
+		constraints.gridx = x;
+		constraints.gridy = y;
+		constraints.gridwidth = width;
+		constraints.gridheight = height;
+		this.add(statblock, constraints);
+>>>>>>> statblock
 	}
 }
