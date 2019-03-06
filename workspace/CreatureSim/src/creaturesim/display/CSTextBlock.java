@@ -1,10 +1,10 @@
 package creaturesim.display;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
@@ -21,33 +21,24 @@ import javax.swing.JPanel;
  */
 public class CSTextBlock extends JPanel{
 	
+	Font font = new Font("Arial", Font.BOLD, 14);
+	
 	String text;
 	String[] words;
+	ArrayList<String> lines;
 	
 	int line_spacing = 2;
 	int margin = 5;
 	
 	public CSTextBlock(String text){
 		this.text = text;
-		words = text.split(" ");
-		this.setOpaque(false);
-//		this.setPreferredSize(new Dimension(100, 200));
+		this.setOpaque(true);
 	}
 	
-	@Override
-	public void paintComponent(Graphics g){
-		// Set Font
-		Font button_font = new Font("Arial", Font.BOLD, 14);
-		this.setFont(button_font);
-		FontMetrics fm = g.getFontMetrics();
-		
-		drawLine(0, fm.getAscent(), fm, g);
-		
-		// Draw outline
-//		g.setColor(Color.white);
-//		g.drawRect(0, 0, getWidth()-1, getHeight()-1);
+	public void convertTextToWords(){
+		words = text.split(" ");
 	}
-	public void drawLine(int startingWord, int line_y, FontMetrics fm, Graphics g){
+	public void convertWordsToLines(int startingWord, FontMetrics fm){
 		// Check for exit to recursion
 		if(startingWord >= words.length){
 			return;
@@ -55,35 +46,51 @@ public class CSTextBlock extends JPanel{
 		
 		// Loop to find last word that will fit in the line
 		int endingWord;
-		String to_draw = "";
+		String line = "";
 		for(endingWord = startingWord; endingWord < words.length; endingWord++){
-			if(fm.stringWidth(to_draw+words[endingWord]+" ") < getWidth()-margin){
-				to_draw += words[endingWord] + " ";
+			if(fm.stringWidth(line+words[endingWord]+" ") < getWidth()-margin){
+				line += words[endingWord] + " ";
 			}
 			else{
 				break;
 			}
 		}
 		
-		// Draw the string
-		g.setColor(Color.decode("#faebd7"));
-		g.setColor(Color.black);
-		g.drawString(to_draw, margin, line_y);
+		// Add line to lines
+		lines.add(line);
 		
-		// Draw next line recursively
+		// Add next line recursively
 		if(endingWord != startingWord){
-			drawLine(endingWord, line_y+fm.getAscent()+line_spacing, fm, g);
+			convertWordsToLines(endingWord, fm);
 		}
 		else{
 			System.out.println("ERROR: Not enough space!");
 		}
 	}
 	
-	public String wordsToString(int startingIndex, int endingIndex){
-		String to_return = "";
-		for(int i = startingIndex; i < endingIndex; i++){
-			to_return = to_return + words[i] + " ";
+	@Override
+	public void paintComponent(Graphics g){
+		// Set Font
+		this.setFont(font);
+		FontMetrics fm = g.getFontMetrics();
+		
+		// Break text into lines
+		lines = new ArrayList<String>();		
+		convertTextToWords();
+		convertWordsToLines(0, fm);
+		
+		System.out.println(lines.size());
+		
+		// Display lines one at a time, vertically centred
+		int total_height = (int)(lines.size()*fm.getAscent() + lines.size()*line_spacing);
+		int line_y = getHeight()/2-total_height/2+fm.getAscent();
+		for(int i = 0; i < lines.size(); i++){
+			g.drawString(lines.get(i), margin, line_y);
+			line_y += fm.getAscent()+line_spacing;
 		}
-		return(to_return);
-	}	
+		
+		// Draw outline
+//		g.setColor(Color.white);
+//		g.drawRect(0, 0, getWidth()-1, getHeight()-1); 
+	}
 }

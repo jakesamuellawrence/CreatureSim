@@ -246,7 +246,13 @@ Record of Progress
 ~30 sessions spent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
+2019-03-06
+	-Buttons and Menu implementation											Continued
+		-Reflections: All components had been implemented and added to the main
+					  menu, however it was then realised that the text blocks
+					  would need to centre the text vertically to achieve the
+					  desired UI design. This meant the word wrap algorithm had
+					  to be furthur modified.
 
 
 

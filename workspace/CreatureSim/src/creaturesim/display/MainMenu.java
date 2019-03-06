@@ -28,7 +28,7 @@ public class MainMenu extends JPanel{
 		this.setLayout(layout);
 		
 		constraints.fill = GridBagConstraints.BOTH;
-		constraints.insets = new Insets(5, 5, 5, 5);
+		constraints.insets = new Insets(3, 3, 3, 3);
 		
 		addTitle				(0, 0, 2, 2, "CreatureSim", "By Jake Lawrence");
 		addHorizontalTextBlock	(2, 0, 2, 1, "Compete a generation in human-friendly time, and view the " +
@@ -41,7 +41,7 @@ public class MainMenu extends JPanel{
 		addHorizontalTextBlock	(2, 2, 2, 1, "Re-compete the previous generation. This will not change the recorded results for " +
 										     "the previous generation");
 		addButton		        (4, 2, 1, 1, "View Previous Generation");
-		addGraph		        (0, 3, 4, 8);
+		addGraph		        (0, 4, 4, 7);
 		addVerticalTextBlock	(4, 4, 1, 8, "The creatures in this simulation are powered by neural nets " +
 				 				         	 "and evolutional learning. " +
 				 				 	         "A neural net, in essense, is just a collection of nodes, " +
@@ -49,7 +49,7 @@ public class MainMenu extends JPanel{
 				 				 	         "some number, typically between -1 and 1. When you wish to get " +
 				 				 	         "the net to compute something, you pass inputs into the begining " +
 				 				 	         "nodes of the net. Those inputs nodes then pass on values to the " +
-				 				 	         "nodes they're connected to, which in turn passes on their values to " +
+				 				 	         "nodes they're connected to, which in turn pass on their values to " +
 				 				 	         "more nodes, until eventually a value reaches the output. " +
 				 				 	         "When a node passes on a value to another node, the value is " +
 				 				 	         "multiplied by the weight which connects the two nodes. At first " +
@@ -94,7 +94,7 @@ public class MainMenu extends JPanel{
 	 */
 	public void addButton(int x, int y, int width, int height, String action){
 		constraints.weightx = 0.8;
-		constraints.weighty = 0.1;
+		constraints.weighty = 0.125;
 		CSButton button = new CSButton(action);
 		constraints.gridx = x;
 		constraints.gridy = y;

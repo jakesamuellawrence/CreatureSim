@@ -8,8 +8,11 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 public class CSStatblock extends JPanel{
+	
+	Font font = new Font("Arial", Font.BOLD, 14);
+	
 	int border_thickness = 3;
-	int margin = 5; 
+	int margin = 10; 
 	
 	@Override
 	public void paintComponent(Graphics g){
@@ -23,7 +26,7 @@ public class CSStatblock extends JPanel{
 		
 		// Draw stats
 		g.setColor(Color.black);
-		g.setFont(new Font("Arial", Font.BOLD, 14));
+		g.setFont(font);
 		FontMetrics fm = g.getFontMetrics();
 		int text_height = fm.getAscent();
 		g.drawString("Current Generation: XX", margin, getHeight()*2/7);

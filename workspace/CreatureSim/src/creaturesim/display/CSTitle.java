@@ -45,7 +45,6 @@ public class CSTitle extends JPanel{
 		fm = g.getFontMetrics();
 		line_bottom += fm.getAscent();
 		g.drawString(subtitle, margin+subtitle_offset, line_bottom);
-		System.out.println("BY JAKE LAWRENCE");
 		
 		// Draw cell
 //		g.setColor(Color.white);
