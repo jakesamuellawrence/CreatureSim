@@ -8,13 +8,18 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 public class CSStatblock extends JPanel{
+	int border_thickness = 3;
 	int margin = 5; 
 	
 	@Override
 	public void paintComponent(Graphics g){
+		// Draw Black border
+		g.setColor(Color.black);
+		g.fillRect(0, 0, getWidth(), getHeight());
+		
 		// Draw orange background
 		g.setColor(Color.decode("#f2a805"));
-		g.fillRect(0, 0, getWidth(), getHeight());
+		g.fillRect(border_thickness, border_thickness, getWidth()-2*border_thickness, getHeight()-2*border_thickness);
 		
 		// Draw stats
 		g.setColor(Color.black);

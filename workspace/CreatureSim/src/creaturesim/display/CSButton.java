@@ -34,7 +34,7 @@ public class CSButton extends JButton{
 	public CSButton(String action){
 		this.button_text = action;
 		this.setActionCommand(action);
-		this.setPreferredSize(new Dimension(preferred_width, preferred_height));
+		this.setOpaque(false);
 	}
 	
 	/**
@@ -65,7 +65,7 @@ public class CSButton extends JButton{
 				     getWidth()/2 - text_width/2, getHeight()/2 + (text_height/2));
 		
 		//Draw Cell
-		g.setColor(Color.white);
+//		g.setColor(Color.white);
 //		g.drawRect(0, 0, getWidth()-1, getHeight()-1);
 	}
 }

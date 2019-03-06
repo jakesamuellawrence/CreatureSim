@@ -47,7 +47,7 @@ public class CSTitle extends JPanel{
 		g.drawString(subtitle, margin+subtitle_offset, line_bottom);
 		System.out.println("BY JAKE LAWRENCE");
 		
-		// Draw outline
+		// Draw cell
 //		g.setColor(Color.white);
 //		g.drawRect(0, 0, getWidth()-1, getHeight()-1);
 	}

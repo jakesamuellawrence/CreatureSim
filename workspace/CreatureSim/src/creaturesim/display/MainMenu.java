@@ -30,44 +30,41 @@ public class MainMenu extends JPanel{
 		constraints.fill = GridBagConstraints.BOTH;
 		constraints.insets = new Insets(5, 5, 5, 5);
 		
-		addTitle		(0, 0, 2, 2, "CreatureSim", "By Jake Lawrence");
-		addTextBlock	(2, 0, 2, 1, "Compete a generation in human-friendly time, and view the " +
-									 "competition");
-		addButton		(4, 0, 1, 1, "Slow Generation");
-		addTextBlock	(2, 1, 2, 1, "Compete a generation as quickly as possible, without viewing " +
-                                 	 "the competition");
-		addButton		(4, 1, 1, 1, "Quick Generation");
-		addCSStatblock	(0, 2, 2, 2);
-		addTextBlock	(2, 2, 2, 1, "Re-view the previous generation's competition. NOTE: this will " +
-                					 "cause all creatures to recompete, rather than replay the events. " +
-                					 "This will not change the previously recorded scores, but what is " +
-                					 "shown may vary slightly from the recorded results due to random " +
-                					 "variation");
-		addButton		(4, 2, 1, 1, "View Previous Generation");
-		addGraph		(0, 3, 4, 8);
-		addTextBlock	(4, 4, 1, 8, "The creatures in this simulation are powered by neural nets " +
-				 				 	 "and evolutional learning. " +
-				 				 	 "A neural net, in essense, is just a collection of nodes, " +
-				 				 	 "each of which is connected by a weight, where each weight is " +
-				 				 	 "some number, typically between -1 and 1. When you wish to get " +
-				 				 	 "the net to compute something, you pass inputs into the begining " +
-				 				 	 "nodes of the net. Those inputs nodes then pass on values to the " +
-				 				 	 "nodes they're connected to, which in turn passes on their values to " +
-				 				 	 "more nodes, until eventually a value reaches the output. " +
-				 				 	 "When a node passes on a value to another node, the value is " +
-				 				 	 "multiplied by the weight which connects the two nodes. At first " +
-				 				 	 "these weights are random, and so the output will be random too. " +
-				 				 	 "However, after each generation competes, the nets which performed " +
-				 				 	 "best will kept and slight mutations will be made from them. " +
-				 				 	 "In this way, each generation, the weights become more and more " +
-				 				 	 "refined to give good outputs based on the inputs. " +
-				 				 	 "If you wish to learn more about neural nets, I suggest reading " +
-									 "this book: http://hagan.okstate.edu/NNDesign.pdf");
-		addButton		(0, 12, 1, 1, "Exit To Desktop");
-		addTextBlock	(1, 12, 1, 1, "WARNING: current set of generations will be lost when the " +
-                					  "application is closed.");
-		addTextBlock	(3, 12, 1, 1, "Discard all creatures and start simulation again from scratch");
-		addButton		(4, 12, 1, 1, "Start Fresh");
+		addTitle				(0, 0, 2, 2, "CreatureSim", "By Jake Lawrence");
+		addHorizontalTextBlock	(2, 0, 2, 1, "Compete a generation in human-friendly time, and view the " +
+											 "competition");
+		addButton				(4, 0, 1, 1, "Slow Generation");
+		addHorizontalTextBlock	(2, 1, 2, 1, "Compete a generation as quickly as possible, without viewing " +
+                                        	 "the competition");
+		addButton				(4, 1, 1, 1, "Quick Generation");
+		addCSStatblock			(0, 2, 2, 2);
+		addHorizontalTextBlock	(2, 2, 2, 1, "Re-compete the previous generation. This will not change the recorded results for " +
+										     "the previous generation");
+		addButton		        (4, 2, 1, 1, "View Previous Generation");
+		addGraph		        (0, 3, 4, 8);
+		addVerticalTextBlock	(4, 4, 1, 8, "The creatures in this simulation are powered by neural nets " +
+				 				         	 "and evolutional learning. " +
+				 				 	         "A neural net, in essense, is just a collection of nodes, " +
+				 				 	         "each of which is connected by a weight, where each weight is " +
+				 				 	         "some number, typically between -1 and 1. When you wish to get " +
+				 				 	         "the net to compute something, you pass inputs into the begining " +
+				 				 	         "nodes of the net. Those inputs nodes then pass on values to the " +
+				 				 	         "nodes they're connected to, which in turn passes on their values to " +
+				 				 	         "more nodes, until eventually a value reaches the output. " +
+				 				 	         "When a node passes on a value to another node, the value is " +
+				 				 	         "multiplied by the weight which connects the two nodes. At first " +
+				 				 	         "these weights are random, and so the output will be random too. " +
+				 				 	         "However, after each generation competes, the nets which performed " +
+				 				 	         "best will kept and slight mutations will be made from them. " +
+				 				 	         "In this way, each generation, the weights become more and more " +
+				 				 	         "refined to give good outputs based on the inputs. " +
+				 				 	         "If you wish to learn more about neural nets, I suggest reading " +
+											 "this book: http://hagan.okstate.edu/NNDesign.pdf");
+		addButton				(0, 12, 1, 1, "Exit To Desktop");
+		addHorizontalTextBlock	(1, 12, 1, 1, "WARNING: current set of generations will be lost when the " +
+											  "application is closed.");
+		addHorizontalTextBlock	(3, 12, 1, 1, "Discard all creatures and start simulation again from scratch");
+		addButton				(4, 12, 1, 1, "Start Fresh");
 	}
 	
 	/**
@@ -96,7 +93,7 @@ public class MainMenu extends JPanel{
 	 * @param action String, the action associated with the button, to be checked by an ActionListener 
 	 */
 	public void addButton(int x, int y, int width, int height, String action){
-		constraints.weightx = 0.1;
+		constraints.weightx = 0.8;
 		constraints.weighty = 0.1;
 		CSButton button = new CSButton(action);
 		constraints.gridx = x;
@@ -105,10 +102,21 @@ public class MainMenu extends JPanel{
 		constraints.gridheight = height;
 		this.add(button, constraints);
 	}
-	public void addTextBlock(int x, int y, int width, int height, String text){
+	public void addVerticalTextBlock(int x, int y, int width, int height, String text){
 		// set weights dynamically
-		constraints.weightx = 0.25;
-		constraints.weighty = text.length()/50;
+		constraints.weightx = 0;
+		constraints.weighty = 1;
+		CSTextBlock textblock = new CSTextBlock(text);
+		constraints.gridx = x;
+		constraints.gridy = y;
+		constraints.gridwidth = width;
+		constraints.gridheight = height;
+		this.add(textblock, constraints);
+	}
+	public void addHorizontalTextBlock(int x, int y, int width, int height, String text){
+		// set weights dynamically
+		constraints.weightx = 1;
+		constraints.weighty = 0;
 		CSTextBlock textblock = new CSTextBlock(text);
 		constraints.gridx = x;
 		constraints.gridy = y;
@@ -117,8 +125,8 @@ public class MainMenu extends JPanel{
 		this.add(textblock, constraints);
 	}
 	public void addTitle(int x, int y, int width, int height, String title, String subtitle){
-		constraints.weightx = 0.1;
-		constraints.weighty = 0.1;
+		constraints.weightx = 0;
+		constraints.weighty = 0;
 		CSTitle cstitle = new CSTitle(title, subtitle);
 		constraints.gridx = x;
 		constraints.gridy = y;
@@ -127,8 +135,8 @@ public class MainMenu extends JPanel{
 		this.add(cstitle, constraints);
 	}
 	public void addGraph(int x, int y, int width, int height){
-		constraints.weightx = 1;
-		constraints.weighty = 1;
+		constraints.weightx = 0.5;
+		constraints.weighty = 0.5;
 		CSGraph graph = new CSGraph();
 		constraints.gridx = x;
 		constraints.gridy = y;
@@ -137,7 +145,7 @@ public class MainMenu extends JPanel{
 		this.add(graph, constraints);
 	}
 	public void addCSStatblock(int x, int y, int width, int height){
-		constraints.weightx = 0.1;
+		constraints.weightx = 0;
 		constraints.weighty = 0;
 		CSStatblock statblock = new CSStatblock();
 		constraints.gridx = x;

@@ -31,7 +31,7 @@ public class CSTextBlock extends JPanel{
 		this.text = text;
 		words = text.split(" ");
 		this.setOpaque(false);
-		this.setPreferredSize(new Dimension(100, 200));
+//		this.setPreferredSize(new Dimension(100, 200));
 	}
 	
 	@Override
