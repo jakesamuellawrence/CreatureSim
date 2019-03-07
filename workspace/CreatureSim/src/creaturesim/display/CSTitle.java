@@ -7,7 +7,13 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+/**
+ * Custom Panel class for displaying a title and smaller subtitle below it
+ * 
+ * @author jakesamuellawrence
+ */
 public class CSTitle extends JPanel{
+	
 	int preferred_x;
 	int preferred_y;
 	int margin = 0;
@@ -21,6 +27,13 @@ public class CSTitle extends JPanel{
 	String title;
 	String subtitle;
 	
+	/**
+	 * Constructor for CSTitle. Sets the title variable to the passed in string,
+	 * and the subtitle variable to the other passed in String.
+	 * 
+	 * @param title String. The large title to be displayed
+	 * @param subtitle String. The smaller subtitle to be displayed
+	 */
 	public CSTitle(String title, String subtitle){
 		this.title = title;
 		this.subtitle = subtitle;
@@ -31,6 +44,11 @@ public class CSTitle extends JPanel{
 		this.setOpaque(false);
 	}
 	
+	/**
+	 * Overridden paintComponent method from JPanel. Draws a large title and a smaller subtitle below
+	 * 
+	 * @param g Graphics Graphics context that gets automatically passed in by AWT.
+	 */
 	@Override
 	public void paintComponent(Graphics g){
 		// Draw title
@@ -45,9 +63,5 @@ public class CSTitle extends JPanel{
 		fm = g.getFontMetrics();
 		line_bottom += fm.getAscent();
 		g.drawString(subtitle, margin+subtitle_offset, line_bottom);
-		
-		// Draw cell
-//		g.setColor(Color.white);
-//		g.drawRect(0, 0, getWidth()-1, getHeight()-1);
 	}
 }

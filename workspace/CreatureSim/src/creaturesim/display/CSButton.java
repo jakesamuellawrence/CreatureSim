@@ -14,6 +14,7 @@ import javax.swing.JButton;
  * Extends JButton class to use super methods for detecting button
  * presses
  * 
+ * @see JButton
  * @author jakesamuellawrence
  */
 public class CSButton extends JButton{
@@ -28,10 +29,10 @@ public class CSButton extends JButton{
 	public final int border_thickness = 3;
 	
 	/**
-	 * Sets the action and bounds of the button
+	 * Sets the action and button text, and makes the button opaque.
 	 * 
-	 * @param action string trigger word that determines what happens when the button is pressed
-	 * @param bounds array of ints for the bounds of button: x,y,width,height
+	 * @param action String. trigger word that determines what happens when the button is pressed. 
+	 * also used to determine what is displayed on the button
 	 */
 	public CSButton(String action){
 		this.button_text = action;
@@ -40,10 +41,12 @@ public class CSButton extends JButton{
 	}
 	
 	/**
+	 * Overridden paintComponent method from JPanel. Is called when the built-in repaint()
+	 * method is called.
+	 * 
 	 * Displays an orange box with a black border and writes button_text in the centre.
 	 * 
-	 * Overridden paintComponent method from JPanel. Is called when the repaint()
-	 * method is called.
+	 * @param g Graphics Graphics context automatically passed in by AWT.
 	 */
 	@Override
 	public void paintComponent(Graphics g){

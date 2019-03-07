@@ -7,6 +7,14 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+/**
+ * Custom Panel class for displaying numerical statistics about the current generation
+ * 
+ * Extends JPanel so it is automatically painted.
+ * 
+ * @see JPanel
+ * @author jakesamuellawrence
+ */
 public class CSStatblock extends JPanel{
 	
 	Font font = new Font("Arial", Font.BOLD, 14);
@@ -14,6 +22,12 @@ public class CSStatblock extends JPanel{
 	int border_thickness = 3;
 	int margin = 10; 
 	
+	/**
+	 * paintComponent method overridden from JPanel. Draws an orange rectangle
+	 * with black border, then writes the stats in it.
+	 * 
+	 * @param g Graphics Graphics context that gets automatically passed in by AWT.
+	 */
 	@Override
 	public void paintComponent(Graphics g){
 		// Draw Black border
@@ -27,8 +41,6 @@ public class CSStatblock extends JPanel{
 		// Draw stats
 		g.setColor(Color.black);
 		g.setFont(font);
-		FontMetrics fm = g.getFontMetrics();
-		int text_height = fm.getAscent();
 		g.drawString("Current Generation: XX", margin, getHeight()*2/7);
 		g.drawString("Generation Size: XX", margin, getHeight()*4/7);
 		g.drawString("Best Creature: XXX", margin, getHeight()*6/7);

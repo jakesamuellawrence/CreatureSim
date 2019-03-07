@@ -21,6 +21,9 @@ public class MainMenu extends JPanel{
 	
 	static GridBagConstraints constraints = new GridBagConstraints();
 	
+	/**
+	 * Constructor for MainMenu. Adds all the components that need to be displayed
+	 */
 	public MainMenu(){
 		super();
 		
@@ -84,7 +87,7 @@ public class MainMenu extends JPanel{
 	/**
 	 * 
 	 * Adds a button to the panel, in accordance with gridbag
-	 * layout.
+	 * layout. Sets standard weights for all buttons
 	 * 
 	 * @param x int, the gridx for the button. 0 is leftmost column
 	 * @param y int, the gridy for the button. 0 is the topmost row
@@ -102,6 +105,18 @@ public class MainMenu extends JPanel{
 		constraints.gridheight = height;
 		this.add(button, constraints);
 	}
+	
+	/**
+	 * 
+	 * Adds a text block that is intended to be vertical to the panel, in accordance with gridbag
+	 * layout. Sets standard weights for all vertical text blocks.
+	 * 
+	 * @param x int, the gridx for the button. 0 is leftmost column
+	 * @param y int, the gridy for the button. 0 is the topmost row
+	 * @param width int, the gridwidth for the button, in number of columns
+	 * @param height int, the gridheight for the button, in number of rows
+	 * @param text String, the text to be displayed
+	 */
 	public void addVerticalTextBlock(int x, int y, int width, int height, String text){
 		// set weights dynamically
 		constraints.weightx = 0;
@@ -113,6 +128,17 @@ public class MainMenu extends JPanel{
 		constraints.gridheight = height;
 		this.add(textblock, constraints);
 	}
+	
+	/**
+	 * Adds a text block that is intended to be horizontal to the panel, in accordance with gridbag
+	 * layout. Sets standard weights for all horizontal text blocks
+	 * 
+	 * @param x int, the gridx for the button. 0 is leftmost column
+	 * @param y int, the gridy for the button. 0 is the topmost row
+	 * @param width int, the gridwidth for the button, in number of columns
+	 * @param height int, the gridheight for the button, in number of rows
+	 * @param text String, the text to be displayed
+	 */
 	public void addHorizontalTextBlock(int x, int y, int width, int height, String text){
 		// set weights dynamically
 		constraints.weightx = 1;
@@ -124,6 +150,18 @@ public class MainMenu extends JPanel{
 		constraints.gridheight = height;
 		this.add(textblock, constraints);
 	}
+	
+	/**
+	 * Adds a title to the panel, in accordance with gridbag
+	 * layout. Sets standard weights for all titles
+	 * 
+	 * @param x int, the gridx for the button. 0 is leftmost column
+	 * @param y int, the gridy for the button. 0 is the topmost row
+	 * @param width int, the gridwidth for the button, in number of columns
+	 * @param height int, the gridheight for the button, in number of rows
+	 * @param title String, the larger text to be displayed
+	 * @param subtitle String, the smaller text to be displayed 
+	 */
 	public void addTitle(int x, int y, int width, int height, String title, String subtitle){
 		constraints.weightx = 0;
 		constraints.weighty = 0;
@@ -134,6 +172,16 @@ public class MainMenu extends JPanel{
 		constraints.gridheight = height;
 		this.add(cstitle, constraints);
 	}
+	
+	/**
+	 * Adds a graph to the panel, in accordance with gridbag
+	 * layout. Sets standard weights for all buttons
+	 * 
+	 * @param x int, the gridx for the button. 0 is leftmost column
+	 * @param y int, the gridy for the button. 0 is the topmost row
+	 * @param width int, the gridwidth for the button, in number of columns
+	 * @param height int, the gridheight for the button, in number of rows
+	 */
 	public void addGraph(int x, int y, int width, int height){
 		constraints.weightx = 0.5;
 		constraints.weighty = 0.5;
@@ -144,6 +192,16 @@ public class MainMenu extends JPanel{
 		constraints.gridheight = height;
 		this.add(graph, constraints);
 	}
+	
+	/**
+	 * Adds a graph to the panel, in accordance with gridbag
+	 * layout. Sets standard weights for all buttons
+	 * 
+	 * @param x int, the gridx for the button. 0 is leftmost column
+	 * @param y int, the gridy for the button. 0 is the topmost row
+	 * @param width int, the gridwidth for the button, in number of columns
+	 * @param height int, the gridheight for the button, in number of rows
+	 */
 	public void addCSStatblock(int x, int y, int width, int height){
 		constraints.weightx = 0;
 		constraints.weighty = 0;

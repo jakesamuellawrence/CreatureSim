@@ -7,7 +7,21 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+/**
+ * Custom Panel class for displaying a graph of creature statistics.
+ * 
+ * Extends the JPanel class so it is automatically repainted
+ * 
+ * @see JPanel
+ * @author jakesamuellawrence
+ */
 public class CSGraph extends JPanel{
+	
+	/**
+	 * Draws A graph using statistics about the creatures and previous generations.
+	 * 
+	 * @param g Graphics Graphics context automatically passed in by AWT.
+	 */
 	@Override
 	public void paintComponent(Graphics g){
 		// Draw graph background

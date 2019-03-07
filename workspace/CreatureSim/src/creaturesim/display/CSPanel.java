@@ -28,8 +28,8 @@ public class CSPanel extends JPanel{
 	 * the main menu card
 	 */
 	public CSPanel(){
-		super(new CardLayout());
-		this.layout = (CardLayout) this.getLayout();
+		super(new CardLayout());		// calls the constructor in the superclass, and passes in a layout to be applied
+		layout = (CardLayout)this.getLayout();
 		
 		main_menu = new MainMenu();
 		in_game = new InGame();
@@ -39,6 +39,6 @@ public class CSPanel extends JPanel{
 		
 		layout.show(this, "Main Menu");
 		
-		this.setPreferredSize(new Dimension(default_x_resolution, default_y_resolution)); // Sets the size of the window
+		this.setPreferredSize(new Dimension(default_x_resolution, default_y_resolution));
 	}
 }
