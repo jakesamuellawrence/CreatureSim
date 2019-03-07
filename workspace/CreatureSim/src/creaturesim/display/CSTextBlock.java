@@ -103,6 +103,7 @@ public class CSTextBlock extends JPanel{
 		convertWordsToLines(0, fm);
 		
 		// Display lines one at a time, vertically centred
+		g.setColor(Color.black);
 		int total_height = (int)(lines.size()*fm.getAscent() + lines.size()*line_spacing);
 		int line_y = getHeight()/2-total_height/2+fm.getAscent();
 		for(int i = 0; i < lines.size(); i++){
