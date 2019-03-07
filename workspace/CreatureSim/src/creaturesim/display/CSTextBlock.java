@@ -32,7 +32,7 @@ public class CSTextBlock extends JPanel{
 	
 	public CSTextBlock(String text){
 		this.text = text;
-		this.setOpaque(true);
+		this.setOpaque(false);
 	}
 	
 	public void convertTextToWords(){
