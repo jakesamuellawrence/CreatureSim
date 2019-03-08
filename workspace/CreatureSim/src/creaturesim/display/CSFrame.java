@@ -2,6 +2,8 @@ package creaturesim.display;
 
 import javax.swing.JFrame;
 
+import creaturesim.logic.CSActionListener;
+
 /**
  * Acts as a window into which other components can be added
  * 
@@ -20,7 +22,7 @@ public class CSFrame extends JFrame{
 		super("CreatureSim!"); 		// Calls the superclass's constructor, which sets the name of the frame
 		
 		canvas = new CSPanel();										
-		this.add(canvas);			// Adds the canvas to the frame so that it can be painted on
+		this.add(canvas);
 		this.pack();				// Forces window to be an appropriate size for all contained components
 		
 		this.setResizable(true); 						

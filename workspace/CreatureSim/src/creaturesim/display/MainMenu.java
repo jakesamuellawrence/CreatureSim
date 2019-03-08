@@ -8,6 +8,8 @@ import java.awt.Insets;
 
 import javax.swing.JPanel;
 
+import creaturesim.logic.CSActionListener;
+
 /**
  * Panel to be displayed by CSPanel's CardLayout.
  * 
@@ -20,6 +22,8 @@ import javax.swing.JPanel;
 public class MainMenu extends JPanel{
 	
 	static GridBagConstraints constraints = new GridBagConstraints();
+	
+	CSActionListener actionlistener = new CSActionListener();
 	
 	/**
 	 * Constructor for MainMenu. Adds all the components that need to be displayed
@@ -104,6 +108,7 @@ public class MainMenu extends JPanel{
 		constraints.gridwidth = width;
 		constraints.gridheight = height;
 		this.add(button, constraints);
+		button.addActionListener(actionlistener);
 	}
 	
 	/**
