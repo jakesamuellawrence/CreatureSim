@@ -3,12 +3,11 @@ package creaturesim;
 import creaturesim.display.CSFrame;
 import creaturesim.display.PaintRunnable;
 import creaturesim.logic.Creature;
+import creaturesim.logic.GenerationManager;
 import creaturesim.logic.LogicRunnable;
 
 public class Main{
-	
-	public static Creature creature;
-	
+		
 	public static CSFrame frame;
 	
 	public static LogicRunnable logic_runnable;
@@ -23,7 +22,7 @@ public class Main{
 	 * @param args arguments passed into the program upon running it
 	 */
 	public static void main(String[] args){
-		creature = new Creature();
+		GenerationManager.initialise();
 		
 		frame = new CSFrame(); 						// Creates a new instance of the CSFrame class
 		

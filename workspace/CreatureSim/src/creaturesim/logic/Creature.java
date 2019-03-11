@@ -1,5 +1,7 @@
 package creaturesim.logic;
 
+import java.awt.Color;
+
 import creaturesim.neural.HardlimNode;
 import creaturesim.neural.SigmoidInputNode;
 import creaturesim.neural.SigmoidNode;
@@ -12,6 +14,8 @@ public class Creature{
 	double bearing;
 	double radius;
 	double movement_speed;
+	
+	Color color = new Color((float)Math.random(), (float)Math.random(), (float)Math.random());
 	
 	double rotation_next_tick;
 	boolean movement_next_tick;
@@ -31,8 +35,8 @@ public class Creature{
 	HardlimNode movement = new HardlimNode(hiddens);
 	
 	public Creature(){
-		x = Math.random()*10 - 5;
-		y = Math.random()*10 - 5;
+		x = Math.random()*45 - 22.5;
+		y = Math.random()*20 - 10;
 		bearing = Math.random()*2*Math.PI - Math.PI;
 		radius = 1;
 		movement_speed = 0.01/radius;
@@ -42,7 +46,7 @@ public class Creature{
 		loseEnergy();
 		move();
 		runThroughNetwork();
-		System.out.println("tick!");
+//		System.out.println("tick!");
 	}
 	
 	public void loseEnergy(){
@@ -83,5 +87,8 @@ public class Creature{
 	}
 	public double getBearing(){
 		return(bearing);
+	}
+	public Color getColor(){
+		return(color);
 	}
 }

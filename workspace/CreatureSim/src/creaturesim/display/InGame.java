@@ -1,12 +1,14 @@
 package creaturesim.display;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
-import creaturesim.Main;
 import creaturesim.logic.Creature;
+import creaturesim.logic.GenerationManager;
 
 /**
  * Panel to be displayed by CSPanel's CardLayout.
@@ -23,8 +25,6 @@ public class InGame extends JPanel{
 	double y = 0;
 	
 	double pixels_per_metre = 25;
-	
-	Creature creature = Main.creature;
 	
 	public InGame(){
 		super();
@@ -43,21 +43,23 @@ public class InGame extends JPanel{
 		g.setColor(Color.black);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		
-		g.setColor(Color.green);
-		g.fillOval(getXRelativeToCamera(creature.getX()-creature.getRadius()),
-				   getYRelativeToCamera(creature.getY()-creature.getRadius()), 
-				   getRelativeRadius(2*creature.getRadius()), 
-				   getRelativeRadius(2*creature.getRadius()));
-		g.drawLine(getXRelativeToCamera(creature.getX()),
-				   getYRelativeToCamera(creature.getY()),
-				   getXRelativeToCamera(creature.getX() + 2*Math.cos(creature.getBearing())), 
-				   getYRelativeToCamera(creature.getY() + 2*Math.sin(creature.getBearing())));
-		
-		g.setColor(Color.red);
-		g.drawRect(getXRelativeToCamera(-25), 
-				   getYRelativeToCamera(-12.5),
-				   getRelativeRadius(50), 
-				   getRelativeRadius(25));
+		Creature[] creatures = GenerationManager.getCurrentGeneration().getCreatures();
+		for(int i = 0; i < creatures.length; i++){
+			// Draw creature
+			g.setColor(creatures[i].getColor());
+			g.fillOval(getXRelativeToCamera(creatures[i].getX() - creatures[i].getRadius()),
+					   getYRelativeToCamera(creatures[i].getY() - creatures[i].getRadius()), 
+					   getRelativeRadius(2*creatures[i].getRadius()), 
+					   getRelativeRadius(2*creatures[i].getRadius()));
+			// Draw outline
+			Graphics2D g2d = (Graphics2D)g;
+			g2d.setColor(Color.white);
+			g2d.setStroke(new BasicStroke(3));
+			g.drawOval(getXRelativeToCamera(creatures[i].getX() - creatures[i].getRadius()),
+					   getYRelativeToCamera(creatures[i].getY() - creatures[i].getRadius()), 
+					   getRelativeRadius(2*creatures[i].getRadius()), 
+					   getRelativeRadius(2*creatures[i].getRadius()));
+		}
 	}
 	
 	public int getXRelativeToCamera(double x){
