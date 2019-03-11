@@ -4,11 +4,13 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
 import creaturesim.logic.Creature;
-import creaturesim.logic.GenerationManager;
+import creaturesim.logic.FoodPellet;
+import creaturesim.logic.CompetitionManager;
 
 /**
  * Panel to be displayed by CSPanel's CardLayout.
@@ -40,25 +42,40 @@ public class InGame extends JPanel{
 	 * @see JPanel
 	 */
 	public void paintComponent(Graphics g){
+		// Draw Background
 		g.setColor(Color.black);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		
-		Creature[] creatures = GenerationManager.getCurrentGeneration().getCreatures();
+		// Draw whole generation
+		Creature[] creatures = CompetitionManager.getCurrentGeneration().getCreatures();
 		for(int i = 0; i < creatures.length; i++){
-			// Draw creature
-			g.setColor(creatures[i].getColor());
-			g.fillOval(getXRelativeToCamera(creatures[i].getX() - creatures[i].getRadius()),
-					   getYRelativeToCamera(creatures[i].getY() - creatures[i].getRadius()), 
-					   getRelativeRadius(2*creatures[i].getRadius()), 
-					   getRelativeRadius(2*creatures[i].getRadius()));
-			// Draw outline
-			Graphics2D g2d = (Graphics2D)g;
-			g2d.setColor(Color.white);
-			g2d.setStroke(new BasicStroke(3));
-			g.drawOval(getXRelativeToCamera(creatures[i].getX() - creatures[i].getRadius()),
-					   getYRelativeToCamera(creatures[i].getY() - creatures[i].getRadius()), 
-					   getRelativeRadius(2*creatures[i].getRadius()), 
-					   getRelativeRadius(2*creatures[i].getRadius()));
+			if(creatures[i].isAlive()){
+				// Draw creature
+				g.setColor(creatures[i].getColor());
+				g.fillOval(getXRelativeToCamera(creatures[i].getX() - creatures[i].getRadius()),
+						   getYRelativeToCamera(creatures[i].getY() - creatures[i].getRadius()), 
+						   getRelativeRadius(2*creatures[i].getRadius()), 
+						   getRelativeRadius(2*creatures[i].getRadius()));
+				// Draw outline
+				Graphics2D g2d = (Graphics2D)g;
+				g2d.setColor(Color.white);
+				g2d.setStroke(new BasicStroke(3));
+				g2d.drawOval(getXRelativeToCamera(creatures[i].getX() - creatures[i].getRadius()),
+						     getYRelativeToCamera(creatures[i].getY() - creatures[i].getRadius()), 
+						     getRelativeRadius(2*creatures[i].getRadius()), 
+						     getRelativeRadius(2*creatures[i].getRadius()));
+			}
+		}
+		
+		// Draw food pellets
+		ArrayList<FoodPellet> food = CompetitionManager.food;
+		for(int i = 0; i < food.size(); i++){
+			// Draw pellet
+			g.setColor(Color.green);
+			g.fillOval(getXRelativeToCamera(food.get(i).getX() - food.get(i).getRadius()), 
+					   getYRelativeToCamera(food.get(i).getY() - food.get(i).getRadius()), 
+					   getRelativeRadius(2*food.get(i).getRadius()), 
+					   getRelativeRadius(2*food.get(i).getRadius()));
 		}
 	}
 	

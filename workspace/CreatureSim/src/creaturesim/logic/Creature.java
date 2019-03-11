@@ -1,6 +1,7 @@
 package creaturesim.logic;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 import creaturesim.neural.HardlimNode;
 import creaturesim.neural.SigmoidInputNode;
@@ -9,16 +10,18 @@ import creaturesim.neural.TanhNode;
 
 public class Creature{
 	
-	double x;
-	double y;
-	double bearing;
-	double radius;
-	double movement_speed;
+	double x = Math.random()*CompetitionManager.spawn_area.width + CompetitionManager.spawn_area.x;
+	double y = Math.random()*CompetitionManager.spawn_area.height + CompetitionManager.spawn_area.y;
+	double bearing = Math.random()*2*Math.PI - Math.PI;
+	double radius = 1;
+	double movement_speed = 0.01/radius;
 	
 	Color color = new Color((float)Math.random(), (float)Math.random(), (float)Math.random());
 	
 	double rotation_next_tick;
 	boolean movement_next_tick;
+	
+	boolean alive = true;
 	
 	SigmoidInputNode i0 = new SigmoidInputNode(); // Bearing
 	SigmoidInputNode i1 = new SigmoidInputNode(); // Distance to object
@@ -34,24 +37,18 @@ public class Creature{
 	TanhNode turning = new TanhNode(hiddens);
 	HardlimNode movement = new HardlimNode(hiddens);
 	
-	public Creature(){
-		x = Math.random()*45 - 22.5;
-		y = Math.random()*20 - 10;
-		bearing = Math.random()*2*Math.PI - Math.PI;
-		radius = 1;
-		movement_speed = 0.01/radius;
-	}
-	
 	public void tick(){
-		loseEnergy();
 		move();
+		loseEnergy();
 		runThroughNetwork();
-//		System.out.println("tick!");
 	}
 	
 	public void loseEnergy(){
 		radius -= 0.0001;
 		movement_speed = 0.01/radius;
+		if(radius < 0.5){
+			die();
+		}
 	}
 	
 	public void move(){
@@ -63,6 +60,12 @@ public class Creature{
 		else{
 			x -= movement_speed*Math.cos(bearing);
 			y -= movement_speed*Math.sin(bearing);
+		}
+		ArrayList<FoodPellet> food = CompetitionManager.food;
+		for(int i = 0; i < food.size(); i++){
+			if(distanceTo(food.get(i)) < radius){
+				eat(food.get(i));
+			}
 		}
 	}
 	
@@ -76,6 +79,23 @@ public class Creature{
 		rotation_next_tick = turning.getOutput()/100;
 	}
 	
+	void eat(FoodPellet food){
+		radius += food.getRadius();
+		CompetitionManager.removeFood(food);
+	}
+	
+	public void die(){
+		alive = false;
+		CompetitionManager.kill(this);
+	}
+	
+	double distanceTo(FoodPellet target){
+		return(Math.hypot(target.getX() - x, target.getY() - y));
+	}
+	
+	public boolean isAlive(){
+		return(alive);
+	}
 	public double getX(){
 		return(x);
 	}

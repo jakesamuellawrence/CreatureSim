@@ -9,7 +9,7 @@ public class LogicRunnable implements Runnable{
 	@Override
 	public void run(){
 		while(true){
-			GenerationManager.tick();
+			CompetitionManager.tick();
 			try{
 				Thread.sleep((long)(tick_time*1000));
 			}catch(InterruptedException e){

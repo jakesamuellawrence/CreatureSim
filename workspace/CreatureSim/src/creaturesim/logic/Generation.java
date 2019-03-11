@@ -2,7 +2,7 @@ package creaturesim.logic;
 
 public class Generation{
 	
-	public Creature[] creatures = new Creature[50];
+	public Creature[] creatures = new Creature[CompetitionManager.generation_size];
 	
 	public Generation(){
 		for(int i = 0; i < creatures.length; i++){
@@ -15,7 +15,9 @@ public class Generation{
 	
 	void tick(){
 		for(int i = 0; i < creatures.length; i++){
-			creatures[i].tick();
+			if(creatures[i].isAlive()){
+				creatures[i].tick();
+			}
 		}
 	}
 	
