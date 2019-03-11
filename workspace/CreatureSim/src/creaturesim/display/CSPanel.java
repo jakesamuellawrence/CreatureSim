@@ -28,7 +28,7 @@ public class CSPanel extends JPanel{
 	 * the main menu card
 	 */
 	public CSPanel(){
-		super(new CardLayout());		// calls the constructor in the superclass, and passes in a layout to be applied
+		super(new CardLayout());		// Calls the constructor in the superclass, and passes in a layout to be applied
 		layout = (CardLayout)this.getLayout();
 		
 		main_menu = new MainMenu();
@@ -37,8 +37,12 @@ public class CSPanel extends JPanel{
 		this.add(main_menu, "Main Menu");
 		this.add(in_game, "In Game");
 		
-		layout.show(this, "Main Menu");
+		layout.show(this, "In Game");
 		
 		this.setPreferredSize(new Dimension(default_x_resolution, default_y_resolution));
+	}
+	
+	public void switchCard(String card){
+		layout.show(this, card);
 	}
 }

@@ -12,7 +12,7 @@ import creaturesim.logic.CSActionListener;
  */
 public class CSFrame extends JFrame{
 	
-	CSPanel canvas;
+	public CSPanel canvas;
 	
 	/**
 	 * Constructor for CSFrame. Calls the parent JFrame constructor,
