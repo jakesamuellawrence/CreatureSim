@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class CompetitionManager{
 	
-	public static int generation_size = 10;
+	public static int generation_size = 1;
 	
 	public static Rectangle spawn_area = new Rectangle(-10, -10, 20, 20);
 	

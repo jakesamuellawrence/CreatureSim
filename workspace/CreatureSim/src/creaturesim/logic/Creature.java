@@ -71,8 +71,21 @@ public class Creature{
 	
 	public void runThroughNetwork(){
 		i0.giveValue(bearing);
-		i1.giveValue(100);
-		i2.giveValue(100);
+		ArrayList<FoodPellet> food = CompetitionManager.food;
+		double nearest_distance = Integer.MAX_VALUE;
+		double nearest_radius = Integer.MAX_VALUE;
+		for(int i = 0; i < food.size(); i++){
+			if(canSee(food.get(i))){
+				if(distanceTo(food.get(i)) < nearest_distance){
+					nearest_distance = distanceTo(food.get(i));
+					nearest_radius = food.get(i).getRadius();
+				}
+				food.get(i).color = Color.red;
+			}
+		}
+		
+		i1.giveValue(nearest_distance);
+		i2.giveValue(nearest_radius);
 		i3.giveValue(radius);
 		i4.giveValue(movement_speed);
 		movement_next_tick = movement.getOutput() == 1;
@@ -91,6 +104,16 @@ public class Creature{
 	
 	double distanceTo(FoodPellet target){
 		return(Math.hypot(target.getX() - x, target.getY() - y));
+	}
+	
+	boolean canSee(FoodPellet target){
+		double m = Math.tan(bearing);
+		double a = target.getX() - this.x;
+		double b = target.getY() - this.y;
+		double r = target.getRadius();
+		double discriminant = Math.pow((-2*b*m - 2*a), 2) 
+				              - 4*(Math.pow(m, 2)+1)*(Math.pow(b, 2)+Math.pow(a, 2)-Math.pow(r, 2));
+		return(discriminant >= 0);
 	}
 	
 	public boolean isAlive(){

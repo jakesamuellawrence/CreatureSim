@@ -4,7 +4,7 @@ import creaturesim.Main;
 
 public class LogicRunnable implements Runnable{
 	
-	double tick_time = 0.001;
+	double tick_time = 0.1;
 	
 	@Override
 	public void run(){

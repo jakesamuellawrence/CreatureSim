@@ -16,7 +16,7 @@ import creaturesim.logic.CSActionListener;
  * Represents the main menu, where a variety of buttons are present
  * which all carry put different functions.
  * 
- * @author jakesamuellawrence
+ * @author jakesamuellawrence0
  *
  */
 public class MainMenu extends JPanel{

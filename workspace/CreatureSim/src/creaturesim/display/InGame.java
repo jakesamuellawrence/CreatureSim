@@ -64,6 +64,12 @@ public class InGame extends JPanel{
 						     getYRelativeToCamera(creatures[i].getY() - creatures[i].getRadius()), 
 						     getRelativeRadius(2*creatures[i].getRadius()), 
 						     getRelativeRadius(2*creatures[i].getRadius()));
+				// Draw looking line
+				g.setColor(Color.white);
+				g.drawLine(getXRelativeToCamera(creatures[i].getX()), 
+						   getYRelativeToCamera(creatures[i].getY()),
+						   getXRelativeToCamera(creatures[i].getX() + 2*Math.cos(creatures[i].getBearing())),
+					       getYRelativeToCamera(creatures[i].getY() + 2*Math.sin(creatures[i].getBearing())));
 			}
 		}
 		
@@ -71,7 +77,7 @@ public class InGame extends JPanel{
 		ArrayList<FoodPellet> food = CompetitionManager.food;
 		for(int i = 0; i < food.size(); i++){
 			// Draw pellet
-			g.setColor(Color.green);
+			g.setColor(food.get(i).color);
 			g.fillOval(getXRelativeToCamera(food.get(i).getX() - food.get(i).getRadius()), 
 					   getYRelativeToCamera(food.get(i).getY() - food.get(i).getRadius()), 
 					   getRelativeRadius(2*food.get(i).getRadius()), 
