@@ -1,5 +1,7 @@
 package creaturesim.logic;
 
+import java.util.ArrayList;
+
 /**
  * Represents an entire group of creatures whom are all competing.
  * 
@@ -22,9 +24,9 @@ public class Generation{
 	 * Constructor for generation which makes new creatures mutated from the
 	 * best creatures of the previous generation.
 	 * 
-	 * @param previous Generation, the previous generation.
+	 * @param previous ArrayList<Creature>, the previous generation's dead creatures, sorted by survival time ascending
 	 */
-	public Generation(Generation previous){
+	public Generation(ArrayList<Creature> previous){
 		
 	}
 	

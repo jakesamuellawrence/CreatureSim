@@ -14,7 +14,7 @@ import javax.swing.JPanel;
  * @author jakesamuellawrence
  * @see JPanel
  */
-public class CSPanel extends JPanel{
+public class CSCanvas extends JPanel{
 	int default_x_resolution = 1280;
 	int default_y_resolution = 720;
 	
@@ -27,7 +27,7 @@ public class CSPanel extends JPanel{
 	 * then sets the size, adds a CardLayout, adds cards, and shows
 	 * the main menu card
 	 */
-	public CSPanel(){
+	public CSCanvas(){
 		super(new CardLayout());		// Calls the constructor in the superclass, and passes in a layout to be applied
 		layout = (CardLayout)this.getLayout();
 		
@@ -37,7 +37,7 @@ public class CSPanel extends JPanel{
 		this.add(main_menu, "Main Menu");
 		this.add(in_game, "In Game");
 		
-		layout.show(this, "In Game");
+		layout.show(this, "Main Menu");
 		
 		this.setPreferredSize(new Dimension(default_x_resolution, default_y_resolution));
 	}

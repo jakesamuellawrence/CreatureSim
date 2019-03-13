@@ -9,14 +9,19 @@ package creaturesim.logic;
  */
 public class LogicRunnable implements Runnable{
 	
-	double tick_time = 0.01;
+	double slow_time = 0.01;
+	double quick_time = 0;
+	
+	public double tick_time;
+	
+	public boolean enabled = false;
 	
 	/**
 	 * ticks the logic of the competition.
 	 */
 	@Override
 	public void run(){
-		while(true){
+		while(enabled){
 			CompetitionManager.tick();
 			try{
 				Thread.sleep((long)(tick_time*1000));

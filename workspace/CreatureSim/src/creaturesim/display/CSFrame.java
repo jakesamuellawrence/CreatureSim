@@ -12,7 +12,7 @@ import creaturesim.logic.CSActionListener;
  */
 public class CSFrame extends JFrame{
 	
-	public CSPanel canvas;
+	public CSCanvas canvas;
 	
 	/**
 	 * Constructor for CSFrame. Calls the parent JFrame constructor,
@@ -21,7 +21,7 @@ public class CSFrame extends JFrame{
 	public CSFrame(){
 		super("CreatureSim!"); 		// Calls the superclass's constructor, which sets the name of the frame
 		
-		canvas = new CSPanel();										
+		canvas = new CSCanvas();										
 		this.add(canvas);
 		this.pack();				// Forces window to be an appropriate size for all contained components
 		

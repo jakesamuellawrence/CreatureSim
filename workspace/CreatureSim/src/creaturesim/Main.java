@@ -27,11 +27,15 @@ public class Main{
 		frame = new CSFrame(); 						// Creates a new instance of the CSFrame class
 		
 		logic_runnable = new LogicRunnable();
-		logic_thread = new Thread(logic_runnable);
-		logic_thread.start();
 		
 		paint_runnable = new PaintRunnable();
 		paint_thread = new Thread(paint_runnable);
 		paint_thread.start();
+	}
+	
+	public static void startNewLogicThread(){
+		logic_runnable.enabled = true;
+		logic_thread = new Thread(logic_runnable);
+		logic_thread.start();
 	}
 }

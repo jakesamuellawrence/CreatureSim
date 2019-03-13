@@ -25,7 +25,8 @@ public class CSActionListener implements ActionListener{
 			System.exit(0);
 		}
 		else if(e.getActionCommand() == "Slow Generation"){
-			Main.frame.canvas.switchCard("In Game");
+			Main.logic_runnable.tick_time = Main.logic_runnable.slow_time;
+			CompetitionManager.startCompetition();
 		}
 	}
 }
