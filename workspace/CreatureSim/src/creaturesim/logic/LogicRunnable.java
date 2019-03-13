@@ -1,11 +1,19 @@
 package creaturesim.logic;
 
-import creaturesim.Main;
-
+/**
+ * Runnable for ticking the logic of the competition.
+ * Designed to be run on a new Thread.
+ * 
+ * @author jakesamuellawrence
+ * @see Runnable, Thread
+ */
 public class LogicRunnable implements Runnable{
 	
 	double tick_time = 0.01;
 	
+	/**
+	 * ticks the logic of the competition.
+	 */
 	@Override
 	public void run(){
 		while(true){

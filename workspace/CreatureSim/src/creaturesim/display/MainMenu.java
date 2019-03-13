@@ -16,14 +16,14 @@ import creaturesim.logic.CSActionListener;
  * Represents the main menu, where a variety of buttons are present
  * which all carry put different functions.
  * 
- * @author jakesamuellawrence0
+ * @author jakesamuellawrence
  *
  */
 public class MainMenu extends JPanel{
 	
-	static GridBagConstraints constraints = new GridBagConstraints();
+	static GridBagConstraints constraints = new GridBagConstraints(); // used to define how the components should be arranged
 	
-	CSActionListener actionlistener = new CSActionListener();
+	CSActionListener actionlistener = new CSActionListener(); // Responds to button presses
 	
 	/**
 	 * Constructor for MainMenu. Adds all the components that need to be displayed
@@ -31,7 +31,7 @@ public class MainMenu extends JPanel{
 	public MainMenu(){
 		super();
 		
-		GridBagLayout layout = new GridBagLayout();
+		GridBagLayout layout = new GridBagLayout(); // Defines the method by which things should be laid out
 		this.setLayout(layout);
 		
 		constraints.fill = GridBagConstraints.BOTH;

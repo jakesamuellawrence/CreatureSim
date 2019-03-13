@@ -15,8 +15,6 @@ import javax.swing.JPanel;
  * Extends JPanel so that it will be automatically painted.
  * 
  * @author jakesamuellawrence
- * 
- * @author jakesamuellawrence
  *
  */
 public class CSTextBlock extends JPanel{

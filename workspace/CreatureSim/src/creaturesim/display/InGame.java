@@ -33,10 +33,10 @@ public class InGame extends JPanel{
 	}
 	
 	/**
-	 * Overidden paintComponent method from JPanel. Is called when the repaint()
+	 * Overridden paintComponent method from JPanel. Is called when the repaint()
 	 * method is called.
 	 * 
-	 * Paints the background black.
+	 * Paints the background black, then paints all creatures, then paints food pellets
 	 * 
 	 * @param g Graphics context which can be painted on
 	 * @see JPanel
@@ -54,16 +54,16 @@ public class InGame extends JPanel{
 				g.setColor(creatures[i].getColor());
 				g.fillOval(getXRelativeToCamera(creatures[i].getX() - creatures[i].getRadius()),
 						   getYRelativeToCamera(creatures[i].getY() - creatures[i].getRadius()), 
-						   getRelativeRadius(2*creatures[i].getRadius()), 
-						   getRelativeRadius(2*creatures[i].getRadius()));
+						   getRelativeDistance(2*creatures[i].getRadius()), 
+						   getRelativeDistance(2*creatures[i].getRadius()));
 				// Draw outline
 				Graphics2D g2d = (Graphics2D)g;
 				g2d.setColor(Color.white);
 				g2d.setStroke(new BasicStroke(3));
 				g2d.drawOval(getXRelativeToCamera(creatures[i].getX() - creatures[i].getRadius()),
 						     getYRelativeToCamera(creatures[i].getY() - creatures[i].getRadius()), 
-						     getRelativeRadius(2*creatures[i].getRadius()), 
-						     getRelativeRadius(2*creatures[i].getRadius()));
+						     getRelativeDistance(2*creatures[i].getRadius()), 
+						     getRelativeDistance(2*creatures[i].getRadius()));
 				// Draw looking line
 				g.setColor(Color.white);
 				g.drawLine(getXRelativeToCamera(creatures[i].getX()), 
@@ -80,22 +80,44 @@ public class InGame extends JPanel{
 			g.setColor(food.get(i).color);
 			g.fillOval(getXRelativeToCamera(food.get(i).getX() - food.get(i).getRadius()), 
 					   getYRelativeToCamera(food.get(i).getY() - food.get(i).getRadius()), 
-					   getRelativeRadius(2*food.get(i).getRadius()), 
-					   getRelativeRadius(2*food.get(i).getRadius()));
+					   getRelativeDistance(2*food.get(i).getRadius()), 
+					   getRelativeDistance(2*food.get(i).getRadius()));
 		}
 	}
 	
+	/**
+	 * Converts global logic x-coordinates (metres) into a position relative to the camera position,
+	 * and relative to the centre of the display area (pixels).
+	 * 
+	 * @param x double, the global coordinate, in metres, to be converted
+	 * @return the relative coordinate in pixels
+	 */
 	public int getXRelativeToCamera(double x){
 		double relative_x_metres = x - this.x;
 		int relative_x_pixels = (getWidth()/2) + (int)Math.round(relative_x_metres*pixels_per_metre);
 		return(relative_x_pixels);
 	}
+	
+	/**
+	 * Converts global logic y-coordinates (metres) into a position relative to the camera position,
+	 * and relative to the centre of the display area (pixels).
+	 * 
+	 * @param y double, the global coordinate, in metres, to be converted
+	 * @return the relative coordinate in pixels
+	 */
 	public int getYRelativeToCamera(double y){
 		double relative_y_metres = y - this.y;
 		int relative_y_pixels = (getHeight()/2) + (int)Math.round(relative_y_metres*pixels_per_metre);
 		return(relative_y_pixels);
 	}
-	public int getRelativeRadius(double radius){
-		return((int)Math.round(radius*pixels_per_metre));
+	
+	/**
+	 * Converts a distance in metres to a distance in pixels.
+	 * 
+	 * @param distance the distance to be converted, in metres
+	 * @return the calculated distance in pixels
+	 */
+	public int getRelativeDistance(double distance){
+		return((int)Math.round(distance*pixels_per_metre));
 	}
 }
