@@ -264,6 +264,16 @@ Record of Progress
 2019-03-12
 	-Slow Generation implementation												Committed
 		-Reflections: None
+		
+2019-03-13
+	-Slow Generation implementation												Committed
+		-Reflections: The original design for the evolutional learning stated
+					  that the creatures must compete within walls, which will
+					  slowly move inwards to ensure that all creatures die
+					  eventually. However, it was realised this was not actually
+					  needed, as the rate of new food pellets being added can be
+					  set to an optimum value such that no single creature can 
+					  stay alive forever.
 
 
 

@@ -44,8 +44,8 @@ public class Creature{
 	}
 	
 	public void loseEnergy(){
-		radius -= 0.0001;
-		movement_speed = 0.01/radius;
+		radius -= 0.0005;
+		movement_speed = 0.1/radius;
 		if(radius < 0.5){
 			die();
 		}
@@ -53,6 +53,12 @@ public class Creature{
 	
 	public void move(){
 		bearing += rotation_next_tick;
+		if(bearing > Math.PI){
+			bearing = bearing - 2*Math.PI;
+		}
+		else if(bearing < -Math.PI){
+			bearing = bearing + 2*Math.PI;
+		}
 		if(movement_next_tick){
 			x += movement_speed*Math.cos(bearing);
 			y += movement_speed*Math.sin(bearing);
@@ -71,25 +77,58 @@ public class Creature{
 	
 	public void runThroughNetwork(){
 		i0.giveValue(bearing);
-		ArrayList<FoodPellet> food = CompetitionManager.food;
-		double nearest_distance = Integer.MAX_VALUE;
-		double nearest_radius = Integer.MAX_VALUE;
-		for(int i = 0; i < food.size(); i++){
-			if(canSee(food.get(i))){
-				if(distanceTo(food.get(i)) < nearest_distance){
-					nearest_distance = distanceTo(food.get(i));
-					nearest_radius = food.get(i).getRadius();
-				}
-				food.get(i).color = Color.red;
-			}
+		if(bearing >= -Math.PI/2 && bearing <= Math.PI/2){
+			checkForFoodRightSide();
 		}
-		
-		i1.giveValue(nearest_distance);
-		i2.giveValue(nearest_radius);
+		else{
+			checkForFoodLeftSide();
+		}
 		i3.giveValue(radius);
 		i4.giveValue(movement_speed);
 		movement_next_tick = movement.getOutput() == 1;
-		rotation_next_tick = turning.getOutput()/100;
+		rotation_next_tick = turning.getOutput()/20;
+	}
+	
+	void checkForFoodRightSide(){
+		FoodPellet nearest_creature = null;
+		ArrayList<FoodPellet> food = CompetitionManager.food;
+		for(int i = 0; i < food.size(); i++){
+			if(food.get(i).getX() >= this.x){
+				if(canSee(food.get(i))){
+					if(nearest_creature == null){
+						nearest_creature = food.get(i);
+					}
+					else if(distanceTo(food.get(i)) < distanceTo(nearest_creature)){
+						nearest_creature = food.get(i);
+					}
+				}
+			}
+		}
+		if(nearest_creature != null){
+			i1.giveValue(distanceTo(nearest_creature));
+			i2.giveValue(nearest_creature.getRadius());
+		}
+	}
+	
+	void checkForFoodLeftSide(){
+		FoodPellet nearest_creature = null;
+		ArrayList<FoodPellet> food = CompetitionManager.food;
+		for(int i = 0; i < food.size(); i++){
+			if(food.get(i).getX() < this.x){
+				if(canSee(food.get(i))){
+					if(nearest_creature == null){
+						nearest_creature = food.get(i);
+					}
+					else if(distanceTo(food.get(i)) < distanceTo(nearest_creature)){
+						nearest_creature = food.get(i);
+					}
+				}
+			}
+		}
+		if(nearest_creature != null){
+			i1.giveValue(distanceTo(nearest_creature));
+			i2.giveValue(nearest_creature.getRadius());
+		}
 	}
 	
 	void eat(FoodPellet food){
