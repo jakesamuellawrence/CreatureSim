@@ -24,12 +24,12 @@ public class Generation{
 	 * Constructor for generation which makes new creatures mutated from the
 	 * best creatures of the previous generation.
 	 * 
-	 * @param previous Generation, the previous generation.
+	 * @param previous ArrayList<Creature>, the previous generation's dead creatures, sorted by survival time ascending
 	 */
 	public Generation(ArrayList<Creature> previous){
 		int generation_size = CompetitionManager.generation_size;
 		int percent_45 = (int) Math.floor(generation_size * 0.45);
-		
+
 		// Generate exact copies of top 45%
 		for(int i = 0; i < percent_45; i++){
 			creatures[i] = previous.get(previous.size()-1 - i);

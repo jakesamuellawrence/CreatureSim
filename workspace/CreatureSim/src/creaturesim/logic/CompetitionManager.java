@@ -3,6 +3,8 @@ package creaturesim.logic;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
+import creaturesim.Main;
+
 /**
  * Stores and is in charge of all things to do with competing the creatures.
  * Stores Mutliple Generations, all food pellets, and has methods for starting
@@ -42,6 +44,21 @@ public class CompetitionManager{
 		}
 	}
 	
+	public static void startCompetition(){
+		Main.frame.canvas.switchCard("In Game");
+		Main.startNewLogicThread();
+	}
+	
+	public static void endCompetition(){
+		Main.logic_runnable.enabled = false;
+		if(generation_number == generations.size()-1){
+			generations.add(new Generation());
+		}
+		generation_number += 1;
+		dead_creatures = new ArrayList<Creature>();
+		Main.frame.canvas.switchCard("Main Menu");
+	}
+	
 	/**
 	 * Runs every tick, to move the logic forward.
 	 * 
@@ -57,7 +74,8 @@ public class CompetitionManager{
 	}
 	
 	/**
-	 * Removes a creature from the competition and adds them to the list of dead creatures.
+	 * Adds a creature to the list of dead creatures.
+	 * If the creature is the last to die, it ends the competition.
 	 * 
 	 * @param target Creature, the creature to be removed
 	 */
@@ -67,6 +85,9 @@ public class CompetitionManager{
 			if(creatures[i] == target){
 				dead_creatures.add(creatures[i]);
 			}
+		}
+		if(dead_creatures.size() == generation_size){
+			endCompetition();
 		}
 	}
 	

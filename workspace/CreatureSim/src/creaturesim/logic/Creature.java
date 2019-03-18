@@ -15,7 +15,6 @@ import creaturesim.neural.TanhNode;
  * Has a position, size, Color, and a neural net for making decisions.
  * 
  * @author jakesamuellawrence
- *
  */
 public class Creature{
 	
