@@ -260,9 +260,13 @@ Record of Progress
 					  the original designs and plans. The designs will be left 
 					  as they originally were, so the differences between them
 					  can be seen.
+	-Slow Generation testing													Committed
+		-Reflections: None
 					  
 2019-03-12
 	-Slow Generation implementation												Committed
+		-Reflections: None
+	-Slow Generation testing													Committed
 		-Reflections: None
 		
 2019-03-13
@@ -276,7 +280,15 @@ Record of Progress
 					  stay alive forever.
 	-Slow Generation commentary													Committed
 		-Reflections: None
-
+		
+2019-03-18
+	-Slow Generation implementation												Started
+		-Reflections: Currently, the creatures get information about their
+					  surroundings, but cannot learn. To implement learning,
+					  when a generation ends a new generation must be made from
+					  the best of the previous generation
+	-Slow Generation testing													Committed
+		-Reflections: None
 
 
 

@@ -1,5 +1,7 @@
 package creaturesim.logic;
 
+import java.util.ArrayList;
+
 /**
  * Represents an entire group of creatures whom are all competing.
  * 
@@ -24,8 +26,22 @@ public class Generation{
 	 * 
 	 * @param previous Generation, the previous generation.
 	 */
-	public Generation(Generation previous){
+	public Generation(ArrayList<Creature> previous){
+		int generation_size = CompetitionManager.generation_size;
+		int percent_45 = (int) Math.floor(generation_size * 0.45);
 		
+		// Generate exact copies of top 45%
+		for(int i = 0; i < percent_45; i++){
+			creatures[i] = previous.get(previous.size()-1 - i);
+		}
+		// Generated mutated copies of top 45%
+		for(int i = percent_45; i < 2*percent_45; i ++){
+//			creatures[i] = new Creature(previous.get(previous.size()-1 - (i - percent_45)));
+		}
+		// Fill in remaining ~10% with random creatures
+		for(int i = 2*percent_45; i < previous.size(); i++){
+			creatures[i] = new Creature();
+		}
 	}
 	
 	/**

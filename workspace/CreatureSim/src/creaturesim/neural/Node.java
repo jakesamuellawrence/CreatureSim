@@ -13,4 +13,5 @@ package creaturesim.neural;
 public interface Node{
 	double transfer(double in);
 	double getOutput();
+	void mutate();
 }
