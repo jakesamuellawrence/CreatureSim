@@ -65,6 +65,10 @@ public class TanhNode implements Node{
 		bias = Math.random()*2 - 1;
 	}
 	
+	public void mutate(){
+		
+	}
+	
 	/**
 	 * Returns information about the node in human-readable format
 	 * for testing purposes

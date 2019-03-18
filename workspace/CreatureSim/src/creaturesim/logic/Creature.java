@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import creaturesim.neural.HardlimNode;
+import creaturesim.neural.Node;
 import creaturesim.neural.SigmoidInputNode;
 import creaturesim.neural.SigmoidNode;
 import creaturesim.neural.TanhNode;
@@ -23,7 +24,7 @@ public class Creature{
 	double radius = 1;
 	double movement_speed;
 	
-	Color color = new Color((float)Math.random(), (float)Math.random(), (float)Math.random());
+	Color color;
 	
 	double rotation_next_tick;
 	boolean move_forwards_next_tick;
@@ -43,6 +44,20 @@ public class Creature{
 	SigmoidNode[] hiddens = new SigmoidNode[]{h0, h1, h2, h3};
 	TanhNode turning = new TanhNode(hiddens);
 	HardlimNode movement = new HardlimNode(hiddens);
+	
+	Node[] nodes = new Node[]{i0, i1, i3, i4, h0, h1, h2, h3, turning, movement};
+	
+	/**
+	 * Changes this creature in small ways, such that it is different from it's parent
+	 * Has a chance to mutate each node in the net.
+	 */
+	public void mutate(){
+		for(int i = 0; i < nodes.length; i++){
+			if(Math.random() < CompetitionManager.mutation_rate){
+//				nodes[i].mutate();
+			}
+		}
+	}
 	
 	/**
 	 * Ticks the logic of the creature. Calls other methods with further logic.

@@ -66,6 +66,29 @@ public class HardlimNode implements Node{
 		bias = Math.random()*2 - 1;						// random number between -1 and 1
 	}
 	
+	public void mutate(){
+		double random = Math.random();
+		if(random < 0.33){
+			scaleWeight();
+		}
+		else if(random < 0.66){
+			shiftWeight();
+		}
+		else{
+			invertWeight();
+		}
+	}
+	
+	void scaleWeight(){
+		int weight_to_scale = Math.round(Math.random()*weights.length);
+	}
+	void shiftWeight(){
+		
+	}
+	void invertWeight(){
+		
+	}
+	
 	/**
 	 * Returns information about the node in human-readable format
 	 * for testing purposes
