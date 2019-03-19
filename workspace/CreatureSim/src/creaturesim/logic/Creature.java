@@ -24,7 +24,7 @@ public class Creature{
 	double radius = 1;
 	double movement_speed;
 	
-	Color color;
+	Color color = new Color((float)Math.random(), (float)Math.random(), (float)Math.random());
 	
 	double rotation_next_tick;
 	boolean move_forwards_next_tick;

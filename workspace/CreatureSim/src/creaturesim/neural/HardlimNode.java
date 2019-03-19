@@ -80,7 +80,7 @@ public class HardlimNode implements Node{
 	}
 	
 	void scaleWeight(){
-		int weight_to_scale = Math.round(Math.random()*weights.length);
+		int weight_to_scale = (int) Math.round(Math.random()*weights.length);
 	}
 	void shiftWeight(){
 		
