@@ -68,8 +68,8 @@ public class InGame extends JPanel{
 				g.setColor(Color.white);
 				g.drawLine(getXRelativeToCamera(creatures[i].getX()), 
 						   getYRelativeToCamera(creatures[i].getY()),
-						   getXRelativeToCamera(creatures[i].getX() + 2*Math.cos(creatures[i].getBearing())),
-					       getYRelativeToCamera(creatures[i].getY() + 2*Math.sin(creatures[i].getBearing())));
+						   getXRelativeToCamera(creatures[i].getX() + creatures[i].getRadius()*Math.cos(creatures[i].getBearing())),
+					       getYRelativeToCamera(creatures[i].getY() + creatures[i].getRadius()*Math.sin(creatures[i].getBearing())));
 			}
 		}
 		

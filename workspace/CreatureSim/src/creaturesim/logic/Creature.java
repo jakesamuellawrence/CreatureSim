@@ -18,11 +18,17 @@ import creaturesim.neural.TanhNode;
  */
 public class Creature{
 	
+	double speed_multiplier = 0.1;
+	double turning_multiplier = 0.05;
+	
 	double x = Math.random()*CompetitionManager.spawn_area.width + CompetitionManager.spawn_area.x;
 	double y = Math.random()*CompetitionManager.spawn_area.height + CompetitionManager.spawn_area.y;
+	
+	double distance_to_object;
+	double size_of_object;
 	double bearing = Math.random()*2*Math.PI - Math.PI;
 	double radius = 1;
-	double movement_speed;
+	double movement_speed = speed_multiplier/radius;
 	
 	Color color = new Color((float)Math.random(), (float)Math.random(), (float)Math.random());
 	
@@ -31,33 +37,7 @@ public class Creature{
 	
 	boolean alive = true;
 	
-	SigmoidInputNode i0 = new SigmoidInputNode(); // Bearing
-	SigmoidInputNode i1 = new SigmoidInputNode(); // Distance to object
-	SigmoidInputNode i2 = new SigmoidInputNode(); // Size of object
-	SigmoidInputNode i3 = new SigmoidInputNode(); // Radius
-	SigmoidInputNode i4 = new SigmoidInputNode(); // Movement Speed
-	SigmoidInputNode[] inputs = new SigmoidInputNode[]{i0, i1, i2, i3, i4};
-	SigmoidNode h0 = new SigmoidNode(inputs);
-	SigmoidNode h1 = new SigmoidNode(inputs);
-	SigmoidNode h2 = new SigmoidNode(inputs);
-	SigmoidNode h3 = new SigmoidNode(inputs);
-	SigmoidNode[] hiddens = new SigmoidNode[]{h0, h1, h2, h3};
-	TanhNode turning = new TanhNode(hiddens);
-	HardlimNode movement = new HardlimNode(hiddens);
-	
-	Node[] nodes = new Node[]{i0, i1, i3, i4, h0, h1, h2, h3, turning, movement};
-	
-	/**
-	 * Changes this creature in small ways, such that it is different from it's parent
-	 * Has a chance to mutate each node in the net.
-	 */
-	public void mutate(){
-		for(int i = 0; i < nodes.length; i++){
-			if(Math.random() < CompetitionManager.mutation_rate){
-//				nodes[i].mutate();
-			}
-		}
-	}
+	Brain brain = new Brain();
 	
 	/**
 	 * Ticks the logic of the creature. Calls other methods with further logic.
@@ -114,8 +94,8 @@ public class Creature{
 	 * If the creature's radius is too small, it dies.
 	 */
 	public void loseEnergy(){
-		radius -= 0.0005;
-		movement_speed = 0.1/radius;
+		radius -= CompetitionManager.energy_loss_rate;
+		movement_speed = speed_multiplier/radius;
 		if(radius < 0.5){
 			die();
 		}
@@ -126,17 +106,16 @@ public class Creature{
 	 * how the creature should move next turn.
 	 */
 	void runThroughNetwork(){
-		i0.giveValue(bearing);
 		if(bearing >= -Math.PI/2 && bearing <= Math.PI/2){
 			checkForFoodRightSide();
 		}
 		else{
 			checkForFoodLeftSide();
 		}
-		i3.giveValue(radius);
-		i4.giveValue(movement_speed);
-		move_forwards_next_tick = movement.getOutput() == 1;
-		rotation_next_tick = turning.getOutput()/20; // this is divided by 20 sop creatures turn in less tight circles
+		
+		brain.loadValues(bearing, distance_to_object, size_of_object, radius, movement_speed);
+		move_forwards_next_tick = brain.getMovement() == 1;
+		rotation_next_tick = brain.getTurning()*turning_multiplier; // multiplier so creatures turn in less tight circles
 	}
 	
 	/**
@@ -162,8 +141,8 @@ public class Creature{
 			}
 		}
 		if(nearest_creature != null){
-			i1.giveValue(distanceTo(nearest_creature));
-			i2.giveValue(nearest_creature.getRadius());
+			distance_to_object = distanceTo(nearest_creature);
+			size_of_object = nearest_creature.getRadius();
 		}
 	}
 	
@@ -190,8 +169,8 @@ public class Creature{
 			}
 		}
 		if(nearest_creature != null){
-			i1.giveValue(distanceTo(nearest_creature));
-			i2.giveValue(nearest_creature.getRadius());
+			distance_to_object = distanceTo(nearest_creature);
+			size_of_object = nearest_creature.getRadius();
 		}
 	}
 	

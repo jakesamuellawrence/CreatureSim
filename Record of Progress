@@ -282,7 +282,7 @@ Record of Progress
 		-Reflections: None
 		
 2019-03-18
-	-Slow Generation implementation												Started
+	-Slow Generation implementation												Committed
 		-Reflections: Currently, the creatures get information about their
 					  surroundings, but cannot learn. To implement learning,
 					  when a generation ends a new generation must be made from
@@ -290,11 +290,12 @@ Record of Progress
 	-Slow Generation testing													Committed
 		-Reflections: None
 
+2019-03-19
+	-Slow Generation implementation												Committed
+		-Reflections: None
 
 
 
 
 
 
-
-	
