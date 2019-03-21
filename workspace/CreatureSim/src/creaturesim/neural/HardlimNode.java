@@ -66,27 +66,65 @@ public class HardlimNode implements Node{
 		bias = Math.random()*2 - 1;						// random number between -1 and 1
 	}
 	
+	/**
+	 * makes random small changes to a weight or bias in this node.
+	 * Will either scale, shift, or invert the chosen weight or bias.
+	 * Calls other private methods to achieve this.
+	 */
 	public void mutate(){
-		double random = Math.random();
-		if(random < 0.33){
-			scaleWeight();
-		}
-		else if(random < 0.66){
-			shiftWeight();
+		int weight_choice = (int)Math.floor(Math.random()*weights.length);
+		if(weight_choice == weights.length){
+			mutateBias();
 		}
 		else{
-			invertWeight();
+			mutateWeight(weight_choice);
 		}
 	}
-	
-	void scaleWeight(){
-		int weight_to_scale = (int) Math.round(Math.random()*weights.length);
+	private void mutateBias(){
+		double mutation_type = Math.random();
+		if(mutation_type < 0.45){ //High chance to scale
+			scaleBias();
+		}
+		else if(mutation_type < 0.9){ // High chance to shift
+			shiftBias();
+		}
+		else{ // Low chance to shift
+			invertBias();
+		}
 	}
-	void shiftWeight(){
-		
+	private void scaleBias(){
+		double scalar = Math.random() + 0.5; // Random number between 0.5 and 1.5
+		bias *= scalar;
 	}
-	void invertWeight(){
-		
+	private void shiftBias(){
+		double shift = Math.random() - 0.5; // Random number between -0.5 and 0.5
+		bias += shift;
+	}
+	private void invertBias(){
+		bias = -bias;
+	}
+	private void mutateWeight(int index){
+		double mutation_type = Math.random();
+		if(mutation_type < 0.45){
+			scaleWeight(index);
+		}
+		else if(mutation_type < 0.9){
+			shiftWeight(index);
+		}
+		else{
+			invertWeight(index);
+		}
+	}
+	private void scaleWeight(int i){
+		double scalar = Math.random() + 0.5; // Random number between 0.5 and 1.5
+		weights[i] *= scalar;
+	}
+	private void shiftWeight(int i){
+		double shift = Math.random() - 0.5; // Random number between -0.5 and 0.5
+		weights[i] += shift;
+	}
+	private void invertWeight(int i){
+		weights[i] = -weights[i];
 	}
 	
 	/**

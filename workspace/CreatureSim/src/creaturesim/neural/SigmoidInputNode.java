@@ -8,7 +8,14 @@ package creaturesim.neural;
  *
  */
 public class SigmoidInputNode implements Node{
+	
 	double value;
+	
+	double bias;
+	
+	public SigmoidInputNode(){
+		bias = 2*Math.random() - 1; // Random number between -1 and 1
+	}
 	
 	/**
 	 * Stores the given value in the node
@@ -39,11 +46,37 @@ public class SigmoidInputNode implements Node{
 	 */
 	@Override
 	public double getOutput(){
-		return(transfer(value));
+		return(transfer(value+bias));
 	}
 	
+	/**
+	 * Makes a small change to the bias of this node.
+	 * will either scale, shift, or invert the bias.
+	 * Calls other private methods in this class to
+	 * achieve this
+	 */
 	public void mutate(){
-		
+		double mutation_type = Math.random();
+		if(mutation_type < 0.45){ // High chance to scale
+			scaleBias();
+		}
+		else if(mutation_type < 0.9){ // High chance to shift
+			shiftBias();
+		}
+		else{ // Low chance to invert
+			invertBias();
+		}
+	}
+	private void scaleBias(){
+		double scalar = Math.random() + 0.5; // Random number between 0.5 and 1.5
+		bias = bias * scalar;
+	}
+	private void shiftBias(){
+		double shift = Math.random() - 0.5; // Random number between -0.5 and 0.5
+		bias = bias + shift;
+	}
+	private void invertBias(){
+		bias = -bias;
 	}
 	
 	/**

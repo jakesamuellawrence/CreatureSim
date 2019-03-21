@@ -30,14 +30,33 @@ public class Creature{
 	double radius = 1;
 	double movement_speed = speed_multiplier/radius;
 	
-	Color color = new Color((float)Math.random(), (float)Math.random(), (float)Math.random());
+	Color color;
 	
 	double rotation_next_tick;
 	boolean move_forwards_next_tick;
 	
 	boolean alive = true;
 	
-	Brain brain = new Brain();
+	Brain brain;
+	
+	public Creature(){
+		this.color = new Color((float)Math.random(), (float)Math.random(), (float)Math.random());
+		this.brain = new Brain();
+	}
+	
+	public Creature makeClone(){
+		Creature clone = new Creature();
+		clone.color = this.color;
+		clone.brain = this.brain;
+		return(clone);
+	}
+	public Creature makeChild(){
+		Creature child = new Creature();
+		child.color = this.color;
+		child.brain = this.brain;
+		child.brain.mutate();
+		return(child);
+	}
 	
 	/**
 	 * Ticks the logic of the creature. Calls other methods with further logic.

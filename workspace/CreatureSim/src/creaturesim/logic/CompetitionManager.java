@@ -53,7 +53,7 @@ public class CompetitionManager{
 	public static void endCompetition(){
 		Main.logic_runnable.enabled = false;
 		if(generation_number == generations.size()-1){
-			generations.add(new Generation());
+			generations.add(new Generation(dead_creatures));
 		}
 		generation_number += 1;
 		dead_creatures = new ArrayList<Creature>();

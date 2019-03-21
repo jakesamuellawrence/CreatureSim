@@ -1,6 +1,7 @@
 package creaturesim.logic;
 
 import creaturesim.neural.HardlimNode;
+import creaturesim.neural.Node;
 import creaturesim.neural.SigmoidInputNode;
 import creaturesim.neural.SigmoidNode;
 import creaturesim.neural.TanhNode;
@@ -20,12 +21,23 @@ public class Brain{
 	TanhNode turning = new TanhNode(hiddens);
 	HardlimNode movement = new HardlimNode(hiddens);
 	
+	Node[] nodes = new Node[]{i0, i1, i2, i3, i4, h0, h1, h2, h3, turning, movement};
+	
 	public void loadValues(double bearing, double distance_to_object, double size_of_object, double radius, double speed){
 		i0.giveValue(bearing);
 		i1.giveValue(distance_to_object);
 		i2.giveValue(size_of_object);
 		i3.giveValue(radius);
 		i4.giveValue(speed);
+	}
+	
+	public void mutate(){
+		double mutation_rate = CompetitionManager.mutation_rate;
+		for(int i = 0; i < nodes.length; i++){
+			if(Math.random() <= mutation_rate){
+				nodes[i].mutate();
+			}
+		}
 	}
 	
 	public double getTurning(){
