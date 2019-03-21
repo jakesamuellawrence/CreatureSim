@@ -16,6 +16,10 @@ import creaturesim.Main;
  */
 public class CompetitionManager{
 	
+	public static double energy_loss_rate = 0.0005;
+	
+	public static int food_drop_time = 250000;
+	
 	public static double mutation_rate = 0.1;
 	
 	public static int generation_size = 10;
@@ -28,7 +32,6 @@ public class CompetitionManager{
 	public static ArrayList<Creature> dead_creatures = new ArrayList<Creature>();
 	
 	public static ArrayList<FoodPellet> food = new ArrayList<FoodPellet>();
-	public static int food_drop_time = 250;
 	public static int ticks_till_food_drop = food_drop_time;
 	
 	/**
@@ -39,9 +42,7 @@ public class CompetitionManager{
 	public static void initialise(){
 		generations.add(new Generation());
 		generation_number = 0;
-		for(int i=0; i < 10; i++){
-			food.add(new FoodPellet());
-		}
+		addFood(10);
 	}
 	
 	public static void startCompetition(){
@@ -56,6 +57,7 @@ public class CompetitionManager{
 		}
 		generation_number += 1;
 		dead_creatures = new ArrayList<Creature>();
+		addFood(10);
 		Main.frame.canvas.switchCard("Main Menu");
 	}
 	
@@ -68,7 +70,7 @@ public class CompetitionManager{
 	public static void tick(){
 		ticks_till_food_drop -= 1;
 		if(ticks_till_food_drop == 0){
-			addFood();
+			addFood(1);
 		}
 		generations.get(generation_number).tick();
 	}
@@ -94,9 +96,11 @@ public class CompetitionManager{
 	/**
 	 * Adds a new piece of food in a random location, and resets the time until more food is added
 	 */
-	static void addFood(){
-		food.add(new FoodPellet());
-		ticks_till_food_drop = food_drop_time;
+	static void addFood(int quantity){
+		for(int i = 0; i < quantity; i++){
+			food.add(new FoodPellet());
+			ticks_till_food_drop = food_drop_time;
+		}
 	}
 	
 	/**
