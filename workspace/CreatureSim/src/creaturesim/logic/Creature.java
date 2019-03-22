@@ -1,13 +1,8 @@
 package creaturesim.logic;
 
 import java.awt.Color;
+import java.awt.Rectangle;
 import java.util.ArrayList;
-
-import creaturesim.neural.HardlimNode;
-import creaturesim.neural.Node;
-import creaturesim.neural.SigmoidInputNode;
-import creaturesim.neural.SigmoidNode;
-import creaturesim.neural.TanhNode;
 
 /**
  * Represents a competitor competing for food.
@@ -21,8 +16,8 @@ public class Creature{
 	double speed_multiplier = 0.1;
 	double turning_multiplier = 0.05;
 	
-	double x = Math.random()*CompetitionManager.spawn_area.width + CompetitionManager.spawn_area.x;
-	double y = Math.random()*CompetitionManager.spawn_area.height + CompetitionManager.spawn_area.y;
+	double x;
+	double y;
 	
 	double distance_to_object;
 	double size_of_object;
@@ -44,6 +39,16 @@ public class Creature{
 		this.brain = new Brain();
 	}
 	
+	public void spawnInRandomLocation(){
+		Rectangle spawn_area = CompetitionManager.spawn_area;
+		x = Math.random()*spawn_area.width + spawn_area.x;
+		y = Math.random()*spawn_area.height + spawn_area.y;
+		while(isNearFood() || isNearCreature()){
+			x = Math.random()*spawn_area.width + spawn_area.x;
+			y = Math.random()*spawn_area.height + spawn_area.y;
+		}
+	}
+	
 	public Creature makeClone(){
 		Creature clone = new Creature();
 		clone.color = this.color;
@@ -56,6 +61,26 @@ public class Creature{
 		child.brain = this.brain;
 		child.brain.mutate();
 		return(child);
+	}
+	
+	boolean isNearFood(){
+		ArrayList<FoodPellet> food = CompetitionManager.food;
+		for(int i = 0; i < food.size(); i++){
+			if(distanceTo(food.get(i)) < 2){
+				return(true);
+			}
+		}
+		return(false);
+	}
+	
+	boolean isNearCreature(){
+		Creature[] creatures = CompetitionManager.getCurrentGeneration().creatures;
+		for(int i = 0; i < creatures.length; i++){
+			if(creatures[i] != this && distanceTo(creatures[i]) < 5){
+				return(true);
+			}
+		}
+		return(false);
 	}
 	
 	/**
@@ -222,6 +247,16 @@ public class Creature{
 	 * @return the distance between this creature and the target food pellet
 	 */
 	double distanceTo(FoodPellet target){
+		return(Math.hypot(target.getX() - x, target.getY() - y));
+	}
+	
+	/**
+	 * returns the distance between a creature and another creature
+	 * 
+	 * @param target Creature, the creature to which the distance is being found.
+	 * @return the distance between this creature and the target creature
+	 */
+	double distanceTo(Creature target){
 		return(Math.hypot(target.getX() - x, target.getY() - y));
 	}
 	

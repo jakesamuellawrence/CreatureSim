@@ -40,6 +40,12 @@ public class Generation{
 		}
 	}
 	
+	public void scatterCreatures(){
+		for(int i = 0; i < creatures.length; i++){
+			creatures[i].spawnInRandomLocation();
+		}
+	}
+	
 	/**
 	 * Ticks through the logic of the generation.
 	 * 

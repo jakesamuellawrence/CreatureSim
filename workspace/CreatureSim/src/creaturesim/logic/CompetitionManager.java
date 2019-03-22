@@ -22,9 +22,9 @@ public class CompetitionManager{
 	
 	public static double mutation_rate = 0.1;
 	
-	public static int generation_size = 10;
+	public static int generation_size = 20;
 	
-	public static Rectangle spawn_area = new Rectangle(-10, -10, 20, 20);
+	public static Rectangle spawn_area = new Rectangle(-2*generation_size, -2*generation_size, 4*generation_size, 4*generation_size);
 	
 	static ArrayList<Generation> generations = new ArrayList<Generation>();
 	static int generation_number;
@@ -42,11 +42,12 @@ public class CompetitionManager{
 	public static void initialise(){
 		generations.add(new Generation());
 		generation_number = 0;
-		addFood(10);
 	}
 	
 	public static void startCompetition(){
 		Main.frame.canvas.switchCard("In Game");
+		addFood(generation_size);
+		getCurrentGeneration().scatterCreatures();
 		Main.startNewLogicThread();
 	}
 	
@@ -57,7 +58,6 @@ public class CompetitionManager{
 		}
 		generation_number += 1;
 		dead_creatures = new ArrayList<Creature>();
-		addFood(10);
 		Main.frame.canvas.switchCard("Main Menu");
 	}
 	
