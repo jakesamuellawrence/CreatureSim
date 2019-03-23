@@ -105,7 +105,8 @@ public class CSTextBlock extends JPanel{
 		int total_height = (int)(lines.size()*fm.getAscent() + lines.size()*line_spacing);
 		int line_y = getHeight()/2-total_height/2+fm.getAscent();
 		for(int i = 0; i < lines.size(); i++){
-			g.drawString(lines.get(i), margin, line_y);
+			int line_width = fm.stringWidth(lines.get(i));
+			g.drawString(lines.get(i), getWidth()/2 - line_width/2, line_y);
 			line_y += fm.getAscent()+line_spacing;
 		}
 	}
