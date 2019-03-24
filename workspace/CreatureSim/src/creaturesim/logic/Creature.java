@@ -158,7 +158,7 @@ public class Creature{
 			checkForFoodLeftSide();
 		}
 		
-		brain.loadValues(bearing, distance_to_object, size_of_object, radius, movement_speed);
+		brain.loadValues(distance_to_object, size_of_object, radius, movement_speed);
 		move_forwards_next_tick = brain.getMovement() == 1;
 		rotation_next_tick = brain.getTurning()*turning_multiplier; // multiplier so creatures turn in less tight circles
 	}
