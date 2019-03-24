@@ -35,6 +35,7 @@ public class FoodPellet{
 		ArrayList<FoodPellet> food = CompetitionManager.food;
 		for(int i = 0; i < food.size(); i++){
 			if(distanceTo(food.get(i)) < 5){
+				System.out.println("Food is too close to each other!");
 				return(true);
 			}
 		}

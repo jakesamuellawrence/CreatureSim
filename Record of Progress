@@ -303,7 +303,12 @@ Record of Progress
 2019-03-22
 	-Slow Generation implementation												Committed
 		-Reflections: None
-
+		
+2019-03-24
+	-Fast Generation implementation												Committed
+		-Reflections: None
+	-Fast Generation testing													Committed
+		-Reflections: None
 
 
 

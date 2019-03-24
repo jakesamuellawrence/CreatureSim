@@ -20,12 +20,16 @@ public class CSActionListener implements ActionListener{
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e){
-		System.out.println(e.getActionCommand());
 		if(e.getActionCommand() == "Exit To Desktop"){
 			System.exit(0);
 		}
 		else if(e.getActionCommand() == "Slow Generation"){
-			Main.logic_runnable.tick_time = Main.logic_runnable.slow_time;
+			Main.logic_runnable.tick_time = LogicRunnable.slow_time;
+			CompetitionManager.startCompetition();
+			Main.frame.canvas.switchCard("In Game");
+		}
+		else if(e.getActionCommand() == "Quick Generation"){
+			Main.logic_runnable.tick_time = LogicRunnable.quick_time;
 			CompetitionManager.startCompetition();
 		}
 	}
