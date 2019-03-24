@@ -22,12 +22,12 @@ public class CompetitionManager{
 	
 	public static double mutation_rate = 0.1;
 	
-	public static int generation_size = 20;
+	public static int generation_size = 10;
 	
-	public static Rectangle spawn_area = new Rectangle(-2*generation_size, -2*generation_size, 4*generation_size, 4*generation_size);
+	public static Rectangle spawn_area = new Rectangle(-generation_size, -generation_size, 2*generation_size, 2*generation_size);
 	
 	static ArrayList<Generation> generations = new ArrayList<Generation>();
-	static int generation_number;
+	public static int generation_number;
 	
 	public static ArrayList<Creature> dead_creatures = new ArrayList<Creature>();
 	

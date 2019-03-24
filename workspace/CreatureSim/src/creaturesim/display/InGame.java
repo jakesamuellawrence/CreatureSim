@@ -26,7 +26,7 @@ public class InGame extends JPanel{
 	double x = 0;
 	double y = 0;
 	
-	double pixels_per_metre = 25;
+	double pixels_per_metre = 20;
 	
 	public InGame(){
 		super();

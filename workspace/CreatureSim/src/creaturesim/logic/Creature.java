@@ -76,7 +76,7 @@ public class Creature{
 	boolean isNearCreature(){
 		Creature[] creatures = CompetitionManager.getCurrentGeneration().creatures;
 		for(int i = 0; i < creatures.length; i++){
-			if(creatures[i] != this && distanceTo(creatures[i]) < 5){
+			if(creatures[i] != this && distanceTo(creatures[i]) < 2){
 				return(true);
 			}
 		}
