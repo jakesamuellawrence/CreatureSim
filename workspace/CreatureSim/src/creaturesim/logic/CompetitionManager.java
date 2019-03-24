@@ -26,7 +26,7 @@ public class CompetitionManager{
 	
 	public static Rectangle spawn_area = new Rectangle(-generation_size, -generation_size, 2*generation_size, 2*generation_size);
 	
-	static ArrayList<Generation> generations = new ArrayList<Generation>();
+	public static ArrayList<Generation> generations = new ArrayList<Generation>();
 	public static int generation_number;
 	
 	public static ArrayList<Creature> dead_creatures = new ArrayList<Creature>();

@@ -309,6 +309,12 @@ Record of Progress
 		-Reflections: None
 	-Fast Generation testing													Committed
 		-Reflections: None
+	-Highest Survival Time Graph												Committed
+		-Reflections: Originally, the graph was intended to be of average
+					  survival times, and for highest and lowest to only be
+					  implemented later. However, it was decided that highest
+					  survival time would be prioritised instead, as it
+					  is a more insightful statistic.
 
 
 
