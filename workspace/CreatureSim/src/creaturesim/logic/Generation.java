@@ -10,6 +10,10 @@ import java.util.List;
  */
 public class Generation{
 	
+	public int highest_survival_time;
+	public int average_survival_time;
+	public int lowest_survival_time;
+	
 	public Creature[] creatures = new Creature[CompetitionManager.generation_size];
 	
 	/**
@@ -44,6 +48,22 @@ public class Generation{
 		for(int i = 0; i < creatures.length; i++){
 			creatures[i].spawnInRandomLocation();
 		}
+	}
+	
+	public void calculateStatistics(){
+		highest_survival_time = creatures[0].survival_time;
+		lowest_survival_time = creatures[0].survival_time;
+		int total = creatures[0].survival_time;
+		for(int i = 1; i < creatures.length; i++){
+			if(creatures[i].survival_time > highest_survival_time){
+				highest_survival_time = creatures[i].survival_time;
+			}
+			else if(creatures[i].survival_time < lowest_survival_time){
+				lowest_survival_time = creatures[i].survival_time;
+			}
+			total += creatures[i].survival_time;
+		}
+		average_survival_time = total / creatures.length;
 	}
 	
 	/**

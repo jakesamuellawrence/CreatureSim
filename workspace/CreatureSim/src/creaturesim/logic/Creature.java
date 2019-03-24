@@ -16,6 +16,8 @@ public class Creature{
 	double speed_multiplier = 0.1;
 	double turning_multiplier = 0.05;
 	
+	int survival_time = 0;
+	
 	double x;
 	double y;
 	
@@ -88,6 +90,7 @@ public class Creature{
 	 * Ticks the logic of the creature. Calls other methods with further logic.
 	 */
 	public void tick(){
+		survival_time++;
 		rotate();
 		move();
 		checkForEating();

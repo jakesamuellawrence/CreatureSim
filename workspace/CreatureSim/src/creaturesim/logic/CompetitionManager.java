@@ -54,6 +54,7 @@ public class CompetitionManager{
 	public static void endCompetition(){
 		Main.logic_runnable.enabled = false;
 		if(generation_number == generations.size()-1){
+			getCurrentGeneration().calculateStatistics();
 			generations.add(new Generation(dead_creatures));
 		}
 		generation_number += 1;
@@ -121,5 +122,19 @@ public class CompetitionManager{
 	 */
 	public static Generation getCurrentGeneration(){
 		return(generations.get(generation_number));
+	}
+	
+	/**
+	 * returns the generation that has just finished competing.
+	 * 
+	 * @return the generation just finished
+	 */
+	public static Generation getPreviousGeneration(){
+		if(generation_number == 0){
+			return(generations.get(generation_number));
+		}
+		else{
+			return(generations.get(generation_number-1));
+		}
 	}
 }
