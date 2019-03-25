@@ -70,7 +70,11 @@ public class CSGraph extends JPanel{
 		}
 		g.setFont(numbers_font);
 		fm = g.getFontMetrics();
-		for(int i = 0; i < max_highest_time; i += 200){
+		int step_y = 100;
+		while((double)pixels_per_tick*(double)step_y < 30){
+			step_y += 100;
+		}
+		for(int i = 0; i < max_highest_time; i += step_y){
 			int height_on_y_axis = (graph_start_y+graph_height)-(int)Math.round(i*pixels_per_tick);
 			g.drawLine(axis_thickness-5, 
 					   height_on_y_axis, 
@@ -102,11 +106,11 @@ public class CSGraph extends JPanel{
 		}
 		g.setFont(numbers_font);
 		fm = g.getFontMetrics();
-		int step = 1;
-		while((double)pixels_per_gen*(double)step < 30){
-			step *= 10;
+		int step_x = 1;
+		while((double)pixels_per_gen*(double)step_x < 30){
+			step_x *= 10;
 		}
-		for(int i = 0; i < number_of_generations; i += step){
+		for(int i = 0; i < number_of_generations; i += step_x){
 			int position_on_x_axis = (graph_start_x)+(int)Math.round(i*pixels_per_gen);
 			g.drawLine(position_on_x_axis, 
 					   getHeight()-axis_thickness+5, 
