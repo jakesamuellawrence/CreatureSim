@@ -50,77 +50,81 @@ public class CSGraph extends JPanel{
 		}
 		int number_of_generations = CompetitionManager.generation_number;
 		
-		{
-			// Draw Y axis line and label
-			g.setColor(Color.black);
-			g.setFont(axis_label_font);
-			FontMetrics fm = g.getFontMetrics();
-			String y_label = "Survival Time (ticks)";
-			int label_height = fm.getAscent();
-			g.drawString(y_label, margin, margin+label_height);
-			int graph_height = getHeight() - 2*margin - label_height - axis_thickness;
-			int graph_start_y = 2*margin+label_height;
-			g.drawLine(axis_thickness, 
-					   graph_start_y, 
-					   axis_thickness, 
-					   graph_start_y+graph_height);
-			// Draw Y Axis numbers
-			double pixels_per_tick = graph_height;
-			if(max_highest_time != 0){
-				pixels_per_tick = (double)graph_height/(double)max_highest_time;
-			}
-			g.setFont(numbers_font);
-			fm = g.getFontMetrics();
-			for(int i = 0; i < max_highest_time; i += 200){
-				int height_on_y_axis = (graph_start_y+graph_height)-(int)Math.round(i*pixels_per_tick);
-				g.drawLine(axis_thickness-5, 
-						   height_on_y_axis, 
-						   axis_thickness,
-						   height_on_y_axis);
-				String number = Integer.toString(i);
-				int number_width = fm.stringWidth(number);
-				int number_height = fm.getAscent();
-				g.drawString(number, axis_thickness-10-number_width, height_on_y_axis+number_height/2);
-			}
+		// Draw Y axis line and label
+		g.setColor(Color.black);
+		g.setFont(axis_label_font);
+		FontMetrics fm = g.getFontMetrics();
+		String y_label = "Survival Time (ticks)";
+		int label_height = fm.getAscent();
+		g.drawString(y_label, margin, margin+label_height);
+		int graph_height = getHeight() - 2*margin - label_height - axis_thickness;
+		int graph_start_y = 2*margin+label_height;
+		g.drawLine(axis_thickness, 
+				   graph_start_y, 
+				   axis_thickness, 
+				   graph_start_y+graph_height);
+		// Draw Y Axis numbers
+		double pixels_per_tick = graph_height;
+		if(max_highest_time != 0){
+			pixels_per_tick = (double)graph_height/(double)max_highest_time;
+		}
+		g.setFont(numbers_font);
+		fm = g.getFontMetrics();
+		for(int i = 0; i < max_highest_time; i += 200){
+			int height_on_y_axis = (graph_start_y+graph_height)-(int)Math.round(i*pixels_per_tick);
+			g.drawLine(axis_thickness-5, 
+					   height_on_y_axis, 
+					   axis_thickness,
+					   height_on_y_axis);
+			String number = Integer.toString(i);
+			int number_width = fm.stringWidth(number);
+			int number_height = fm.getAscent();
+			g.drawString(number, axis_thickness-10-number_width, height_on_y_axis+number_height/2);
 		}
 		
-		{
-			// Draw X axis line and label
-			g.setColor(Color.black);
-			g.setFont(axis_label_font);
-			FontMetrics fm = g.getFontMetrics();
-			String x_label = "Generations";
-			int label_height = fm.getAscent();
-			int label_width = fm.stringWidth(x_label);
-			int graph_width = getWidth() - 2*margin - label_width - axis_thickness;
-			int graph_start_x = axis_thickness;
-			g.drawString(x_label, graph_start_x+graph_width+margin, getHeight()-axis_thickness+label_height/2);
-			g.drawLine(graph_start_x, 
-					   getHeight()-axis_thickness, 
-					   graph_start_x+graph_width, 
+		// Draw X axis line and label
+		g.setColor(Color.black);
+		g.setFont(axis_label_font);
+		fm = g.getFontMetrics();
+		String x_label = "Generations";
+		int label_width = fm.stringWidth(x_label);
+		int graph_width = getWidth() - 2*margin - label_width - axis_thickness;
+		int graph_start_x = axis_thickness;
+		g.drawString(x_label, graph_start_x+graph_width+margin, getHeight()-axis_thickness+label_height/2);
+		g.drawLine(graph_start_x, 
+				   getHeight()-axis_thickness, 
+				   graph_start_x+graph_width, 
+				   getHeight()-axis_thickness);
+		// Draw Y Axis numbers
+		double pixels_per_gen = graph_width;
+		if(number_of_generations != 0){
+			 pixels_per_gen = (double)graph_width/(double)number_of_generations;
+		}
+		g.setFont(numbers_font);
+		fm = g.getFontMetrics();
+		int step = 1;
+		while((double)pixels_per_gen*(double)step < 30){
+			step *= 10;
+		}
+		for(int i = 0; i < number_of_generations; i += step){
+			int position_on_x_axis = (graph_start_x)+(int)Math.round(i*pixels_per_gen);
+			g.drawLine(position_on_x_axis, 
+					   getHeight()-axis_thickness+5, 
+					   position_on_x_axis,
 					   getHeight()-axis_thickness);
-			// Draw Y Axis numbers
-			double pixels_per_gen = graph_width;
-			if(number_of_generations != 0){
-				 pixels_per_gen = (double)graph_width/(double)number_of_generations;
-			}
-			g.setFont(numbers_font);
-			fm = g.getFontMetrics();
-			int step = 1;
-			while((double)pixels_per_gen*(double)step < 30){
-				step *= 10;
-			}
-			for(int i = 0; i < number_of_generations; i += step){
-				int position_on_x_axis = (graph_start_x)+(int)Math.round(i*pixels_per_gen);
-				g.drawLine(position_on_x_axis, 
-						   getHeight()-axis_thickness+5, 
-						   position_on_x_axis,
-						   getHeight()-axis_thickness);
-				String number = Integer.toString(i);
-				int number_width = fm.stringWidth(number);
-				int number_height = fm.getAscent();
-				g.drawString(number, position_on_x_axis-number_width/2, getHeight()-axis_thickness+5+number_height);
-			}
+			String number = Integer.toString(i);
+			int number_width = fm.stringWidth(number);
+			int number_height = fm.getAscent();
+			g.drawString(number, position_on_x_axis-number_width/2, getHeight()-axis_thickness+5+number_height);
+		}
+		
+		// Draw the line graph
+		g.setColor(Color.red);
+		for(int i = 1; i < number_of_generations; i++){
+			g.drawLine((int)Math.round(graph_start_x + (i-1)*pixels_per_gen),
+					   (int)Math.round((graph_start_y+graph_height) - highest_times[i-1]*pixels_per_tick),
+					   (int)Math.round(graph_start_x + (i)*pixels_per_gen),
+					   (int)Math.round((graph_start_y+graph_height) - highest_times[i]*pixels_per_tick));
 		}
 	}
 }

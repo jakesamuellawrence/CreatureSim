@@ -46,7 +46,6 @@ public class Creature{
 		x = Math.random()*spawn_area.width + spawn_area.x;
 		y = Math.random()*spawn_area.height + spawn_area.y;
 		while(isNearFood() || isNearCreature()){
-			System.out.println("Too near things!");
 			x = Math.random()*spawn_area.width + spawn_area.x;
 			y = Math.random()*spawn_area.height + spawn_area.y;
 		}

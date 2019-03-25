@@ -316,6 +316,19 @@ Record of Progress
 					  survival time would be prioritised instead, as it
 					  is a more insightful statistic.
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~40 sessions spent
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~		
+							  
+2019-03-25
+	-Highest Survival Time Graph												Committed
+		-Reflections: Now that the results of competitions are being graphed,
+					  it is clear that the creatures are not really 
+					  'learning', as little to no improvement can be observed
+					  in survival times from generation to generation. However,
+					  this will not be addressed until after all other features
+					  have been implemented properly
+
 
 
 

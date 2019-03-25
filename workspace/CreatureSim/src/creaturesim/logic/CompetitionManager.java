@@ -48,7 +48,6 @@ public class CompetitionManager{
 		addFood(generation_size);
 		getCurrentGeneration().scatterCreatures();
 		Main.startNewLogicThread();
-		System.out.println("Competition has started");
 	}
 	
 	public static void endCompetition(){
@@ -61,7 +60,6 @@ public class CompetitionManager{
 		dead_creatures = new ArrayList<Creature>();
 		food = new ArrayList<FoodPellet>();
 		Main.frame.canvas.switchCard("Main Menu");
-		System.out.println("Competition has ended");
 	}
 	
 	/**
