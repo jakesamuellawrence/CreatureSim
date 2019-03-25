@@ -34,7 +34,14 @@ public class Generation{
 	public Generation(ArrayList<Creature> previous){
 		int generation_size = CompetitionManager.generation_size;
 		int percent_45 = (int) Math.floor(generation_size * 0.45);
-		List<Creature> top_45 = previous.subList(generation_size-1-percent_45, generation_size-1);
+		List<Creature> top_45 = previous.subList(previous.size()-percent_45, previous.size());
+		for(int i = 0; i < previous.size(); i++){
+			System.out.println(previous.get(i).survival_time);
+		}
+		System.out.println("~~~~~~~~~~~~~~~~~~~~");
+		for(int i = 0; i < top_45.size(); i++){
+			System.out.println(top_45.get(i).survival_time);
+		}
 		for(int i = 0; i < top_45.size(); i++){
 			creatures[i] = top_45.get(i).makeClone();
 			creatures[i+top_45.size()] = top_45.get(i).makeChild();
@@ -47,6 +54,11 @@ public class Generation{
 	public void scatterCreatures(){
 		for(int i = 0; i < creatures.length; i++){
 			creatures[i].spawnInRandomLocation();
+		}
+	}
+	public void reviveCreatures(){
+		for(int i = 0; i < creatures.length; i++){
+			creatures[i].revive();
 		}
 	}
 	

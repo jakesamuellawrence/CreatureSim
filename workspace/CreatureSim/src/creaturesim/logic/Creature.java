@@ -51,6 +51,11 @@ public class Creature{
 		}
 	}
 	
+	public void revive(){
+		radius = 1;
+		alive = true;
+	}
+	
 	public Creature makeClone(){
 		Creature clone = new Creature();
 		clone.color = this.color;
@@ -131,6 +136,7 @@ public class Creature{
 		for(int i = 0; i < food.size(); i++){
 			if(distanceTo(food.get(i)) < radius + food.get(i).getRadius()){
 				eat(food.get(i));
+				food = CompetitionManager.food;
 			}
 		}
 	}

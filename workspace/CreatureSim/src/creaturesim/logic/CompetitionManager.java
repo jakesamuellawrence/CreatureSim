@@ -18,7 +18,7 @@ public class CompetitionManager{
 	
 	public static double energy_loss_rate = 0.0005;
 	
-	public static int food_drop_time = 300;
+	public static int food_drop_time = 400;
 	
 	public static double mutation_rate = 0.1;
 	
@@ -45,6 +45,7 @@ public class CompetitionManager{
 	}
 	
 	public static void startCompetition(){
+		CSActionListener.buttons_enabled = false;
 		addFood(generation_size);
 		getCurrentGeneration().scatterCreatures();
 		Main.startNewLogicThread();
@@ -60,6 +61,7 @@ public class CompetitionManager{
 		dead_creatures = new ArrayList<Creature>();
 		food = new ArrayList<FoodPellet>();
 		Main.frame.canvas.switchCard("Main Menu");
+		CSActionListener.buttons_enabled = true;
 	}
 	
 	/**
