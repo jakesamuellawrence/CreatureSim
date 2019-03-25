@@ -309,7 +309,7 @@ Record of Progress
 		-Reflections: None
 	-Fast Generation testing													Committed
 		-Reflections: None
-	-Highest Survival Time Graph												Committed
+	-Highest Survival Time Graph implementation									Committed
 		-Reflections: Originally, the graph was intended to be of average
 					  survival times, and for highest and lowest to only be
 					  implemented later. However, it was decided that highest
@@ -321,13 +321,14 @@ Record of Progress
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~		
 							  
 2019-03-25
-	-Highest Survival Time Graph												Committed
+	-Highest Survival Time Graph implementation									Committed
 		-Reflections: Now that the results of competitions are being graphed,
 					  it is clear that the creatures are not really 
 					  'learning', as little to no improvement can be observed
 					  in survival times from generation to generation. However,
 					  this will not be addressed until after all other features
 					  have been implemented properly
+	-Highest Survival Graph testing												Committed
 
 
 

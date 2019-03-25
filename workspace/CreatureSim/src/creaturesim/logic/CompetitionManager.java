@@ -18,7 +18,7 @@ public class CompetitionManager{
 	
 	public static double energy_loss_rate = 0.0005;
 	
-	public static int food_drop_time = 250000;
+	public static int food_drop_time = 300;
 	
 	public static double mutation_rate = 0.1;
 	

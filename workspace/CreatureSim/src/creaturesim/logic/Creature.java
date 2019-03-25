@@ -89,7 +89,6 @@ public class Creature{
 	 * Ticks the logic of the creature. Calls other methods with further logic.
 	 */
 	public void tick(){
-		survival_time++;
 		rotate();
 		move();
 		checkForEating();
@@ -145,6 +144,9 @@ public class Creature{
 		movement_speed = speed_multiplier/radius;
 		if(radius < 0.5){
 			die();
+		}
+		else{
+			survival_time++;
 		}
 	}
 	
