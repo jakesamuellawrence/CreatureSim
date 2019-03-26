@@ -333,7 +333,13 @@ Record of Progress
 	-View Previous Generation implementation									Committed
 		-Reflections: None
 		
-
+2019-03-26
+	-Creature Names implementation												Committed
+		-Reflections: Originally, it was planned that 'Creature cannibalism'
+					  would be the next task undertaken. However, it was
+					  decided that creature cannibalism would not be
+					  implemented at all as it would actually impede the
+					  creature's ability to learn.
 
 
 

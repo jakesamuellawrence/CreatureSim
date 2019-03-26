@@ -13,6 +13,9 @@ import java.util.ArrayList;
  */
 public class Creature{
 	
+	String first_name;
+	String last_name;
+	
 	double speed_multiplier = 0.1;
 	double turning_multiplier = 0.05;
 	
@@ -39,6 +42,8 @@ public class Creature{
 	public Creature(){
 		this.color = new Color((float)Math.random(), (float)Math.random(), (float)Math.random());
 		this.brain = new Brain();
+		this.first_name = CompetitionManager.getRandomName();
+		this.last_name = "Godson";
 	}
 	
 	public void spawnInRandomLocation(){
@@ -60,6 +65,8 @@ public class Creature{
 		Creature clone = new Creature();
 		clone.color = this.color;
 		clone.brain = this.brain;
+		clone.first_name = first_name;
+		clone.last_name = last_name;
 		return(clone);
 	}
 	public Creature makeChild(){
@@ -67,6 +74,7 @@ public class Creature{
 		child.color = this.color;
 		child.brain = this.brain;
 		child.brain.mutate();
+		child.last_name = first_name + "son";
 		return(child);
 	}
 	

@@ -23,6 +23,7 @@ public class CSActionListener implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e){
 		if(buttons_enabled){
+			buttons_enabled = false;
 			if(e.getActionCommand() == "Exit To Desktop"){
 				System.exit(0);
 			}

@@ -1,6 +1,11 @@
 package creaturesim.logic;
 
 import java.awt.Rectangle;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import creaturesim.Main;
@@ -45,7 +50,6 @@ public class CompetitionManager{
 	}
 	
 	public static void startCompetition(){
-		CSActionListener.buttons_enabled = false;
 		addFood(generation_size);
 		getCurrentGeneration().scatterCreatures();
 		Main.startNewLogicThread();
@@ -113,6 +117,31 @@ public class CompetitionManager{
 	 */
 	public static void removeFood(FoodPellet target){
 		food.remove(target);
+	}
+	
+	public static String getRandomName(){
+		String name = "You've messed it up somehow :(";
+		try{
+			File names_list = new File("resources/names.csv");
+			BufferedReader names_reader = new BufferedReader(new FileReader(names_list));
+			long number_of_lines = names_reader.lines().count();
+			names_reader.close();
+			names_reader = new BufferedReader(new FileReader(names_list));
+			int line_to_read = (int)Math.round(Math.random()*number_of_lines);
+			for(int i = 0; i <= number_of_lines; i++){
+				if(i == line_to_read){
+					name = names_reader.readLine();
+				}
+				else{
+					names_reader.readLine();
+				}
+			}
+			names_reader.close();
+		}
+		catch (IOException e){
+			e.printStackTrace();
+		}
+		return(name);
 	}
 	
 	/**
