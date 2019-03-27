@@ -14,6 +14,8 @@ public class Generation{
 	public int average_survival_time;
 	public int lowest_survival_time;
 	
+	public String best_creature_name = "No previous generations";
+	
 	public Creature[] creatures = new Creature[CompetitionManager.generation_size];
 	
 	/**
@@ -64,10 +66,12 @@ public class Generation{
 	public void calculateStatistics(){
 		highest_survival_time = creatures[0].survival_time;
 		lowest_survival_time = creatures[0].survival_time;
+		best_creature_name = creatures[0].first_name + " " + creatures[0].last_name;
 		int total = creatures[0].survival_time;
 		for(int i = 1; i < creatures.length; i++){
 			if(creatures[i].survival_time > highest_survival_time){
 				highest_survival_time = creatures[i].survival_time;
+				best_creature_name = creatures[i].first_name + " " + creatures[i].last_name;
 			}
 			else if(creatures[i].survival_time < lowest_survival_time){
 				lowest_survival_time = creatures[i].survival_time;
