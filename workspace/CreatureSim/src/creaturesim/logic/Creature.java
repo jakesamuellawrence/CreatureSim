@@ -43,7 +43,18 @@ public class Creature{
 		this.color = new Color((float)Math.random(), (float)Math.random(), (float)Math.random());
 		this.brain = new Brain();
 		this.first_name = CompetitionManager.getRandomName();
-		this.last_name = "Godson";
+		String suffix;
+		double suffix_choice = Math.random();
+		if(suffix_choice < 0.45){
+			suffix = "son";
+		}
+		else if(suffix_choice < 0.9){
+			suffix = "dottir";
+		}
+		else{
+			suffix = "child";
+		}
+		this.last_name = "God" + suffix;
 	}
 	
 	public void spawnInRandomLocation(){
@@ -65,8 +76,8 @@ public class Creature{
 		Creature clone = new Creature();
 		clone.color = this.color;
 		clone.brain = this.brain;
-		clone.first_name = first_name;
-		clone.last_name = last_name;
+		clone.first_name = this.first_name;
+		clone.last_name = this.last_name;
 		return(clone);
 	}
 	public Creature makeChild(){
@@ -74,7 +85,18 @@ public class Creature{
 		child.color = this.color;
 		child.brain = this.brain;
 		child.brain.mutate();
-		child.last_name = first_name + "son";
+		String suffix;
+		double suffix_choice = Math.random();
+		if(suffix_choice < 0.4){
+			suffix = "son";
+		}
+		else if(suffix_choice < 0.8){
+			suffix = "dottir";
+		}
+		else{
+			suffix = "child";
+		}
+		child.last_name = this.first_name + suffix;
 		return(child);
 	}
 	
