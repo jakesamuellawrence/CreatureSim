@@ -8,6 +8,8 @@ import java.util.ArrayList;
  * Represents a competitor competing for food.
  * 
  * Has a position, size, Color, and a neural net for making decisions.
+ * Also has a first and last name, a track of how long it's been alive,
+ * and a boolean stating whether or not it is alive
  * 
  * @author jakesamuellawrence
  */
@@ -39,6 +41,11 @@ public class Creature{
 	
 	Brain brain;
 	
+	/**
+	 * Constructor for Creature.
+	 * 
+	 * Creates a completely random creature, with random colour, brain, and names
+	 */
 	public Creature(){
 		this.color = new Color((float)Math.random(), (float)Math.random(), (float)Math.random());
 		this.brain = new Brain();
@@ -57,6 +64,9 @@ public class Creature{
 		this.last_name = "God" + suffix;
 	}
 	
+	/**
+	 * Moves the creature to a random unoccupied spot within the spawn area specified by CompetitionManager
+	 */
 	public void spawnInRandomLocation(){
 		Rectangle spawn_area = CompetitionManager.spawn_area;
 		x = Math.random()*spawn_area.width + spawn_area.x;
@@ -67,11 +77,22 @@ public class Creature{
 		}
 	}
 	
+	/**
+	 * Makes the creature the default size, and sets their alive boolean to true
+	 */
 	public void revive(){
 		radius = 1;
 		alive = true;
 	}
 	
+	/**
+	 * Creates an exact copy of the creature in which this method is being run.
+	 * 
+	 * Generates a random creature, but then sets all their essential instance variables
+	 * to be the same as the creature being cloned
+	 * 
+	 * @return the clone created.
+	 */
 	public Creature makeClone(){
 		Creature clone = new Creature();
 		clone.color = this.color;
@@ -80,6 +101,16 @@ public class Creature{
 		clone.last_name = this.last_name;
 		return(clone);
 	}
+	
+	/**
+	 * Creates a child from the creature on which this method is being run
+	 * 
+	 * Creates a completely random creature, then sets it's colour to that of it's parent.
+	 * Gives them a mutated version of their parent's brain, and a last name based on their
+	 * parent's first name.
+	 * 
+	 * @return
+	 */
 	public Creature makeChild(){
 		Creature child = new Creature();
 		child.color = this.color;
@@ -100,6 +131,11 @@ public class Creature{
 		return(child);
 	}
 	
+	/**
+	 * checks whether the creature is close to any pellets of food
+	 * 
+	 * @return whether or not they are nearby
+	 */
 	boolean isNearFood(){
 		ArrayList<FoodPellet> food = CompetitionManager.food;
 		for(int i = 0; i < food.size(); i++){
@@ -110,6 +146,11 @@ public class Creature{
 		return(false);
 	}
 	
+	/**
+	 * checks whether the creature is close to any other creatures in it's generation
+	 * 
+	 * @return whether or not they are nearby
+	 */
 	boolean isNearCreature(){
 		Creature[] creatures = CompetitionManager.getCurrentGeneration().creatures;
 		for(int i = 0; i < creatures.length; i++){
@@ -159,7 +200,7 @@ public class Creature{
 	}
 	
 	/**
-	 * Checks to see if any creatures are on top of food pellets. If they are, they eat the food pellet
+	 * Checks to see if this creature is on top of any food pellets. If they are, they eat the food pellet
 	 */
 	void checkForEating(){
 		ArrayList<FoodPellet> food = CompetitionManager.food;
@@ -173,7 +214,8 @@ public class Creature{
 	
 	/**
 	 * Decreases the radius of the creature, and recalculates it's movement speed.
-	 * If the creature's radius is too small, it dies.
+	 * If the creature's radius is too small, it dies. If it's still alive, increment
+	 * it's survival time
 	 */
 	public void loseEnergy(){
 		radius -= CompetitionManager.energy_loss_rate;
@@ -207,8 +249,7 @@ public class Creature{
 	 * Checks to see if any of the food pellets to the right of the creature are in the 
 	 * creature's line of sight. This is required as the method for checking
 	 * whether a creature is in the line of sight detects creatures to both the left
-	 * and the right. If a creature is found, inputs the distance to it and it's radius into
-	 * the neural network
+	 * and the right. If a food pellet is found, stores the distance to it and the size of it
 	 */
 	void checkForFoodRightSide(){
 		FoodPellet nearest_creature = null;
@@ -235,8 +276,7 @@ public class Creature{
 	 * Checks to see if any food pellets to the left of the creature are in
 	 * the creature's line of sight. This is required as the method for checking
 	 * whether a creature is in the line of sight detects creatures to both the left
-	 * and the right. If a creature is found, inputs the distance to it and it's radius into
-	 * the neural network
+	 * and the right. If a food pellet is found, stores the distance to it and it's size
 	 */
 	void checkForFoodLeftSide(){
 		FoodPellet nearest_creature = null;

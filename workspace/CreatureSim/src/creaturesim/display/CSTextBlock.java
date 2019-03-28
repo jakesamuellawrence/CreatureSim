@@ -9,8 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 /**
- * /**
- * Custom Panel class for rendering consistently styled text blocks
+ * Custom JPanel class for rendering consistently styled text blocks
  * 
  * Extends JPanel so that it will be automatically painted.
  * 
@@ -29,7 +28,7 @@ public class CSTextBlock extends JPanel{
 	int margin = 5;
 	
 	/**
-	 * Constructor for CSTextBlock. Assigns the passed in text to text variable.
+	 * Constructor for CSTextBlock. Assigns the passed in text to text variable, then
 	 * makes the panel non-opaque
 	 * 
 	 * @param text the text to be displayed
@@ -48,8 +47,9 @@ public class CSTextBlock extends JPanel{
 	
 	/**
 	 * Turns the instance variable words into an ArrayList of Strings, recursively, depending on how big the area for the
-	 * text to be displayed is 
+	 * text to be displayed is.
 	 * 
+	 * @see ArrayList
 	 * @param startingWord String. The word at the beggining of the line being converted
 	 * @param fm FontMetrics Holds data about the current font such as sizes of strings
 	 */
@@ -84,7 +84,9 @@ public class CSTextBlock extends JPanel{
 	}
 	
 	/**
-	 * Overridden paintComponent method from JPanel. Breaks text into lines and then displays them
+	 * Overridden paintComponent method from JPanel. Is called when repaint() is called 
+	 * 
+	 * Breaks text into lines and then displays them
 	 * in the centre of the component.
 	 * 
 	 * @param g Graphics. Graphics context passed automatically by AWT.

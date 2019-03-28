@@ -22,6 +22,14 @@ public class Brain{
 	
 	Node[] nodes = new Node[]{i0, i1, i2, i3, h0, h1, h2, turning, movement};
 	
+	/**
+	 * Gives values to the input nodes, to prepare the network to be run through.
+	 * 
+	 * @param distance_to_object the value to be passed to i0
+	 * @param size_of_object the value to be passed to i1
+	 * @param radius the value to be passed to i2
+	 * @param speed the value to be passed to i3
+	 */
 	public void loadValues(double distance_to_object, double size_of_object, double radius, double speed){
 		i0.giveValue(distance_to_object);
 		i1.giveValue(size_of_object);
@@ -29,6 +37,9 @@ public class Brain{
 		i3.giveValue(speed);
 	}
 	
+	/**
+	 * For each Node in the brain, randomly decides whether it should be mutated
+	 */
 	public void mutate(){
 		double mutation_rate = CompetitionManager.mutation_rate;
 		for(int i = 0; i < nodes.length; i++){
@@ -38,10 +49,20 @@ public class Brain{
 		}
 	}
 	
+	/**
+	 * Returns the output from the turning output node
+	 * 
+	 * @return the output of the turning node
+	 */
 	public double getTurning(){
 		return(turning.getOutput());
 	}
 	
+	/**
+	 * Returns the output from the movement output Node
+	 * 
+	 * @return the output of the movement node
+	 */
 	public double getMovement(){
 		return(movement.getOutput());
 	}

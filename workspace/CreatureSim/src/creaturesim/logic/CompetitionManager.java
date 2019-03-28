@@ -31,7 +31,7 @@ public class CompetitionManager{
 	
 	public static Rectangle spawn_area = new Rectangle(-generation_size, -generation_size, 2*generation_size, 2*generation_size);
 	
-	public static ArrayList<Generation> generations = new ArrayList<Generation>();
+	public static ArrayList<Generation> generations;
 	public static int generation_number;
 	
 	public static ArrayList<Creature> dead_creatures = new ArrayList<Creature>();
@@ -42,19 +42,34 @@ public class CompetitionManager{
 	/**
 	 * Sets up the CompetitionManager
 	 * 
-	 * Creates the initial generation, and add's 10 food pellets
+	 * makes a new list of generations, wiping whatever generations may have already been stored,
+	 * then creates the first generation
 	 */
 	public static void initialise(){
+		generations = new ArrayList<Generation>();
 		generations.add(new Generation());
 		generation_number = 0;
 	}
 	
+	/**
+	 * Begins a competition by adding 1 food for every creature,
+	 * scattering the creatures of the current generation, and beginning a new logic thread
+	 */
 	public static void startCompetition(){
 		addFood(generation_size);
 		getCurrentGeneration().scatterCreatures();
 		Main.startNewLogicThread();
 	}
 	
+	/**
+	 * Ends the competition and stops the creature logic being stopped. Is called when all creatures are dead.
+	 * 
+	 * stops the logic thread, then checks to see whether the generation that's just been competed
+	 * is the latest. If it is, it updates statistics about that generation, then creates a new generation.
+	 * increments the tracker of what the current generation is.
+	 * resets the list of dead creatures, resets the array of food.
+	 * Switches to the main menu view, then enables the main menu's buttons
+	 */
 	public static void endCompetition(){
 		Main.logic_runnable.enabled = false;
 		if(generation_number == generations.size()-1){
@@ -119,8 +134,13 @@ public class CompetitionManager{
 		food.remove(target);
 	}
 	
+	/**
+	 * Picks a random name from the csv file of names.
+	 * 
+	 * @return A random name chosen from a list
+	 */
 	public static String getRandomName(){
-		String name = "You've messed it up somehow :(";
+		String name = "You've messed it up somehow :("; // This will be returned unchanged if it somehow malfunctions
 		try{
 			File names_list = new File("resources/names.csv");
 			BufferedReader names_reader = new BufferedReader(new FileReader(names_list));

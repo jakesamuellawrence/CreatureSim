@@ -32,8 +32,9 @@ public class CSStatblock extends JPanel{
 	
 	
 	/**
-	 * paintComponent method overridden from JPanel. Draws an orange rectangle
-	 * with black border, then writes the stats in it.
+	 * paintComponent method overridden from JPanel. Is called when repaint() is called. 
+	 * 
+	 * Draws an orange rectangle with black border, then writes statistics in it.
 	 * 
 	 * @param g Graphics Graphics context that gets automatically passed in by AWT.
 	 */
@@ -47,7 +48,7 @@ public class CSStatblock extends JPanel{
 		g.setColor(Color.decode("#f2a805"));
 		g.fillRect(border_thickness, border_thickness, getWidth()-2*border_thickness, getHeight()-2*border_thickness);
 		
-		// Draw stats
+		// Get stats
 		gen_number = Integer.toString(CompetitionManager.generation_number);
 		gen_size = Integer.toString(CompetitionManager.generation_size);
 		best_creature = CompetitionManager.getPreviousGeneration().best_creature_name;
@@ -55,6 +56,7 @@ public class CSStatblock extends JPanel{
 		av_survival_time = Integer.toString(CompetitionManager.getPreviousGeneration().average_survival_time);
 		low_survival_time = Integer.toString(CompetitionManager.getPreviousGeneration().lowest_survival_time);
 		
+		// Draw stats
 		g.setColor(Color.black);
 		g.setFont(font);
 		g.drawString("Current Generation: " + gen_number, margin, getHeight()*2/7);

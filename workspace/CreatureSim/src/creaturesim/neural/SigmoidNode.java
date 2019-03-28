@@ -79,6 +79,10 @@ public class SigmoidNode implements Node{
 			mutateWeight(weight_choice);
 		}
 	}
+	
+	/**
+	 * Mutates a bias in one of three ways: scaling, shifting, inverting
+	 */
 	private void mutateBias(){
 		double mutation_type = Math.random();
 		if(mutation_type < 0.45){ //High chance to scale
@@ -91,17 +95,36 @@ public class SigmoidNode implements Node{
 			invertBias();
 		}
 	}
+	
+	/**
+	 * Multiplies the bias by a random number between 0.5 and 1.5 
+	 */
 	private void scaleBias(){
-		double scalar = Math.random() + 0.5; // Random number between 0.5 and 1.5
+		double scalar = Math.random() + 0.5;
 		bias *= scalar;
 	}
+	
+	/**
+	 * Adds a random number between -0.5 and 0.5
+	 */
 	private void shiftBias(){
-		double shift = Math.random() - 0.5; // Random number between -0.5 and 0.5
+		double shift = Math.random() - 0.5;
 		bias += shift;
 	}
+	
+	/**
+	 * Makes the bias negative if it's currently positive, 
+	 * and makes it positive if it's currently negative
+	 */
 	private void invertBias(){
 		bias = -bias;
 	}
+	
+	/**
+	 * Mutate's the chosen wieght in one of three ways: Scaling, shifting, or inverting
+	 * 
+	 * @param index the index of the weight to be mutated
+	 */
 	private void mutateWeight(int index){
 		double mutation_type = Math.random();
 		if(mutation_type < 0.45){
@@ -114,14 +137,33 @@ public class SigmoidNode implements Node{
 			invertWeight(index);
 		}
 	}
+	
+	/**
+	 * Multiplies the chosen weight by a random number between 0.5 and 1.5
+	 * 
+	 * @param i the index of the weight to be mutated
+	 */
 	private void scaleWeight(int i){
 		double scalar = Math.random() + 0.5; // Random number between 0.5 and 1.5
 		weights[i] *= scalar;
 	}
+	
+	/**
+	 * Adds a random number between -0.5 and 0.5 to the chosen weight
+	 * 
+	 * @param i the index of the weight to be mutated
+	 */
 	private void shiftWeight(int i){
 		double shift = Math.random() - 0.5; // Random number between -0.5 and 0.5
 		weights[i] += shift;
 	}
+	
+	/**
+	 * Makes the chosen weight negative if it's currently positive, or
+	 * makes it positive if it's currently negative
+	 * 
+	 * @param i the index of the weight to be mutated
+	 */
 	private void invertWeight(int i){
 		weights[i] = -weights[i];
 	}

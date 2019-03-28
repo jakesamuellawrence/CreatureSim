@@ -28,7 +28,9 @@ public class CSGraph extends JPanel{
 	Font numbers_font = new Font("Arial", Font.PLAIN, 14);
 	
 	/**
-	 * Draws A graph using statistics about the creatures and previous generations.
+	 * Overridden paintComponent() method from JPanel. Is called when repaint() is called.
+	 * 
+	 * Draws A graph using statistics about the creatures from previous generations.
 	 * 
 	 * @param g Graphics Graphics context automatically passed in by AWT.
 	 */

@@ -180,7 +180,7 @@ public class MainMenu extends JPanel{
 	
 	/**
 	 * Adds a graph to the panel, in accordance with gridbag
-	 * layout. Sets standard weights for all buttons
+	 * layout. Sets standard weights for any graph added
 	 * 
 	 * @param x int, the gridx for the button. 0 is leftmost column
 	 * @param y int, the gridy for the button. 0 is the topmost row
@@ -199,8 +199,8 @@ public class MainMenu extends JPanel{
 	}
 	
 	/**
-	 * Adds a graph to the panel, in accordance with gridbag
-	 * layout. Sets standard weights for all buttons
+	 * Adds a statistic block to the panel, in accordance with gridbag
+	 * layout. Sets standard weights for all statistics blocks that could be added
 	 * 
 	 * @param x int, the gridx for the button. 0 is leftmost column
 	 * @param y int, the gridy for the button. 0 is the topmost row

@@ -67,14 +67,27 @@ public class SigmoidInputNode implements Node{
 			invertBias();
 		}
 	}
+	
+	/**
+	 * Multiplies the bias by a random number between 0.5 and 1.5
+	 */
 	private void scaleBias(){
 		double scalar = Math.random() + 0.5; // Random number between 0.5 and 1.5
 		bias = bias * scalar;
 	}
+	
+	/**
+	 * Adds a random number between -0.5 and 0.5 to the bias 
+	 */
 	private void shiftBias(){
 		double shift = Math.random() - 0.5; // Random number between -0.5 and 0.5
 		bias = bias + shift;
 	}
+	
+	/**
+	 * makes the bias negative if it's currently positive, or makes
+	 * the bias positive if it's currently negative
+	 */
 	private void invertBias(){
 		bias = -bias;
 	}

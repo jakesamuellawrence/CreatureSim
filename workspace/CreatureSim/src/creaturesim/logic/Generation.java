@@ -52,17 +52,30 @@ public class Generation{
 		}
 	}
 	
+	/**
+	 * moves all creatures in the generation to a random unoccupied spot
+	 */
 	public void scatterCreatures(){
 		for(int i = 0; i < creatures.length; i++){
 			creatures[i].spawnInRandomLocation();
 		}
 	}
+	
+	/**
+	 * makes all creatures in the generation alive and set's their radius to the default value
+	 */
 	public void reviveCreatures(){
 		for(int i = 0; i < creatures.length; i++){
 			creatures[i].revive();
 		}
 	}
 	
+	/**
+	 * Calculates statistics about the current generation
+	 * 
+	 * Finds the best, average, and worst survival times.
+	 * Stores the name of the creature with the best score.
+	 */
 	public void calculateStatistics(){
 		highest_survival_time = creatures[0].survival_time;
 		lowest_survival_time = creatures[0].survival_time;
@@ -82,7 +95,7 @@ public class Generation{
 	}
 	
 	/**
-	 * Ticks through the logic of the generation.
+	 * Ticks through the logic of the whole generation.
 	 * 
 	 * Ticks the logic of each creature in the generation, if they are alive.
 	 */

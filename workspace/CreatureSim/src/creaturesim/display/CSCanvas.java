@@ -23,7 +23,7 @@ public class CSCanvas extends JPanel{
 	JPanel in_game;
 	
 	/**
-	 * Constructor for CSPanel. Calls parent constructor from JPanel,
+	 * Constructor for CSPanel. Calls parent constructor for JPanel,
 	 * then sets the size, adds a CardLayout, adds cards, and shows
 	 * the main menu card
 	 */
@@ -42,6 +42,12 @@ public class CSCanvas extends JPanel{
 		this.setPreferredSize(new Dimension(default_x_resolution, default_y_resolution));
 	}
 	
+	/**
+	 * Tells the layout manager to display a different card,
+	 * so long as the card has been added to it. 
+	 * 
+	 * @param card the string identifying the card to be switched to.
+	 */
 	public void switchCard(String card){
 		layout.show(this, card);
 	}

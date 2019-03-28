@@ -15,8 +15,7 @@ import creaturesim.logic.CompetitionManager;
 /**
  * Panel to be displayed by CSPanel's CardLayout.
  * 
- * Represents what is displayed in-game. I.e, creatures, (creature scores?),
- * fast forwards controls, and a button to exit
+ * Represents what is displayed in-game, i.e the creatures being competed
  * 
  * @author jakesamuellawrence
  *
@@ -28,6 +27,9 @@ public class InGame extends JPanel{
 	
 	double pixels_per_metre = 20;
 	
+	/**
+	 * Constructor for InGame. Calls the super constructor of JPanel
+	 */
 	public InGame(){
 		super();
 	}

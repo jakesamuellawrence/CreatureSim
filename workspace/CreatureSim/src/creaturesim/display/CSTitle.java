@@ -18,8 +18,8 @@ public class CSTitle extends JPanel{
 	int preferred_y;
 	int margin = 0;
 	int subtitle_offset = 10;
-	int title_size = 18;
-	int subtitle_size = 8;
+	int title_size = 95;
+	int subtitle_size = 35;
 	
 	Font title_font;
 	Font subtitle_font;
@@ -38,14 +38,16 @@ public class CSTitle extends JPanel{
 		this.title = title;
 		this.subtitle = subtitle;
 		
-		title_font = new Font("Arial", Font.BOLD, 80);
-		subtitle_font = new Font("Arial", Font.BOLD, 30);
+		title_font = new Font("Arial", Font.BOLD, title_size);
+		subtitle_font = new Font("Arial", Font.BOLD, subtitle_size);
 		
 		this.setOpaque(false);
 	}
 	
 	/**
-	 * Overridden paintComponent method from JPanel. Draws a large title and a smaller subtitle below
+	 * Overridden paintComponent method from JPanel. Is called when repaint() is called 
+	 * 
+	 * Draws a large title and a smaller subtitle below
 	 * 
 	 * @param g Graphics Graphics context that gets automatically passed in by AWT.
 	 */

@@ -31,6 +31,12 @@ public class TransferFunctions{
 		return(0);
 	}
 	
+	/**
+	 * Trigonemtric function that will return values between -1 and 1
+	 * 
+	 * @param x the x-value passed into the function
+	 * @return tanh(x)
+	 */
 	public static double tanh(double x){
 		return(Math.tanh(x));
 	}

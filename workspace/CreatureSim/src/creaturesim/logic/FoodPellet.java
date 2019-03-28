@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 /**
- * Represents a pellet of food in the comepetition, which can be eaten by a creature.
+ * Represents a pellet of food in the competition, which can be eaten by a creature.
  * 
  * Has a position, radius, and colour.
  * 
@@ -18,10 +18,16 @@ public class FoodPellet{
 	
 	public Color color = Color.GREEN;
 	
+	/**
+	 * Constructor for FoodPellet. Moves the food to a random location
+	 */
 	public FoodPellet(){
 		spawnInRandomLocation();
 	}
 	
+	/**
+	 * Keeps putting the food in random spots until one is found which is not near other food pellets
+	 */
 	void spawnInRandomLocation(){
 		x = Math.random()*CompetitionManager.spawn_area.width + CompetitionManager.spawn_area.x;
 		y = Math.random()*CompetitionManager.spawn_area.height + CompetitionManager.spawn_area.y;
@@ -31,6 +37,10 @@ public class FoodPellet{
 		}
 	}
 	
+	/**
+	 * Returns whether or not this food pellet is near other pellets of food
+	 * @return
+	 */
 	boolean isNearFood(){
 		ArrayList<FoodPellet> food = CompetitionManager.food;
 		for(int i = 0; i < food.size(); i++){

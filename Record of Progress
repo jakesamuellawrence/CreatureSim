@@ -340,6 +340,17 @@ Record of Progress
 					  decided that creature cannibalism would not be
 					  implemented at all as it would actually impede the
 					  creature's ability to learn.
+					  
+2019-03-27
+	-Creature names implementation												Committed
+		-Reflections: More suffixes were added for last name generation
+	-Creature names testing														Committed
+		-Reflections: None
+		
+2019-03-28
+	-Whole Project commentary													Committed
+		-Reflections: Ensuring that all subroutines are properly commented
+					  with adequate and sufficient information
 
 
 
