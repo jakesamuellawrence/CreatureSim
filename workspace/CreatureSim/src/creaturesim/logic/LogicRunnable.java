@@ -9,7 +9,7 @@ package creaturesim.logic;
  */
 public class LogicRunnable implements Runnable{
 	
-	public static double slow_time = 0.01;
+	public static double slow_time = 0.005;
 	public static double quick_time = 0;
 	
 	public double tick_time;

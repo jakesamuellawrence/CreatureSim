@@ -271,7 +271,7 @@ public class Creature{
 	}
 	
 	/**
-	 * Checks to see if any of the food pellets to the right of the creature are in the 
+	 * Checks to see if any of the food pellets to the left of the creature are in the 
 	 * creature's line of sight. This is required as the method for checking
 	 * whether a creature is in the line of sight detects creatures to both the left
 	 * and the right. If a food pellet is found, returns true, returns false otherwise
