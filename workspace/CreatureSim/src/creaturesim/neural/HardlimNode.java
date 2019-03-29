@@ -2,6 +2,8 @@ package creaturesim.neural;
 
 import java.util.Arrays;
 
+import creaturesim.logic.CompetitionManager;
+
 /**
  * Implementation of Node that gets inputs from an array of
  * other nodes. Uses the hardlim transfer function
@@ -82,40 +84,45 @@ public class HardlimNode implements Node{
 	}
 	
 	/**
-	 * Mutates a bias in one of three ways: scaling, shifting, inverting
+	 * Makes a small change to the bias of this node.
+	 * will either scale, shift, or invert the bias.
+	 * Calls other private methods in this class to
+	 * achieve this
 	 */
-	private void mutateBias(){
+	public void mutateBias(){
 		double mutation_type = Math.random();
-		if(mutation_type < 0.45){ //High chance to scale
+		if(mutation_type < 0.45){ // High chance to scale
 			scaleBias();
 		}
 		else if(mutation_type < 0.9){ // High chance to shift
 			shiftBias();
 		}
-		else{ // Low chance to shift
+		else{ // Low chance to invert
 			invertBias();
 		}
 	}
 	
 	/**
-	 * Multiplies the bias by a random number between 0.5 and 1.5 
+	 * Multiplies the bias by a random number between based on the mutation_factor
 	 */
 	private void scaleBias(){
-		double scalar = Math.random() + 0.5;
-		bias *= scalar;
+		double mutation_factor = CompetitionManager.mutation_factor;
+		double scalar = Math.random()*2*mutation_factor + (1-mutation_factor); // Random number between 0.5 and 1.5
+		bias = bias * scalar;
 	}
 	
 	/**
-	 * Adds a random number between -0.5 and 0.5
+	 * Adds a random number based on the mutation factor to the bias 
 	 */
 	private void shiftBias(){
-		double shift = Math.random() - 0.5;
-		bias += shift;
+		double mutation_factor = CompetitionManager.mutation_factor;
+		double shift = Math.random()*2*mutation_factor - mutation_factor; // Random number between -0.5 and 0.5
+		bias = bias + shift;
 	}
 	
 	/**
-	 * Makes the bias negative if it's currently positive, 
-	 * and makes it positive if it's currently negative
+	 * makes the bias negative if it's currently positive, or makes
+	 * the bias positive if it's currently negative
 	 */
 	private void invertBias(){
 		bias = -bias;
@@ -140,22 +147,24 @@ public class HardlimNode implements Node{
 	}
 	
 	/**
-	 * Multiplies the chosen weight by a random number between 0.5 and 1.5
+	 * Multiplies the chosen weight by a random number based on the muatation_factor
 	 * 
 	 * @param i the index of the weight to be mutated
 	 */
 	private void scaleWeight(int i){
-		double scalar = Math.random() + 0.5; // Random number between 0.5 and 1.5
+		double mutation_factor = CompetitionManager.mutation_factor;
+		double scalar = Math.random()*2*mutation_factor + (1-mutation_factor);
 		weights[i] *= scalar;
 	}
 	
 	/**
-	 * Adds a random number between -0.5 and 0.5 to the chosen weight
+	 * Adds a random number based on the mutation_factor to the chosen weight
 	 * 
 	 * @param i the index of the weight to be mutated
 	 */
 	private void shiftWeight(int i){
-		double shift = Math.random() - 0.5; // Random number between -0.5 and 0.5
+		double mutation_factor = CompetitionManager.mutation_factor;
+		double shift = Math.random()*2*mutation_factor - mutation_factor;
 		weights[i] += shift;
 	}
 	

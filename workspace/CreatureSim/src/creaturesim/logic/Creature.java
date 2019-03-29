@@ -18,28 +18,27 @@ public class Creature{
 	String first_name;
 	String last_name;
 	
-	double speed_multiplier = 0.1;
-	double turning_multiplier = 0.05;
+	double movespeed = 0.04;
+	double turnspeed = 0.01;
 	
 	int survival_time = 0;
 	
 	double x;
 	double y;
 	
-	double distance_to_object;
-	double size_of_object;
 	double bearing = Math.random()*2*Math.PI - Math.PI;
 	double radius = 1;
-	double movement_speed = speed_multiplier/radius;
 	
 	Color color;
-	
-	double rotation_next_tick;
-	boolean move_forwards_next_tick;
 	
 	boolean alive = true;
 	
 	Brain brain;
+	
+	boolean should_move_forwards;
+	boolean should_move_backwards;
+	boolean should_turn_left;
+	boolean should_turn_right;
 	
 	/**
 	 * Constructor for Creature.
@@ -165,18 +164,43 @@ public class Creature{
 	 * Ticks the logic of the creature. Calls other methods with further logic.
 	 */
 	public void tick(){
+		runThroughNetwork();
 		rotate();
 		move();
 		checkForEating();
 		loseEnergy();
-		runThroughNetwork();
 	}
 	
 	/**
-	 * Rotates the creature, then normalises it's bearing to within the range -PI to PI
+	 * Gives values to the input nodes, then gets output from the output nodes, to see
+	 * how the creature should move next turn.
+	 */
+	void runThroughNetwork(){
+		boolean is_looking_at_food = false;
+		if(bearing >= -Math.PI/2 && bearing <= Math.PI/2){
+			is_looking_at_food = checkForFoodRightSide();
+		}
+		else{
+			is_looking_at_food = checkForFoodLeftSide();
+		}
+		brain.loadValues(is_looking_at_food);
+		should_move_forwards = brain.shouldMoveForwards();
+		should_move_backwards = brain.shouldMoveBackwards();
+		should_turn_left = brain.shouldTurnLeft();
+		should_turn_right = brain.shouldTurnRight();
+	}
+	
+	/**
+	 * Rotates the creature based on the decisions it's made, 
+	 * then normalises it's bearing to within the range -PI to PI
 	 */
 	void rotate(){
-		bearing += rotation_next_tick;
+		if(should_turn_right){
+			bearing += turnspeed;
+		}
+		if(should_turn_left){
+			bearing -= turnspeed;
+		}
 		if(bearing > Math.PI){
 			bearing = bearing - 2*Math.PI;
 		}
@@ -186,16 +210,17 @@ public class Creature{
 	}
 	
 	/**
-	 * Moves the creature in the direction of it's bearing
+	 * Moves the creature in the direction of it's bearing, either
+	 * forwards or backwards depending on the decisions it has made
 	 */
 	void move(){
-		if(move_forwards_next_tick){
-			x += movement_speed*Math.cos(bearing);
-			y += movement_speed*Math.sin(bearing);
+		if(should_move_forwards){
+			x += movespeed*Math.cos(bearing);
+			y += movespeed*Math.sin(bearing);
 		}
-		else{
-			x -= movement_speed*Math.cos(bearing);
-			y -= movement_speed*Math.sin(bearing);
+		if(should_move_backwards){
+			x -= movespeed*Math.cos(bearing);
+			y -= movespeed*Math.sin(bearing);
 		}
 	}
 	
@@ -219,7 +244,6 @@ public class Creature{
 	 */
 	public void loseEnergy(){
 		radius -= CompetitionManager.energy_loss_rate;
-		movement_speed = speed_multiplier/radius;
 		if(radius < 0.5){
 			die();
 		}
@@ -229,74 +253,39 @@ public class Creature{
 	}
 	
 	/**
-	 * Gives values to the input nodes, then gets output from the output nodes, to see
-	 * how the creature should move next turn.
+	 * Checks to see if any of the food pellets to the right of the creature are in the 
+	 * creature's line of sight. This is required as the method for checking
+	 * whether a creature is in the line of sight detects creatures to both the left
+	 * and the right. If a food pellet is found, returns true, returns false otherwise
 	 */
-	void runThroughNetwork(){
-		if(bearing >= -Math.PI/2 && bearing <= Math.PI/2){
-			checkForFoodRightSide();
+	boolean checkForFoodRightSide(){
+		ArrayList<FoodPellet> food = CompetitionManager.food;
+		for(int i = 0; i < food.size(); i++){
+			if(food.get(i).getX() >= this.x){
+				if(inLineWith(food.get(i))){
+					return(true);
+				}
+			}
 		}
-		else{
-			checkForFoodLeftSide();
-		}
-		
-		brain.loadValues(distance_to_object, size_of_object, radius, movement_speed);
-		move_forwards_next_tick = brain.getMovement() == 1;
-		rotation_next_tick = brain.getTurning()*turning_multiplier; // multiplier so creatures turn in less tight circles
+		return(false);
 	}
 	
 	/**
 	 * Checks to see if any of the food pellets to the right of the creature are in the 
 	 * creature's line of sight. This is required as the method for checking
 	 * whether a creature is in the line of sight detects creatures to both the left
-	 * and the right. If a food pellet is found, stores the distance to it and the size of it
+	 * and the right. If a food pellet is found, returns true, returns false otherwise
 	 */
-	void checkForFoodRightSide(){
-		FoodPellet nearest_creature = null;
+	boolean checkForFoodLeftSide(){
 		ArrayList<FoodPellet> food = CompetitionManager.food;
 		for(int i = 0; i < food.size(); i++){
-			if(food.get(i).getX() >= this.x){
+			if(food.get(i).getX() <= this.x){
 				if(inLineWith(food.get(i))){
-					if(nearest_creature == null){
-						nearest_creature = food.get(i);
-					}
-					else if(distanceTo(food.get(i)) < distanceTo(nearest_creature)){
-						nearest_creature = food.get(i);
-					}
+					return(true);
 				}
 			}
 		}
-		if(nearest_creature != null){
-			distance_to_object = distanceTo(nearest_creature);
-			size_of_object = nearest_creature.getRadius();
-		}
-	}
-	
-	/**
-	 * Checks to see if any food pellets to the left of the creature are in
-	 * the creature's line of sight. This is required as the method for checking
-	 * whether a creature is in the line of sight detects creatures to both the left
-	 * and the right. If a food pellet is found, stores the distance to it and it's size
-	 */
-	void checkForFoodLeftSide(){
-		FoodPellet nearest_creature = null;
-		ArrayList<FoodPellet> food = CompetitionManager.food;
-		for(int i = 0; i < food.size(); i++){
-			if(food.get(i).getX() < this.x){
-				if(inLineWith(food.get(i))){
-					if(nearest_creature == null){
-						nearest_creature = food.get(i);
-					}
-					else if(distanceTo(food.get(i)) < distanceTo(nearest_creature)){
-						nearest_creature = food.get(i);
-					}
-				}
-			}
-		}
-		if(nearest_creature != null){
-			distance_to_object = distanceTo(nearest_creature);
-			size_of_object = nearest_creature.getRadius();
-		}
+		return(false);
 	}
 	
 	/**

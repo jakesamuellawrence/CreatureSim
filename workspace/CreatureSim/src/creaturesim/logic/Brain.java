@@ -8,19 +8,18 @@ import creaturesim.neural.TanhInputNode;
 import creaturesim.neural.TanhNode;
 
 public class Brain{
-	TanhInputNode i0 = new TanhInputNode(); // Distance to object
-	TanhInputNode i1 = new TanhInputNode(); // Size of object
-	TanhInputNode i2 = new TanhInputNode(); // Radius
-	TanhInputNode i3 = new TanhInputNode(); // Movement Speed
-	TanhInputNode[] inputs = new TanhInputNode[]{i0, i1, i2, i3};
+	
+	TanhInputNode i0 = new TanhInputNode(); // Can see food
+	TanhInputNode[] inputs = new TanhInputNode[]{i0};
 	TanhNode h0 = new TanhNode(inputs);
 	TanhNode h1 = new TanhNode(inputs);
-	TanhNode h2 = new TanhNode(inputs);
-	TanhNode[] hiddens = new TanhNode[]{h0, h1, h2};
-	TanhNode turning = new TanhNode(hiddens);
-	HardlimNode movement = new HardlimNode(hiddens);
+	TanhNode[] hiddens = new TanhNode[]{h0, h1};
+	HardlimNode turn_left = new HardlimNode(hiddens);
+	HardlimNode turn_right = new HardlimNode(hiddens);
+	HardlimNode move_forwards = new HardlimNode(hiddens);
+	HardlimNode move_backwards = new HardlimNode(hiddens);
 	
-	Node[] nodes = new Node[]{i0, i1, i2, i3, h0, h1, h2, turning, movement};
+	Node[] nodes = new Node[]{i0, h0, h1, turn_left, turn_right, move_forwards, move_backwards};
 	
 	/**
 	 * Gives values to the input nodes, to prepare the network to be run through.
@@ -30,11 +29,13 @@ public class Brain{
 	 * @param radius the value to be passed to i2
 	 * @param speed the value to be passed to i3
 	 */
-	public void loadValues(double distance_to_object, double size_of_object, double radius, double speed){
-		i0.giveValue(distance_to_object);
-		i1.giveValue(size_of_object);
-		i2.giveValue(radius);
-		i3.giveValue(speed);
+	public void loadValues(boolean can_see_food){
+		if(can_see_food){
+			i0.giveValue(1);
+		}
+		else{
+			i0.giveValue(0);
+		}
 	}
 	
 	/**
@@ -50,20 +51,38 @@ public class Brain{
 	}
 	
 	/**
-	 * Returns the output from the turning output node
+	 * Decides whether the creature should turn left, based on the output from it's neural net.
 	 * 
-	 * @return the output of the turning node
+	 * @return the decision of the creature
 	 */
-	public double getTurning(){
-		return(turning.getOutput());
+	public boolean shouldTurnLeft(){
+		return(turn_left.getOutput() == 1);
 	}
 	
 	/**
-	 * Returns the output from the movement output Node
+	 * Decides whether the creature should turn right, based on the output from it's neural net.
+	 * 
+	 * @return the decision of the creature
+	 */
+	public boolean shouldTurnRight(){
+		return(turn_right.getOutput() == 1);
+	}
+	
+	/**
+	 * Decides whether the creature should move forwards
 	 * 
 	 * @return the output of the movement node
 	 */
-	public double getMovement(){
-		return(movement.getOutput());
+	public boolean shouldMoveForwards(){
+		return(move_forwards.getOutput() == 1);
+	}
+	
+	/**
+	 * Decides whether the creature should move backwards
+	 * 
+	 * @return the output of the movement node
+	 */
+	public boolean shouldMoveBackwards(){
+		return(move_backwards.getOutput() == 1);
 	}
 }

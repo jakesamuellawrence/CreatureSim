@@ -1,5 +1,7 @@
 package creaturesim.neural;
 
+import creaturesim.logic.CompetitionManager;
+
 /**
  * Implementation of Node that can be given a value,
  * and that uses the tanh transfer function
@@ -69,18 +71,20 @@ public class TanhInputNode implements Node{
 	}
 	
 	/**
-	 * Multiplies the bias by a random number between 0.5 and 1.5
+	 * Multiplies the bias by a random number between based on the mutation_factor
 	 */
 	private void scaleBias(){
-		double scalar = Math.random() + 0.5; // Random number between 0.5 and 1.5
+		double mutation_factor = CompetitionManager.mutation_factor;
+		double scalar = Math.random()*2*mutation_factor + (1-mutation_factor);
 		bias = bias * scalar;
 	}
 	
 	/**
-	 * Adds a random number between -0.5 and 0.5 to the bias 
+	 * Adds a random number based on the mutation factor to the bias 
 	 */
 	private void shiftBias(){
-		double shift = Math.random() - 0.5; // Random number between -0.5 and 0.5
+		double mutation_factor = CompetitionManager.mutation_factor;
+		double shift = Math.random()*2*mutation_factor - mutation_factor;
 		bias = bias + shift;
 	}
 	
