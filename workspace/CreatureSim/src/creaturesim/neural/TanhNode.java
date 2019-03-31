@@ -18,7 +18,7 @@ public class TanhNode implements Node{
 	
 	/**
 	 * Constructor that connects the node to all
-	 * given input nodes.
+	 * given input nodes, then randomises it's weights
 	 * 
 	 * @param inputs an array of nodes which the node should take inputs from.
 	 */
@@ -26,6 +26,20 @@ public class TanhNode implements Node{
 		this.inputs = inputs;
 		weights = new double[inputs.length];
 		randomiseWeights();
+	}
+	
+	/**
+	 * Constructor that connects the node to all given
+	 * input nodes, then sets it's weights and bias equal to the weights and bias
+	 * of the node being cloned
+	 * 
+	 * @param inputs the other nodes this node should connect to
+	 * @param node_to_clone the node this node should be a copy of
+	 */
+	public TanhNode(Node[] inputs, TanhNode node_to_clone){
+		this.inputs = inputs;
+		weights = node_to_clone.weights.clone();
+		bias = node_to_clone.bias;
 	}
 	
 	/**

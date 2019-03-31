@@ -21,7 +21,7 @@ import creaturesim.Main;
  */
 public class CompetitionManager{
 	
-	public static int food_drop_time = 200;
+	public static int food_drop_time = 1000;
 	
 	public static double mutation_rate = 0.1;
 	
@@ -38,9 +38,7 @@ public class CompetitionManager{
 	public static ArrayList<Creature> dead_creatures = new ArrayList<Creature>();
 	
 	public static ArrayList<FoodPellet> food = new ArrayList<FoodPellet>();
-	public static int ticks_till_food_drop = food_drop_time;
-	
-	public static int ticks_this_competition;
+	public static int ticks_till_food_drop = (int) (food_drop_time / Math.pow((generation_size - dead_creatures.size()), 1.2));
 	
 	/**
 	 * Sets up the CompetitionManager
@@ -60,9 +58,9 @@ public class CompetitionManager{
 	 */
 	public static void startCompetition(){
 		getCurrentGeneration().scatterCreatures();
+		getCurrentGeneration().reviveCreatures();
 		addFood(2*generation_size);
 		Main.startNewLogicThread();
-		ticks_this_competition = 0;
 	}
 	
 	/**
@@ -78,6 +76,7 @@ public class CompetitionManager{
 		Main.logic_runnable.enabled = false;
 		if(generation_number == generations.size()-1){
 			getCurrentGeneration().calculateStatistics();
+			System.out.println(dead_creatures.size());
 			generations.add(new Generation(dead_creatures));
 		}
 		generation_number += 1;
@@ -97,20 +96,9 @@ public class CompetitionManager{
 		ticks_till_food_drop -= 1;
 		if(ticks_till_food_drop == 0){
 			addFood(1);
-			ticks_till_food_drop = food_drop_time;
+			ticks_till_food_drop = (int) (food_drop_time / Math.pow((generation_size - dead_creatures.size()), 1.2));
 		}
-		generations.get(generation_number).tick();
-		ticks_this_competition += 1;
-		if(ticks_this_competition > 20000){
-			System.out.println("Congratulations!! Your creatures have learned the best techniques for finding food!!"
-					         + "They would technically be able to survive forever, so I've capped them at 20000 ticks");
-			Creature[] creatures = getCurrentGeneration().creatures;
-			for(int i = 0; i < creatures.length; i++){
-				if(creatures[i].alive){
-					kill(creatures[i]);
-				}
-			}
-		}
+		getCurrentGeneration().tick();
 	}
 	
 	/**
@@ -139,9 +127,6 @@ public class CompetitionManager{
 			FoodPellet pellet = new FoodPellet();
 			if(pellet.overcrowded == false){
 				food.add(pellet);
-			}
-			else{
-				System.out.println("Food pellet too overcrowded");
 			}
 		}
 	}

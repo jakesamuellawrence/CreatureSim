@@ -40,12 +40,13 @@ public class Generation{
 		for(int i = 0; i < previous.size(); i++){
 			System.out.println(previous.get(i).survival_time
 							   + " " + previous.get(i).first_name 
-							   + " " + previous.get(i).last_name);
+							   + " " + previous.get(i).last_name
+							   + " - " + previous.get(i).brain.number);
 		}
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~");
 		for(int i = 0; i < top_45.size(); i++){
-			creatures[i] = top_45.get(i).makeClone();
-			creatures[i+top_45.size()] = top_45.get(i).makeChild();
+			creatures[i] = top_45.get(i);
+			creatures[i+top_45.size()] = new Creature(top_45.get(i));
 		}
 		for(int i = 2*top_45.size(); i < creatures.length; i++){
 			creatures[i] = new Creature();

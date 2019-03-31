@@ -19,6 +19,10 @@ public class TanhInputNode implements Node{
 		bias = 2*Math.random() - 1; // Random number between -1 and 1
 	}
 	
+	public TanhInputNode(TanhInputNode node_to_clone){
+		bias = node_to_clone.bias;
+	}
+	
 	/**
 	 * Stores the given value in the node
 	 * 

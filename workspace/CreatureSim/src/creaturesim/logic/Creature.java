@@ -68,6 +68,25 @@ public class Creature{
 		this.last_name = "God" + suffix;
 	}
 	
+	public Creature(Creature parent){
+		color = parent.color;
+		brain = new Brain(parent.brain);
+		brain.mutate();
+		first_name = CompetitionManager.getRandomName();
+		String suffix;
+		double suffix_choice = Math.random();
+		if(suffix_choice < 0.4){
+			suffix = "son";
+		}
+		else if(suffix_choice < 0.8){
+			suffix = "dottir";
+		}
+		else{
+			suffix = "child";
+		}
+		last_name = parent.first_name + suffix;
+	}
+	
 	/**
 	 * Moves the creature to a random unoccupied spot within the spawn area specified by CompetitionManager
 	 */
@@ -87,52 +106,7 @@ public class Creature{
 	public void revive(){
 		radius = 1;
 		alive = true;
-	}
-	
-	/**
-	 * Creates an exact copy of the creature in which this method is being run.
-	 * 
-	 * Generates a random creature, but then sets all their essential instance variables
-	 * to be the same as the creature being cloned
-	 * 
-	 * @return the clone created.
-	 */
-	public Creature makeClone(){
-		Creature clone = new Creature();
-		clone.color = this.color;
-		clone.brain = this.brain;
-		clone.first_name = this.first_name;
-		clone.last_name = this.last_name;
-		return(clone);
-	}
-	
-	/**
-	 * Creates a child from the creature on which this method is being run
-	 * 
-	 * Creates a completely random creature, then sets it's colour to that of it's parent.
-	 * Gives them a mutated version of their parent's brain, and a last name based on their
-	 * parent's first name.
-	 * 
-	 * @return
-	 */
-	public Creature makeChild(){
-		Creature child = new Creature();
-		child.color = this.color;
-		child.brain = this.brain;
-		child.brain.mutate();
-		String suffix;
-		double suffix_choice = Math.random();
-		if(suffix_choice < 0.4){
-			suffix = "son";
-		}
-		else if(suffix_choice < 0.8){
-			suffix = "dottir";
-		}
-		else{
-			suffix = "child";
-		}
-		child.last_name = this.first_name + suffix;
-		return(child);
+		survival_time = 0;
 	}
 	
 	/**
@@ -181,14 +155,22 @@ public class Creature{
 	 * how the creature should move next turn.
 	 */
 	void runThroughNetwork(){
-		boolean is_looking_at_food = false;
+		FoodPellet nearest_seen_food;
 		if(bearing >= -Math.PI/2 && bearing <= Math.PI/2){
-			is_looking_at_food = checkForFoodRightSide();
+			nearest_seen_food = findFoodRightSide();
 		}
 		else{
-			is_looking_at_food = checkForFoodLeftSide();
+			nearest_seen_food = findFoodLeftSide();
 		}
-		brain.loadValues(is_looking_at_food);
+		if(nearest_seen_food == null){
+			brain.loadValues(1, radius);
+		}
+		else{
+			double absolute_distance = distanceTo(nearest_seen_food);
+			double proportional_distance = absolute_distance / Math.hypot(CompetitionManager.spawn_area.getWidth(), 
+																		  CompetitionManager.spawn_area.getHeight());
+			brain.loadValues(proportional_distance, radius);
+		}
 		should_move_forwards = brain.shouldMoveForwards();
 		should_move_backwards = brain.shouldMoveBackwards();
 		should_turn_left = brain.shouldTurnLeft();
@@ -262,36 +244,50 @@ public class Creature{
 	 * Checks to see if any of the food pellets to the right of the creature are in the 
 	 * creature's line of sight. This is required as the method for checking
 	 * whether a creature is in the line of sight detects creatures to both the left
-	 * and the right. If a food pellet is found, returns true, returns false otherwise
+	 * and the right. If multiple food pellets are found, returns whichever is closest.
+	 * If no food pellets are found, returns a null object
 	 */
-	boolean checkForFoodRightSide(){
+	FoodPellet findFoodRightSide(){
 		ArrayList<FoodPellet> food = CompetitionManager.food;
+		FoodPellet nearest_food = null;
 		for(int i = 0; i < food.size(); i++){
-			if(food.get(i).getX() >= this.x){
-				if(inLineWith(food.get(i))){
-					return(true);
+			if(food.get(i).getX() >= this.x && inLineWith(food.get(i))){
+				if(nearest_food != null){
+					if(distanceTo(food.get(i)) < distanceTo(nearest_food)){
+						nearest_food = food.get(i);
+					}
+				}
+				else{
+					nearest_food = food.get(i);
 				}
 			}
 		}
-		return(false);
+		return(nearest_food);
 	}
 	
 	/**
 	 * Checks to see if any of the food pellets to the left of the creature are in the 
 	 * creature's line of sight. This is required as the method for checking
 	 * whether a creature is in the line of sight detects creatures to both the left
-	 * and the right. If a food pellet is found, returns true, returns false otherwise
+	 * and the right. If multiple food pellets are found, returns whichever is closest.
+	 * If no food pellets are found, returns a null object
 	 */
-	boolean checkForFoodLeftSide(){
+	FoodPellet findFoodLeftSide(){
 		ArrayList<FoodPellet> food = CompetitionManager.food;
+		FoodPellet nearest_food = null;
 		for(int i = 0; i < food.size(); i++){
-			if(food.get(i).getX() <= this.x){
-				if(inLineWith(food.get(i))){
-					return(true);
+			if(food.get(i).getX() < this.x && inLineWith(food.get(i))){
+				if(nearest_food != null){
+					if(distanceTo(food.get(i)) < distanceTo(nearest_food)){
+						nearest_food = food.get(i);
+					}
+				}
+				else{
+					nearest_food = food.get(i);
 				}
 			}
 		}
-		return(false);
+		return(nearest_food);
 	}
 	
 	/**
