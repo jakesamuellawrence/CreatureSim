@@ -14,7 +14,10 @@ public class FoodPellet{
 	
 	double x;
 	double y;
-	double radius = 0.2;
+	
+	public static double standard_radius = 0.2; 
+	
+	double radius = standard_radius;
 	
 	public Color color = Color.GREEN;
 	
@@ -31,7 +34,7 @@ public class FoodPellet{
 	void spawnInRandomLocation(){
 		x = Math.random()*CompetitionManager.spawn_area.width + CompetitionManager.spawn_area.x;
 		y = Math.random()*CompetitionManager.spawn_area.height + CompetitionManager.spawn_area.y;
-		while(isNearFood()){
+		while(isNearFood() || isNearCreature()){
 			x = Math.random()*CompetitionManager.spawn_area.width + CompetitionManager.spawn_area.x;
 			y = Math.random()*CompetitionManager.spawn_area.height + CompetitionManager.spawn_area.y;
 		}
@@ -52,12 +55,37 @@ public class FoodPellet{
 	}
 	
 	/**
-	 * returns the distance between a creature and a given food pellet.
+	 * checks whether the food pellet is close to any creatures in the current generation
+	 * 
+	 * @return whether or not they are nearby
+	 */
+	boolean isNearCreature(){
+		Creature[] creatures = CompetitionManager.getCurrentGeneration().creatures;
+		for(int i = 0; i < creatures.length; i++){
+			if(distanceTo(creatures[i]) < 2){
+				return(true);
+			}
+		}
+		return(false);
+	}
+	
+	/**
+	 * returns the distance between this food pellet and another food pellet
 	 * 
 	 * @param target FoodPellet, the food pellet to which the distance is being found.
-	 * @return the distance between this creature and the target food pellet
+	 * @return the distance between this food pellet and the target food pellet
 	 */
 	double distanceTo(FoodPellet target){
+		return(Math.hypot(target.getX() - x, target.getY() - y));
+	}
+	
+	/**
+	 * returns the distance between this food pellet and a given creature.
+	 * 
+	 * @param target Creature, the creature to which the distance is being found.
+	 * @return the distance between this food pellet and the target creature
+	 */
+	double distanceTo(Creature target){
 		return(Math.hypot(target.getX() - x, target.getY() - y));
 	}
 	

@@ -21,9 +21,7 @@ import creaturesim.Main;
  */
 public class CompetitionManager{
 	
-	public static double energy_loss_rate = 0.0005;
-	
-	public static int food_drop_time = 500;
+	public static int food_drop_time = 100;
 	
 	public static double mutation_rate = 0.1;
 	
@@ -32,6 +30,7 @@ public class CompetitionManager{
 	public static int generation_size = 10;
 	
 	public static Rectangle spawn_area = new Rectangle(-generation_size, -generation_size, 2*generation_size, 2*generation_size);
+	public static double average_distance = 0.52 * 2 * generation_size;
 	
 	public static ArrayList<Generation> generations;
 	public static int generation_number;
@@ -92,10 +91,6 @@ public class CompetitionManager{
 	 * food pellet if necessary, then ticks the logic of the current generation.
 	 */
 	public static void tick(){
-		ticks_till_food_drop -= 1;
-		if(ticks_till_food_drop == 0){
-			addFood(1);
-		}
 		generations.get(generation_number).tick();
 	}
 	
@@ -134,6 +129,7 @@ public class CompetitionManager{
 	 */
 	public static void removeFood(FoodPellet target){
 		food.remove(target);
+		addFood(1);
 	}
 	
 	/**

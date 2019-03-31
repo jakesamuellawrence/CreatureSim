@@ -29,6 +29,9 @@ public class Creature{
 	double bearing = Math.random()*2*Math.PI - Math.PI;
 	double radius = 1;
 	
+	double metabolism_multiplier = 0.0005;
+	double metabolism = metabolism_multiplier * Math.pow(radius, 2);
+	
 	Color color;
 	
 	boolean alive = true;
@@ -243,7 +246,8 @@ public class Creature{
 	 * it's survival time
 	 */
 	public void loseEnergy(){
-		radius -= CompetitionManager.energy_loss_rate;
+		metabolism = metabolism_multiplier * Math.pow(radius, 2);
+		radius -= metabolism;
 		if(radius < 0.5){
 			die();
 		}
