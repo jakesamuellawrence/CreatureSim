@@ -15,6 +15,8 @@ import java.util.ArrayList;
  */
 public class Creature{
 	
+	double overcrowding_distance = 2;
+	
 	String first_name;
 	String last_name;
 	
@@ -29,7 +31,7 @@ public class Creature{
 	double bearing = Math.random()*2*Math.PI - Math.PI;
 	double radius = 1;
 	
-	double metabolism_multiplier = 0.0005;
+	double metabolism_multiplier = 0.001;
 	double metabolism = metabolism_multiplier * Math.pow(radius, 2);
 	
 	Color color;
@@ -141,7 +143,7 @@ public class Creature{
 	boolean isNearFood(){
 		ArrayList<FoodPellet> food = CompetitionManager.food;
 		for(int i = 0; i < food.size(); i++){
-			if(distanceTo(food.get(i)) < 2){
+			if(distanceTo(food.get(i)) < overcrowding_distance+food.get(i).radius+radius){
 				return(true);
 			}
 		}
@@ -156,7 +158,7 @@ public class Creature{
 	boolean isNearCreature(){
 		Creature[] creatures = CompetitionManager.getCurrentGeneration().creatures;
 		for(int i = 0; i < creatures.length; i++){
-			if(creatures[i] != this && distanceTo(creatures[i]) < 2){
+			if(creatures[i] != this && distanceTo(creatures[i]) < overcrowding_distance+creatures[i].radius+radius){
 				return(true);
 			}
 		}

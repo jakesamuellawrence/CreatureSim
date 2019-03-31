@@ -12,6 +12,9 @@ import java.util.ArrayList;
  */
 public class FoodPellet{
 	
+	boolean overcrowded = false;
+	double overcrowding_distance = 1;
+	
 	double x;
 	double y;
 	
@@ -29,14 +32,14 @@ public class FoodPellet{
 	}
 	
 	/**
-	 * Keeps putting the food in random spots until one is found which is not near other food pellets
+	 * Puts the food in a random spot. If the food is too near other pieces of food, marks it as overcrowded, 
+	 * so it will not be added to the competition.
 	 */
 	void spawnInRandomLocation(){
 		x = Math.random()*CompetitionManager.spawn_area.width + CompetitionManager.spawn_area.x;
 		y = Math.random()*CompetitionManager.spawn_area.height + CompetitionManager.spawn_area.y;
-		while(isNearFood() || isNearCreature()){
-			x = Math.random()*CompetitionManager.spawn_area.width + CompetitionManager.spawn_area.x;
-			y = Math.random()*CompetitionManager.spawn_area.height + CompetitionManager.spawn_area.y;
+		if(isNearFood() || isNearCreature()){
+			overcrowded = true;
 		}
 	}
 	
@@ -47,7 +50,7 @@ public class FoodPellet{
 	boolean isNearFood(){
 		ArrayList<FoodPellet> food = CompetitionManager.food;
 		for(int i = 0; i < food.size(); i++){
-			if(distanceTo(food.get(i)) < 5){
+			if(distanceTo(food.get(i)) < overcrowding_distance+food.get(i).radius+radius){
 				return(true);
 			}
 		}
@@ -62,7 +65,7 @@ public class FoodPellet{
 	boolean isNearCreature(){
 		Creature[] creatures = CompetitionManager.getCurrentGeneration().creatures;
 		for(int i = 0; i < creatures.length; i++){
-			if(distanceTo(creatures[i]) < 2){
+			if(distanceTo(creatures[i]) < overcrowding_distance+radius+creatures[i].radius){
 				return(true);
 			}
 		}
