@@ -256,10 +256,17 @@ Record of Progress
 	
 2019-03-11
 	-Slow Generation implementation												Committed
-		-Reflections: Some slight deviations have been needed to be made from 
-					  the original designs and plans. The designs will be left 
-					  as they originally were, so the differences between them
-					  can be seen.
+		-Reflections: It was realised that the original designs for how the
+					  neural nets would work were not appropriate for how
+					  creatures are designed. Several changes have been made:
+					  First, creatures do not have a separate energy and radius
+					  anymore, the initial radius is just set to 1, and this 
+					  represents their energy. Every tick a creature's radius
+					  decreases by a set amount. If a creature's radius is
+					  lower than 0.5, it dies. Thirdly, there are no longer
+					  any 'walls' that move in after a set time. It is simply
+					  ensured that the creatures cannot survive indefinitely
+					  by throttling the production of food.
 	-Slow Generation testing													Committed
 		-Reflections: None
 					  
@@ -315,6 +322,11 @@ Record of Progress
 					  implemented later. However, it was decided that highest
 					  survival time would be prioritised instead, as it
 					  is a more insightful statistic.
+	-Neural net overhaul														Committed
+		-Reflections: It was decided that the Sigmoid transfer function was not
+					  sufficient for the needs of the neural net. For this
+					  reason, all input and all hidden layer nodes were changed
+					  to use the tanh transfer function
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~40 sessions spent
@@ -351,6 +363,33 @@ Record of Progress
 	-Whole Project commentary													Committed
 		-Reflections: Ensuring that all subroutines are properly commented
 					  with adequate and sufficient information
+					  
+2019-03-30
+	-Creature learning															Committed
+		-Reflections: Now that the majority of the features have been
+					  implemented, I have decided to attempt to rework the way
+					  the creature's brain works entirely. They are now only
+					  given one input: a boolean of whether or not food is in
+					  front of them. Additionally, the net now has four boolean
+					  outputs: should move forwards, should move backwards,
+					  should turn left, should turn right. Lastly, a creature's
+					  movement and turning speed are now set values are cannot
+					  change.
+					  
+2019-03-31
+	-Creature learning tweaks													Committed
+		-Reflections: Creatures are now successfully learning a good technique
+					  for finding food, however I'm not entirely happy with the
+					  way this turns out, as it leads to a spike in survival time
+					  when one creature figures it out, and then a decline in
+					  as they all figure it out. A few changes have been made to
+					  combat this. First, creatures are now given two inputs:
+					  the distance to whatever they're looking at, expressed as a 
+					  proportion of the spawn area, and their current radius.
+					  Secondly, creatures now lose energy faster when they are 
+					  larger. Lastly, the way food is added into the arena is now
+					  changed: food is now added more often when there are more 
+					  creatures
 
 
 
