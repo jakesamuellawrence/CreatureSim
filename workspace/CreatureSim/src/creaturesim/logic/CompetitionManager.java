@@ -50,6 +50,7 @@ public class CompetitionManager{
 		generations = new ArrayList<Generation>();
 		generations.add(new Generation());
 		generation_number = 0;
+		CSActionListener.buttons_enabled = true;
 	}
 	
 	/**

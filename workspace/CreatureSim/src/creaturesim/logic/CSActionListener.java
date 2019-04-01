@@ -44,6 +44,9 @@ public class CSActionListener implements ActionListener{
 					Main.frame.canvas.switchCard("In Game");
 				}
 			}
+			else if(e.getActionCommand() == "Start Fresh"){
+				CompetitionManager.initialise();
+			}
 		}
 	}
 }
