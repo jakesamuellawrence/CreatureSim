@@ -21,15 +21,16 @@ import creaturesim.Main;
  */
 public class CompetitionManager{
 	
-	public static double energy_loss_rate = 0.0005;
-	
-	public static int food_drop_time = 400;
+	public static int food_drop_time = 1000;
 	
 	public static double mutation_rate = 0.1;
+	
+	public static double mutation_factor = 0.1;
 	
 	public static int generation_size = 10;
 	
 	public static Rectangle spawn_area = new Rectangle(-generation_size, -generation_size, 2*generation_size, 2*generation_size);
+	public static double average_distance = 0.52 * 2 * generation_size;
 	
 	public static ArrayList<Generation> generations;
 	public static int generation_number;
@@ -37,7 +38,7 @@ public class CompetitionManager{
 	public static ArrayList<Creature> dead_creatures = new ArrayList<Creature>();
 	
 	public static ArrayList<FoodPellet> food = new ArrayList<FoodPellet>();
-	public static int ticks_till_food_drop = food_drop_time;
+	public static int ticks_till_food_drop = (int) (food_drop_time / Math.pow((generation_size - dead_creatures.size()), 1.2));
 	
 	/**
 	 * Sets up the CompetitionManager
@@ -56,8 +57,9 @@ public class CompetitionManager{
 	 * scattering the creatures of the current generation, and beginning a new logic thread
 	 */
 	public static void startCompetition(){
-		addFood(generation_size);
 		getCurrentGeneration().scatterCreatures();
+		getCurrentGeneration().reviveCreatures();
+		addFood(2*generation_size);
 		Main.startNewLogicThread();
 	}
 	
@@ -74,6 +76,7 @@ public class CompetitionManager{
 		Main.logic_runnable.enabled = false;
 		if(generation_number == generations.size()-1){
 			getCurrentGeneration().calculateStatistics();
+			System.out.println(dead_creatures.size());
 			generations.add(new Generation(dead_creatures));
 		}
 		generation_number += 1;
@@ -93,8 +96,9 @@ public class CompetitionManager{
 		ticks_till_food_drop -= 1;
 		if(ticks_till_food_drop == 0){
 			addFood(1);
+			ticks_till_food_drop = (int) (food_drop_time / Math.pow((generation_size - dead_creatures.size()), 1.2));
 		}
-		generations.get(generation_number).tick();
+		getCurrentGeneration().tick();
 	}
 	
 	/**
@@ -120,8 +124,10 @@ public class CompetitionManager{
 	 */
 	static void addFood(int quantity){
 		for(int i = 0; i < quantity; i++){
-			food.add(new FoodPellet());
-			ticks_till_food_drop = food_drop_time;
+			FoodPellet pellet = new FoodPellet();
+			if(pellet.overcrowded == false){
+				food.add(pellet);
+			}
 		}
 	}
 	

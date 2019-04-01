@@ -42,6 +42,7 @@ public class CSGraph extends JPanel{
 		
 		// Get generation information
 		ArrayList<Generation> generations = CompetitionManager.generations;
+		int number_of_generations = CompetitionManager.generation_number;
 		int[] highest_times = new int[generations.size()];
 		int max_highest_time = generations.get(0).highest_survival_time;
 		for(int i = 0; i < generations.size(); i++){
@@ -50,7 +51,14 @@ public class CSGraph extends JPanel{
 				max_highest_time = highest_times[i];
 			}
 		}
-		int number_of_generations = CompetitionManager.generation_number;
+		int[] average_times = new int[generations.size()];
+		for(int i = 0; i < generations.size(); i++){
+			average_times[i] = generations.get(i).average_survival_time;
+		}
+		int[] lowest_times = new int[generations.size()];
+		for(int i = 0; i < generations.size(); i++){
+			lowest_times[i] = generations.get(i).lowest_survival_time;
+		}
 		
 		// Draw Y axis line and label
 		g.setColor(Color.black);
@@ -124,13 +132,71 @@ public class CSGraph extends JPanel{
 			g.drawString(number, position_on_x_axis-number_width/2, getHeight()-axis_thickness+5+number_height);
 		}
 		
-		// Draw the line graph
+		// Draw Key
+		g.setColor(Color.black);
+		g.setFont(axis_label_font);
+		int key_start_x = graph_start_x+graph_width+margin;
+		int key_start_y = graph_start_y-label_height-margin;
+		int key_width = label_width;
+		int key_height = 100;
+		g.drawRect(key_start_x, 
+				   key_start_y, 
+				   key_width,
+				   key_height);
+		g.drawString("Key: ", key_start_x+5, key_start_y+key_height/4);
+		g.setFont(numbers_font);
+		fm = g.getFontMetrics();
+		g.setColor(Color.blue);
+		g.drawLine(key_start_x+5, 
+				   key_start_y+key_height*2/4-fm.getAscent()/2-5, 
+				   key_start_x+20, 
+				   key_start_y+key_height*2/4-fm.getAscent()/2-5);
+		g.setColor(Color.black);
+		g.drawLine(key_start_x+5, 
+				   key_start_y+key_height*3/4-fm.getAscent()/2-5, 
+				   key_start_x+20, 
+				   key_start_y+key_height*3/4-fm.getAscent()/2-5);
 		g.setColor(Color.red);
+		g.drawLine(key_start_x+5, 
+				   key_start_y+key_height*4/4-fm.getAscent()/2-5, 
+				   key_start_x+20, 
+				   key_start_y+key_height*4/4-fm.getAscent()/2-5);
+		g.setColor(Color.black);
+		g.drawString("Highest", 
+				     key_start_x+30, 
+				     key_start_y+key_height*2/4-5);
+		g.drawString("Average", 
+			     key_start_x+30, 
+			     key_start_y+key_height*3/4-5);
+		g.drawString("Lowest", 
+			     key_start_x+30, 
+			     key_start_y+key_height*4/4-5);
+		
+		
+		
+		// Draw the highest line graph
+		g.setColor(Color.blue);
 		for(int i = 1; i < number_of_generations; i++){
 			g.drawLine((int)Math.round(graph_start_x + (i-1)*pixels_per_gen),
 					   (int)Math.round((graph_start_y+graph_height) - highest_times[i-1]*pixels_per_tick),
 					   (int)Math.round(graph_start_x + (i)*pixels_per_gen),
 					   (int)Math.round((graph_start_y+graph_height) - highest_times[i]*pixels_per_tick));
+		}
+		// Draw the average line graph
+		g.setColor(Color.black);
+		for(int i = 1; i < number_of_generations; i++){
+			g.drawLine((int)Math.round(graph_start_x + (i-1)*pixels_per_gen),
+					   (int)Math.round((graph_start_y+graph_height) - average_times[i-1]*pixels_per_tick),
+					   (int)Math.round(graph_start_x + (i)*pixels_per_gen),
+					   (int)Math.round((graph_start_y+graph_height) - average_times[i]*pixels_per_tick));
+		}
+		// Draw the lowest line graph
+		g.setColor(Color.red);
+		for(int i = 1; i < number_of_generations; i++){
+			g.drawLine((int)Math.round(graph_start_x + (i-1)*pixels_per_gen),
+					   (int)Math.round((graph_start_y+graph_height) - lowest_times[i-1]*pixels_per_tick),
+					   (int)Math.round(graph_start_x + (i)*pixels_per_gen),
+					   (int)Math.round((graph_start_y+graph_height) - lowest_times[i]*pixels_per_tick));
 		}
 	}
 }

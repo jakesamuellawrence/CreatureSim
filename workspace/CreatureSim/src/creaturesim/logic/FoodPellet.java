@@ -12,9 +12,15 @@ import java.util.ArrayList;
  */
 public class FoodPellet{
 	
+	boolean overcrowded = false;
+	double overcrowding_distance = 1;
+	
 	double x;
 	double y;
-	double radius = 0.2;
+	
+	public static double standard_radius = 0.2; 
+	
+	double radius = standard_radius;
 	
 	public Color color = Color.GREEN;
 	
@@ -26,14 +32,14 @@ public class FoodPellet{
 	}
 	
 	/**
-	 * Keeps putting the food in random spots until one is found which is not near other food pellets
+	 * Puts the food in a random spot. If the food is too near other pieces of food, marks it as overcrowded, 
+	 * so it will not be added to the competition.
 	 */
 	void spawnInRandomLocation(){
 		x = Math.random()*CompetitionManager.spawn_area.width + CompetitionManager.spawn_area.x;
 		y = Math.random()*CompetitionManager.spawn_area.height + CompetitionManager.spawn_area.y;
-		while(isNearFood()){
-			x = Math.random()*CompetitionManager.spawn_area.width + CompetitionManager.spawn_area.x;
-			y = Math.random()*CompetitionManager.spawn_area.height + CompetitionManager.spawn_area.y;
+		if(isNearFood() || isNearCreature()){
+			overcrowded = true;
 		}
 	}
 	
@@ -44,7 +50,7 @@ public class FoodPellet{
 	boolean isNearFood(){
 		ArrayList<FoodPellet> food = CompetitionManager.food;
 		for(int i = 0; i < food.size(); i++){
-			if(distanceTo(food.get(i)) < 5){
+			if(distanceTo(food.get(i)) < overcrowding_distance+food.get(i).radius+radius){
 				return(true);
 			}
 		}
@@ -52,12 +58,37 @@ public class FoodPellet{
 	}
 	
 	/**
-	 * returns the distance between a creature and a given food pellet.
+	 * checks whether the food pellet is close to any creatures in the current generation
+	 * 
+	 * @return whether or not they are nearby
+	 */
+	boolean isNearCreature(){
+		Creature[] creatures = CompetitionManager.getCurrentGeneration().creatures;
+		for(int i = 0; i < creatures.length; i++){
+			if(distanceTo(creatures[i]) < overcrowding_distance+radius+creatures[i].radius){
+				return(true);
+			}
+		}
+		return(false);
+	}
+	
+	/**
+	 * returns the distance between this food pellet and another food pellet
 	 * 
 	 * @param target FoodPellet, the food pellet to which the distance is being found.
-	 * @return the distance between this creature and the target food pellet
+	 * @return the distance between this food pellet and the target food pellet
 	 */
 	double distanceTo(FoodPellet target){
+		return(Math.hypot(target.getX() - x, target.getY() - y));
+	}
+	
+	/**
+	 * returns the distance between this food pellet and a given creature.
+	 * 
+	 * @param target Creature, the creature to which the distance is being found.
+	 * @return the distance between this food pellet and the target creature
+	 */
+	double distanceTo(Creature target){
 		return(Math.hypot(target.getX() - x, target.getY() - y));
 	}
 	

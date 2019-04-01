@@ -40,7 +40,6 @@ public class CSActionListener implements ActionListener{
 				if(CompetitionManager.generation_number != 0){
 					Main.logic_runnable.tick_time = LogicRunnable.slow_time;
 					CompetitionManager.generation_number -= 1;
-					CompetitionManager.getCurrentGeneration().reviveCreatures();
 					CompetitionManager.startCompetition();
 					Main.frame.canvas.switchCard("In Game");
 				}
