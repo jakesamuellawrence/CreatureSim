@@ -414,9 +414,8 @@ Record of Progress
 					  replacing the text box that previously simply described
 					  neural nets with a textbox describing how to use the
 					  program and what it's purpose is.
-										
-	
-
-
-
-
+	-Usability testing and end-user surveys
+		-Refections: Now that a few usability suggestions had been implemented,
+					 I decided it was ready to call it a release and send it to
+					 potential end-users for testing, along with a survey for 
+					 them to fill out
