@@ -48,25 +48,21 @@ public class MainMenu extends JPanel{
 		addHorizontalTextBlock	(2, 2, 2, 1, "Re-compete the previous generation. This will not change the recorded results for " +
 										     "the previous generation");
 		addButton		        (4, 2, 1, 1, "View Previous Generation");
-		addGraph		        (0, 4, 4, 7);
-		addVerticalTextBlock	(4, 4, 1, 8, "The creatures in this simulation are powered by neural nets " +
-				 				         	 "and evolutional learning. " +
-				 				 	         "A neural net, in essense, is just a collection of nodes, " +
-				 				 	         "each of which is connected by a weight, where each weight is " +
-				 				 	         "some number, typically between -1 and 1. When you wish to get " +
-				 				 	         "the net to compute something, you pass inputs into the begining " +
-				 				 	         "nodes of the net. Those inputs nodes then pass on values to the " +
-				 				 	         "nodes they're connected to, which in turn pass on their values to " +
-				 				 	         "more nodes, until eventually a value reaches the output. " +
-				 				 	         "When a node passes on a value to another node, the value is " +
-				 				 	         "multiplied by the weight which connects the two nodes. At first " +
-				 				 	         "these weights are random, and so the output will be random too. " +
-				 				 	         "However, after each generation competes, the nets which performed " +
-				 				 	         "best will kept and slight mutations will be made from them. " +
-				 				 	         "In this way, each generation, the weights become more and more " +
-				 				 	         "refined to give good outputs based on the inputs. " +
-				 				 	         "If you wish to learn more about neural nets, I suggest reading " +
-											 "this book: http://hagan.okstate.edu/NNDesign.pdf");
+		addGraph		        (0, 4, 4, 8);
+		addVerticalTextBlock	(4, 4, 1, 1, "Welcome to CreatureSim! This program is designed as sort of 'simulation' " +
+				                             "of creatures, all competing with each other to try to eat food and " +
+				                             "survive. At first, they won't survive long, moving around basically at random. " +
+				                             "However, give them time, and eventually they'll learn to eat food more reliably , " +
+				                             "through the power of neural nets and evolutionary learning. There is no specific " +
+				                             "way to 'play' CreatureSim. and no end-goal to reach, just sit back and watch your " +
+				                             "creatures learn!");
+		addVerticalTextBlock	(4, 5, 1, 7, "To the left you can find a graph of how well your creatures are doing. " +
+											 "On the x-axis are subsequent generations of creatures, and on the y-axis " +
+											 "displays how long the creatures in that generation survived. This survival time is " +
+											 "measured in 'ticks', which is basically a single unit of logical operations . " +
+											 "It can be thought of as like a turn in a board game. " +
+											 "The three coloured lines represent the highest, average, and lowest survival " +
+											 "times for each generation");
 		addButton				(0, 12, 1, 1, "Exit To Desktop");
 		addHorizontalTextBlock	(1, 12, 1, 1, "WARNING: current set of generations will be lost when the " +
 											  "application is closed.");
@@ -125,7 +121,7 @@ public class MainMenu extends JPanel{
 	public void addVerticalTextBlock(int x, int y, int width, int height, String text){
 		// set weights dynamically
 		constraints.weightx = 0;
-		constraints.weighty = 1.1;
+		constraints.weighty = text.length()*0.0015;
 		CSTextBlock textblock = new CSTextBlock(text);
 		constraints.gridx = x;
 		constraints.gridy = y;
