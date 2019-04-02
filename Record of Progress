@@ -406,8 +406,14 @@ Record of Progress
 		-Reflections: It was realised that there is no point in giving creatures
 					  names if the names aren't displayed, so it was decided to
 					  add a box above each creature displaying their name
-	-Functionality testing														Committed
+	-Functionality and Usability testing										Committed
 		-Reflections: None
+	-UI Tweaks																	Committed
+		-Reflections: After some beta user feedback, I have decided to alter
+					  one of the elements of the User interface slightly, 
+					  replacing the text box that previously simply described
+					  neural nets with a textbox describing how to use the
+					  program and what it's purpose is.
 										
 	
 

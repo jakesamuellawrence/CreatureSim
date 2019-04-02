@@ -2,10 +2,10 @@ package creaturesim.logic;
 
 import java.awt.Rectangle;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import creaturesim.Main;
@@ -148,11 +148,12 @@ public class CompetitionManager{
 	public static String getRandomName(){
 		String name = "You've messed it up somehow :("; // This will be returned unchanged if it somehow malfunctions
 		try{
-			File names_list = new File("resources/names.csv");
-			BufferedReader names_reader = new BufferedReader(new FileReader(names_list));
+			InputStream in = CompetitionManager.class.getResourceAsStream("/resources/names.csv");
+			BufferedReader names_reader = new BufferedReader(new InputStreamReader(in));
 			long number_of_lines = names_reader.lines().count();
 			names_reader.close();
-			names_reader = new BufferedReader(new FileReader(names_list));
+			in = CompetitionManager.class.getResourceAsStream("/resources/names.csv");
+			names_reader = new BufferedReader(new InputStreamReader(in));
 			int line_to_read = (int)Math.round(Math.random()*number_of_lines);
 			for(int i = 0; i <= number_of_lines; i++){
 				if(i == line_to_read){
