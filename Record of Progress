@@ -363,6 +363,10 @@ Record of Progress
 	-Whole Project commentary													Committed
 		-Reflections: Ensuring that all subroutines are properly commented
 					  with adequate and sufficient information
+	-Average and Lowest survival time graph										Committed
+		-Reflections: It was decided average and lowest survival time graphs
+					  should now be implemented as it provides more insight
+					  into whether the creatures are learning
 					  
 2019-03-30
 	-Creature learning															Committed
@@ -402,6 +406,8 @@ Record of Progress
 		-Reflections: It was realised that there is no point in giving creatures
 					  names if the names aren't displayed, so it was decided to
 					  add a box above each creature displaying their name
+	-Functionality testing														Committed
+		-Reflections: None
 										
 	
 
