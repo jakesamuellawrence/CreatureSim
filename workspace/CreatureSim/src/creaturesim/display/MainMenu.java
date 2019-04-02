@@ -53,12 +53,12 @@ public class MainMenu extends JPanel{
 				                             "of creatures, all competing with each other to try to eat food and " +
 				                             "survive. At first, they won't survive long, moving around basically at random. " +
 				                             "However, give them time, and eventually they'll learn to eat food more reliably , " +
-				                             "through the power of neural nets and evolutional learning. There is no specific " +
+				                             "through the power of neural nets and evolutionary learning. There is no specific " +
 				                             "way to 'play' CreatureSim. and no end-goal to reach, just sit back and watch your " +
 				                             "creatures learn!");
 		addVerticalTextBlock	(4, 5, 1, 7, "To the left you can find a graph of how well your creatures are doing. " +
-											 "On the x-axis is subsequent generations of creatures, and on the y-axis " +
-											 "is how long the creatures in that generation survived. This survival time is " +
+											 "On the x-axis are subsequent generations of creatures, and on the y-axis " +
+											 "displays how long the creatures in that generation survived. This survival time is " +
 											 "measured in 'ticks', which is basically a single unit of logical operations . " +
 											 "It can be thought of as like a turn in a board game. " +
 											 "The three coloured lines represent the highest, average, and lowest survival " +
