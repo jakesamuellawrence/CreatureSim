@@ -402,4 +402,13 @@ public class Creature{
 	public Color getColor(){
 		return(color);
 	}
+	
+	/**
+	 * Returns the full name of the creature
+	 * 
+	 * @return the first name of the creature addded to the last name of the creature
+	 */
+	public String getName(){
+		return(first_name + " " + last_name);
+	}
 }

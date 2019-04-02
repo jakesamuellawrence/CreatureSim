@@ -2,15 +2,17 @@ package creaturesim.display;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import creaturesim.logic.CompetitionManager;
 import creaturesim.logic.Creature;
 import creaturesim.logic.FoodPellet;
-import creaturesim.logic.CompetitionManager;
 
 /**
  * Panel to be displayed by CSPanel's CardLayout.
@@ -25,7 +27,7 @@ public class InGame extends JPanel{
 	double x = 0;
 	double y = 0;
 	
-	double pixels_per_metre = 20;
+	double pixels_per_metre = 25;
 	
 	/**
 	 * Constructor for InGame. Calls the super constructor of JPanel
@@ -72,6 +74,14 @@ public class InGame extends JPanel{
 						   getYRelativeToCamera(creatures[i].getY()),
 						   getXRelativeToCamera(creatures[i].getX() + creatures[i].getRadius()*Math.cos(creatures[i].getBearing())),
 					       getYRelativeToCamera(creatures[i].getY() + creatures[i].getRadius()*Math.sin(creatures[i].getBearing())));
+				// Draw names
+				String creature_name = creatures[i].getName();
+				g.setFont(new Font("Arial", Font.PLAIN, 20));
+				FontMetrics fm = g.getFontMetrics();
+				g.setColor(Color.white);
+				g.drawString(creature_name, 
+						     getXRelativeToCamera(creatures[i].getX()) - fm.stringWidth(creature_name)/2, 
+						     getYRelativeToCamera(creatures[i].getY()-creatures[i].getRadius()) - 10);
 			}
 		}
 		

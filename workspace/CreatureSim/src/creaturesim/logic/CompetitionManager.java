@@ -77,7 +77,6 @@ public class CompetitionManager{
 		Main.logic_runnable.enabled = false;
 		if(generation_number == generations.size()-1){
 			getCurrentGeneration().calculateStatistics();
-			System.out.println(dead_creatures.size());
 			generations.add(new Generation(dead_creatures));
 		}
 		generation_number += 1;

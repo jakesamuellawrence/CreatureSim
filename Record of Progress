@@ -395,14 +395,14 @@ Record of Progress
 	-Start fresh button implementation											Committed
 		-Reflections: None
 		
-1029-04-02
+2019-04-02
 	-Start fresh button testing													Committed
 		-Reflections: None
 	-Further Creature name implementation
 		-Reflections: It was realised that there is no point in giving creatures
 					  names if the names aren't displayed, so it was decided to
-					  add a colour coded list of creature names at the side of
-					  the screen when viewing a competition
+					  add a box above each creature displaying their name
+										
 	
 
 

@@ -9,8 +9,6 @@ import creaturesim.neural.TanhNode;
 
 public class Brain{
 	
-	double number = 0;
-	
 	TanhInputNode i0; // Distance to food, as proportion of diagonal of spawn area (1 if no food seen)
 	TanhInputNode i1; // current radius
 	TanhNode h0;
@@ -78,7 +76,6 @@ public class Brain{
 	 * For each Node in the brain, randomly decides whether it should be mutated
 	 */
 	public void mutate(){
-		number += 1;
 		double mutation_rate = CompetitionManager.mutation_rate;
 		for(int i = 0; i < nodes.length; i++){
 			if(Math.random() <= mutation_rate){
