@@ -121,7 +121,7 @@ public class MainMenu extends JPanel{
 	public void addVerticalTextBlock(int x, int y, int width, int height, String text){
 		// set weights dynamically
 		constraints.weightx = 0;
-		constraints.weighty = text.length()*0.0015;
+		constraints.weighty = text.length()*0.001;
 		CSTextBlock textblock = new CSTextBlock(text);
 		constraints.gridx = x;
 		constraints.gridy = y;
