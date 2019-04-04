@@ -57,7 +57,7 @@ public class MainMenu extends JPanel{
 				                             "way to 'play' CreatureSim. and no end-goal to reach, just sit back and watch your " +
 				                             "creatures learn!");
 		addVerticalTextBlock	(4, 5, 1, 7, "To the left you can find a graph of how well your creatures are doing. " +
-											 "On the x-axis are subsequent generations of creatures, and on the y-axis " +
+											 "On the x-axis are subsequent generations of creatures, and the y-axis " +
 											 "displays how long the creatures in that generation survived. This survival time is " +
 											 "measured in 'ticks', which is basically a single unit of logical operations . " +
 											 "It can be thought of as like a turn in a board game. " +
