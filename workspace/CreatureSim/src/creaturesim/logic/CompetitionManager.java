@@ -54,7 +54,7 @@ public class CompetitionManager{
 	}
 	
 	/**
-	 * Begins a competition by adding 1 food for every creature,
+	 * Begins a competition by adding 2 food for every creature,
 	 * scattering the creatures of the current generation, and beginning a new logic thread
 	 */
 	public static void startCompetition(){

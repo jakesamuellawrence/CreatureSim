@@ -68,6 +68,15 @@ public class Creature{
 		this.last_name = "God" + suffix;
 	}
 	
+	/**
+	 * Consructor for Creature which creates a child based on the passed in parent.
+	 * 
+	 * Will give the child the same colour as it's parent, give it a clone of the same brain,
+	 * then mutate that brain. It will then generate a random first name and a last name based on the
+	 * parent's first name
+	 * 
+	 * @param parent Creature, the parent which the child is based off of
+	 */
 	public Creature(Creature parent){
 		color = parent.color;
 		brain = new Brain(parent.brain);

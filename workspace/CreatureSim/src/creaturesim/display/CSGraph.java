@@ -173,7 +173,6 @@ public class CSGraph extends JPanel{
 			     key_start_y+key_height*4/4-5);
 		
 		
-		
 		// Draw the highest line graph
 		g.setColor(Color.blue);
 		for(int i = 1; i < number_of_generations; i++){
